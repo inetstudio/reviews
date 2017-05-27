@@ -1,0 +1,22 @@
+{
+    "name": "inetstudio/reviews",
+    "description": "Package for reviews",
+    "homepage": "https://github.com/inetstudio/reviews",
+    "license": "MIT",
+    "require": {
+        "inetstudio/admin-panel": "^1.0",
+        "emojione/emojione": "^3.0.3",
+        "spatie/laravel-medialibrary": "^5.11.1"
+    },
+    "authors": [
+        {
+            "name": "Konstantin Bukin",
+            "email": "bukin@inetstudio.ru"
+        }
+    ],
+    "autoload": {
+      "psr-4": {
+        "InetStudio\\Vkontakte\\": "src/"
+      }
+    }
+}
