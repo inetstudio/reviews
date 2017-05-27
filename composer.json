@@ -16,7 +16,7 @@
     ],
     "autoload": {
       "psr-4": {
-        "InetStudio\\Vkontakte\\": "src/"
+        "InetStudio\\Reviews\\": "src/"
       }
     }
 }
