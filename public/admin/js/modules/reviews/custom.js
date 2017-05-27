@@ -1,3 +1,5 @@
+/** global: tinymce */
+
 $(document).ready(function(){
 
     if ($('.tinymce').length > 0) {
@@ -20,7 +22,7 @@ $(document).ready(function(){
             rating: 0,
             ratedFill: '#1ab394',
             fullStar: true,
-            onChange: function (rating, rateYoInstance) {
+            onChange: function (rating) {
                 $(this).prev().val(rating);
             }
         });
@@ -46,7 +48,7 @@ $(document).ready(function(){
     $('.table').on('click', '.delete', function (event) {
         event.preventDefault();
 
-        $button = $(this);
+        var $button = $(this);
 
         swal({
             title: 'Вы уверены?',
