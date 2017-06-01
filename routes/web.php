@@ -1,7 +1,7 @@
 <?php
 
 Route::group(['namespace' => 'InetStudio\Reviews\Controllers'], function () {
-    Route::get('modules/reviews/get/{alias?}', 'ReviewsFeedbacksController@getFeedbacks');
+    Route::any('modules/reviews/get/{alias?}', 'ReviewsFeedbacksController@getFeedbacks');
     Route::group(['middleware' => 'web', 'prefix' => 'back/reviews'], function () {
         Route::group(['middleware' => 'admin.auth'], function () {
 
