@@ -4,7 +4,7 @@
     "homepage": "https://github.com/inetstudio/reviews",
     "license": "MIT",
     "require": {
-        "inetstudio/admin-panel": "1.2.8",
+        "inetstudio/admin-panel": "^1.0",
         "spatie/laravel-medialibrary": "^5.11.1"
     },
     "authors": [
