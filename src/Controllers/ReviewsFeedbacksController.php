@@ -168,31 +168,35 @@ class ReviewsFeedbacksController extends Controller
      */
     public function getFeedbacks($alias = '')
     {
-        $items = ($alias) ? ReviewsFeedbackModel::with('site')->whereHas('site', function ($query) use ($alias) {
-            $query->where('alias', $alias);
-        })->get() : ReviewsFeedbackModel::get();
+        $result = \Cache::remember('reviews_'.$alias, 60, function () use ($alias) {
+            $items = ($alias) ? ReviewsFeedbackModel::with('site')->whereHas('site', function ($query) use ($alias) {
+                $query->where('alias', $alias);
+            })->get() : ReviewsFeedbackModel::get();
 
-        $items = $items->map(function ($item) {
-            return [
-                'siteName' => $item->site->alias,
-                'id' => $item->id,
-                'stars' => $item->rating,
-                'body' => $item->feedback,
-                'title' => $item->title,
-                'authorName' => $item->user,
-                'url' => $item->link,
-            ];
-        });
+            $items = $items->map(function ($item) {
+                return [
+                    'siteName' => $item->site->alias,
+                    'id' => $item->id,
+                    'stars' => $item->rating,
+                    'body' => $item->feedback,
+                    'title' => $item->title,
+                    'authorName' => $item->user,
+                    'url' => $item->link,
+                ];
+            });
 
-        $result = [];
+            $result = [];
 
-        if (! $alias) {
-            foreach ($items as $item) {
-                $result[$item['siteName']][] = $item;
+            if (! $alias) {
+                foreach ($items as $item) {
+                    $result[$item['siteName']][] = $item;
+                }
+            } else {
+                $result = $items;
             }
-        } else {
-            $result = $items;
-        }
+
+            return $result;
+        });
 
         return response()->json($result, 200);
     }
