@@ -27,7 +27,7 @@ class ReviewsFeedbackModel extends Model
      * @var array
      */
     protected $fillable = [
-        'site_id', 'title', 'user', 'feedback', 'link', 'rating', 'author_id', 'last_editor_id',
+        'site_id', 'title', 'user', 'user_link', 'feedback', 'link', 'rating', 'author_id', 'last_editor_id',
     ];
 
     /**

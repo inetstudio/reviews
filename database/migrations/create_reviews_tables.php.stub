@@ -23,11 +23,10 @@ class CreateReviewsTables extends Migration
             $table->tinyInteger('site_id')->default(0);
             $table->string('title')->default('');
             $table->string('user')->default('');
+            $table->string('user_link', 1000)->default('');
             $table->text('feedback');
             $table->string('link', 1000)->default('');
             $table->tinyInteger('rating')->default(0);
-            $table->bigInteger('author_id')->unsigned()->index()->default(0);
-            $table->bigInteger('last_editor_id')->unsigned()->index()->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

@@ -91,6 +91,16 @@
                                 ],
                             ]) !!}
 
+                            {!! Form::string('user_link', $item->user_link, [
+                                'label' => [
+                                    'title' => 'Ссылка на пользователя',
+                                    'class' => 'col-sm-2 control-label',
+                                ],
+                                'field' => [
+                                    'class' => 'form-control',
+                                ],
+                            ]) !!}
+
                             {!! Form::string('link', $item->link, [
                                 'label' => [
                                     'title' => 'Ссылка на отзыв',
