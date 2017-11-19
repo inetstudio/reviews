@@ -6,36 +6,12 @@
 
 @section('title', $title)
 
-@section('styles')
+@pushonce('styles:reviews_custom')
     <!-- CUSTOM -->
     <link href="{!! asset('admin/css/modules/reviews/custom.css') !!}" rel="stylesheet">
-@endsection
+@endpushonce
 
 @section('content')
-    <div class="row wrapper border-bottom white-bg page-heading">
-        <div class="col-sm-12">
-            <h2>
-                {{ $title }}
-            </h2>
-            <ol class="breadcrumb">
-                <li>
-                    <a href="{{ url('/back/') }}">Главная</a>
-                </li>
-                <li>
-                    <span>Пользовательские отзывы</span>
-                </li>
-                <li>
-                    <a href="{{ route('back.reviews.sites.index') }}">Сайты с отзывами</a>
-                </li>
-                <li class="active">
-                    <strong>
-                        {{ $title }}
-                    </strong>
-                </li>
-            </ol>
-        </div>
-    </div>
-
     <div class="wrapper wrapper-content">
 
         {!! Form::info() !!}
@@ -108,7 +84,7 @@
     </div>
 @endsection
 
-@section('scripts')
-    <!-- CUSTOM SCRIPTS -->
+@pushonce('scripts:reviews_custom')
+    <!-- Custom Admin Scripts -->
     <script src="{!! asset('admin/js/modules/reviews/custom.js') !!}"></script>
-@endsection
+@endpushonce

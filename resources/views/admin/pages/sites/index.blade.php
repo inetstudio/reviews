@@ -6,14 +6,7 @@
 
 @section('title', $title)
 
-@section('styles')
-    <!-- Sweet Alert -->
-    <link href="{!! asset('admin/css/plugins/sweetalert/sweetalert.css') !!}" rel="stylesheet">
-@endsection
-
 @section('content')
-
-    @include('admin.module.reviews::partials.breadcrumb_index', ['title' => $title])
 
     <div class="wrapper wrapper-content">
         <div class="row">
@@ -57,10 +50,7 @@
     </div>
 @endsection
 
-@section('scripts')
-    <!-- Sweet alert -->
-    <script src="{!! asset('admin/js/plugins/sweetalert/sweetalert.min.js') !!}"></script>
-
+@pushonce('scripts:reviews_custom')
     <!-- Custom Admin Scripts -->
     <script src="{!! asset('admin/js/modules/reviews/custom.js') !!}"></script>
-@endsection
+@endpushonce

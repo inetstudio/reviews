@@ -6,39 +6,12 @@
 
 @section('title', $title)
 
-@section('styles')
-    <!-- SELECT2 -->
-    <link href="{!! asset('admin/css/plugins/select2/select2.min.css') !!}" rel="stylesheet">
-
+@pushonce('styles:rateyo')
     <!-- RATEYO -->
     <link href="{!! asset('admin/css/plugins/rateyo/jquery.rateyo.min.css') !!}" rel="stylesheet">
-@endsection
+@endpushonce
 
 @section('content')
-    <div class="row wrapper border-bottom white-bg page-heading">
-        <div class="col-sm-12">
-            <h2>
-                {{ $title }}
-            </h2>
-            <ol class="breadcrumb">
-                <li>
-                    <a href="{{ url('/back/') }}">Главная</a>
-                </li>
-                <li>
-                    <span>Пользовательские отзывы</span>
-                </li>
-                <li>
-                    <a href="{{ route('back.reviews.feedbacks.index') }}">Отзывы</a>
-                </li>
-                <li class="active">
-                    <strong>
-                        {{ $title }}
-                    </strong>
-                </li>
-            </ol>
-        </div>
-    </div>
-
     <div class="wrapper wrapper-content">
 
         {!! Form::info() !!}
@@ -142,16 +115,12 @@
     </div>
 @endsection
 
-@section('scripts')
-    <!-- SELECT2 -->
-    <script src="{!! asset('admin/js/plugins/select2/select2.full.min.js') !!}"></script>
-
+@pushonce('scripts:rateyo')
     <!-- RATEYO -->
     <script src="{!! asset('admin/js/plugins/rateyo/jquery.rateyo.min.js') !!}"></script>
+@endpushonce
 
-    <!-- TINYMCE -->
-    <script src="{!! asset('admin/js/plugins/tinymce/tinymce.min.js') !!}"></script>
-
+@pushonce('scripts:reviews_custom')
     <!-- CUSTOM SCRIPTS -->
     <script src="{!! asset('admin/js/modules/reviews/custom.js') !!}"></script>
-@endsection
+@endpushonce
