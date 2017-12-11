@@ -111,7 +111,7 @@ class ReviewsFeedbacksController extends Controller
             'title' => trim(strip_tags($request->get('title'))),
             'user' => trim(strip_tags($request->get('user'))),
             'user_link' => trim(strip_tags($request->get('user_link'))),
-            'feedback' => trim($request->get('feedback')),
+            'feedback' => trim($request->input('feedback.text')),
             'link' => trim(strip_tags($request->get('link'))),
             'rating' => trim(strip_tags($request->get('rating'))),
         ];
