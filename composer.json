@@ -3,19 +3,30 @@
     "description": "Package for reviews",
     "homepage": "https://github.com/inetstudio/reviews",
     "license": "MIT",
-    "require": {
-        "inetstudio/admin-panel": "^1.0",
-        "spatie/laravel-medialibrary": "^5.11.1"
-    },
     "authors": [
         {
             "name": "Konstantin Bukin",
             "email": "bukin@inetstudio.ru"
         }
     ],
+    "require": {
+        "inetstudio/admin-panel": "1.6.*",
+        "inetstudio/widgets": "1.6.*"
+    },
     "autoload": {
       "psr-4": {
-        "InetStudio\\Reviews\\": "src/"
+        "InetStudio\\Reviews\\": "package/src",
+        "InetStudio\\Reviews\\Messages\\": "entities/messages/src",
+        "InetStudio\\Reviews\\Sites\\": "entities/sites/src"
       }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "InetStudio\\Reviews\\Providers\\ReviewsServiceProvider",
+                "InetStudio\\Reviews\\Messages\\Providers\\MessagesServiceProvider",
+                "InetStudio\\Reviews\\Sites\\Providers\\SitesServiceProvider"
+            ]
+        }
     }
 }

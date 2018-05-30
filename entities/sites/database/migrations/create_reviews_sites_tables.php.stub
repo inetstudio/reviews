@@ -1,0 +1,30 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateReviewsSitesTables extends Migration
+{
+    public function up()
+    {
+        Schema::create('reviews_sites', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('alias');
+            $table->string('link', 1000)->default('');
+            $table->boolean('is_active')->default(1);
+            $table->timestamps();
+            $table->softDeletes();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('reviews_sites');
+    }
+}

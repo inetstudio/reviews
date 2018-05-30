@@ -1,0 +1,7 @@
+{
+  "name": "inetstudio-reviews",
+  "version": "1.6.0",
+  "dependencies": {
+    "rateyo": "^2.3.3"
+  }
+}
