@@ -12,9 +12,9 @@ class CreateReviewsMessagesTables extends Migration
             $table->tinyInteger('site_id')->default(0);
             $table->string('title')->default('');
             $table->integer('user_id')->unsigned()->default(0);
-            $table->string('user_name')->default('');
-            $table->string('user_link', 1000)->default('');
-            $table->string('link', 1000)->default('');
+            $table->string('user_name')->nullable();
+            $table->string('user_link', 1000)->nullable();
+            $table->string('link', 1000)->nullable();
             $table->tinyInteger('rating')->default(0);
             $table->text('message');
             $table->boolean('is_active')->default(1);
