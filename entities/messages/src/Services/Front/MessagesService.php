@@ -24,4 +24,17 @@ class MessagesService implements MessagesServiceContract
     {
         $this->repository = $repository;
     }
+
+    /**
+     * Возвращаем отзывы по id.
+     *
+     * @param $ids
+     * @param bool $returnBuilder
+     *
+     * @return mixed
+     */
+    public function getMessagesByIDs($ids, bool $returnBuilder = false)
+    {
+        return $this->repository->getItemsByIDs($ids, $returnBuilder);
+    }
 }
