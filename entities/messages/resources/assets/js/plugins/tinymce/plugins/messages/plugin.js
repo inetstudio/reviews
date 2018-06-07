@@ -165,6 +165,8 @@ window.tinymce.PluginManager.add('reviews.messages', function (editor) {
                         });
                     })
                 });
+            } else {
+                widgetID = '';
             }
 
             $('#messages_list_modal').modal();

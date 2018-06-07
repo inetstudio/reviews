@@ -4,7 +4,7 @@ namespace InetStudio\Reviews\Messages\Http\Controllers\Back;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use InetStudio\Reviews\Messages\Http\Responses\Back\Utility\SuggestionsResponse;
+use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Utility\SuggestionsResponseContract;
 use InetStudio\Reviews\Messages\Contracts\Http\Controllers\Back\MessagesUtilityControllerContract;
 
 /**
@@ -34,9 +34,9 @@ class MessagesUtilityController extends Controller implements MessagesUtilityCon
      *
      * @param Request $request
      *
-     * @return SuggestionsResponse
+     * @return SuggestionsResponseContract
      */
-    public function getSuggestions(Request $request): SuggestionsResponse
+    public function getSuggestions(Request $request): SuggestionsResponseContract
     {
         $search = $request->get('q');
         $type = $request->get('type') ?? '';
@@ -44,7 +44,7 @@ class MessagesUtilityController extends Controller implements MessagesUtilityCon
         $suggestions = $this->services['messages']->getSuggestions($search);
 
         return app()->makeWith(
-            'InetStudio\Reviews\Messages\Http\Responses\Back\Utility\SuggestionsResponse',
+            'InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Utility\SuggestionsResponseContract',
             compact('suggestions', 'type')
         );
     }
