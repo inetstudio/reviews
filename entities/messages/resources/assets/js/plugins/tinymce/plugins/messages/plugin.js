@@ -1,7 +1,7 @@
 let messagesList = $('#messages_list_modal'),
     messageModal = $('#message_modal'),
     template = messagesList.find('.message-tr-template'),
-    widgetID = '',
+    messagesWidgetID = '',
     contentEditor = undefined;
 
 messagesList.find('.save').on('click', function (event) {
@@ -15,7 +15,7 @@ messagesList.find('.save').on('click', function (event) {
         }).get());
 
     if (ids.length !== 0) {
-        window.Admin.modules.widgets.saveWidget(widgetID, {
+        window.Admin.modules.widgets.saveWidget(messagesWidgetID, {
             view: 'admin.module.reviews.messages::front.partials.content.messages_widget',
             params: {
                 ids: ids
@@ -153,9 +153,9 @@ window.tinymce.PluginManager.add('reviews.messages', function (editor) {
 
                 return false;
             } else if (content !== '') {
-                widgetID = $(content).attr('data-id');
+                messagesWidgetID = $(content).attr('data-id');
 
-                window.Admin.modules.widgets.getWidget(widgetID, function (widget) {
+                window.Admin.modules.widgets.getWidget(messagesWidgetID, function (widget) {
                     let titles = widget.additional_info.titles;
 
                     widget.params.ids.forEach(function (id, index) {
@@ -166,7 +166,7 @@ window.tinymce.PluginManager.add('reviews.messages', function (editor) {
                     })
                 });
             } else {
-                widgetID = '';
+                messagesWidgetID = '';
             }
 
             $('#messages_list_modal').modal();

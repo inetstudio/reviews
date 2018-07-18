@@ -102,7 +102,7 @@ class SitesService implements SitesServiceContract
      */
     public function getSuggestions(string $search): Collection
     {
-        $items = $this->repository->searchItemsByField('name', $search);
+        $items = $this->repository->searchItems([['name', 'LIKE', '%'.$search.'%']]);
 
         return $items;
     }

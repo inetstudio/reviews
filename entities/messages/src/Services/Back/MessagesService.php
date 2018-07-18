@@ -96,7 +96,7 @@ class MessagesService implements MessagesServiceContract
      */
     public function getSuggestions(string $search): array
     {
-        $items = $this->repository->searchItemsByField('message', $search);
+        $items = $this->repository->searchItems([['message', 'LIKE', '%'.$search.'%']]);
 
         return $items;
     }

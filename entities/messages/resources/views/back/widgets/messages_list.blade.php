@@ -52,7 +52,7 @@
                 <div class="modal-body">
                     <div class="ibox-content form-horizontal">
                         <div class="row">
-                            {!! Form::open(['url' => route('back.reviews.messages.store'), 'id' => 'mainForm', 'enctype' => 'multipart/form-data', 'class' => 'form-horizontal']) !!}
+                            {!! Form::open(['url' => route('back.reviews.messages.store'), 'id' => 'messageModalForm', 'enctype' => 'multipart/form-data', 'class' => 'form-horizontal']) !!}
 
                                 {{ method_field('POST') }}
 
