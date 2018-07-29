@@ -24,7 +24,9 @@
         "laravel": {
             "providers": [
                 "InetStudio\\Reviews\\Providers\\ReviewsServiceProvider",
+                "InetStudio\\Reviews\\Messages\\Providers\\MessagesBindingsServiceProvider",
                 "InetStudio\\Reviews\\Messages\\Providers\\MessagesServiceProvider",
+                "InetStudio\\Reviews\\Sites\\Providers\\SitesBindingsServiceProvider",
                 "InetStudio\\Reviews\\Sites\\Providers\\SitesServiceProvider"
             ]
         }
