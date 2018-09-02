@@ -9,8 +9,8 @@ return [
 
     'reviews_sites' => [
         'driver' => 'local',
-        'root' => storage_path('app/public/reviews_sites/'),
-        'url' => env('APP_URL').'/storage/reviews_sites/',
+        'root' => storage_path('app/public/reviews_sites'),
+        'url' => env('APP_URL').'/storage/reviews_sites',
         'visibility' => 'public',
     ],
 
