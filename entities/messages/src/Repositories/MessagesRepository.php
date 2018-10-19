@@ -164,7 +164,7 @@ class MessagesRepository implements MessagesRepositoryContract
      */
     protected function getItemsQuery($extColumns = [], $with = []): Builder
     {
-        $defaultColumns = ['id', 'user_name', 'message', 'is_active'];
+        $defaultColumns = ['id', 'site_id', 'user_name', 'message', 'is_active'];
 
         $relations = [];
 
