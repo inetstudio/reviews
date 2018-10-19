@@ -3,15 +3,15 @@
 namespace InetStudio\Reviews\Sites\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use InetStudio\Uploads\Models\Traits\HasImages;
 use InetStudio\Reviews\Sites\Contracts\Models\SiteModelContract;
-use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 
 /**
  * Class SiteModel.
  */
-class SiteModel extends Model implements SiteModelContract, HasMediaConversions
+class SiteModel extends Model implements SiteModelContract, HasMedia
 {
     use HasImages;
     use SoftDeletes;
