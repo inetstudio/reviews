@@ -49,7 +49,7 @@ class SaveSiteRequest extends FormRequest implements SaveSiteRequestContract
     public function rules(Request $request)
     {
         return [
-            'user_name' => 'required|max:255',
+            'name' => 'required|max:255',
             'alias' => 'required|max:255|unique:reviews_sites,alias,'.$request->get('site_id'),
             'link' => 'url',
         ];
