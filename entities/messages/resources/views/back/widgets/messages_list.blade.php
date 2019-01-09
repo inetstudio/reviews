@@ -20,7 +20,7 @@
                                                         <span></span>
                                                     </td>
                                                     <td width="10%">
-                                                        <a href="#" class="btn btn-xs btn-default edit-message m-r-xs"><i class="fa fa-pencil"></i></a>
+                                                        <a href="#" class="btn btn-xs btn-default edit-message m-r-xs"><i class="fa fa-pencil-alt"></i></a>
                                                         <a href="#" class="btn btn-xs btn-danger delete-message"><i class="fa fa-times"></i></a>
                                                     </td>
                                                     <input name="message[]'" type="hidden" value="">
