@@ -15,7 +15,7 @@ class SaveMessageRequest extends FormRequest implements SaveMessageRequestContra
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -25,7 +25,7 @@ class SaveMessageRequest extends FormRequest implements SaveMessageRequestContra
      *
      * @return array
      */
-    public function messages()
+    public function messages(): array
     {
         return [
             'site_id.exist' => 'Поле «Сайт с отзывами» содержит несуществующее значение',
@@ -42,7 +42,7 @@ class SaveMessageRequest extends FormRequest implements SaveMessageRequestContra
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'site_id' => 'exists:reviews_sites,id',

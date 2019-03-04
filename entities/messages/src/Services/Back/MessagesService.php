@@ -2,69 +2,61 @@
 
 namespace InetStudio\Reviews\Messages\Services\Back;
 
+use Illuminate\Support\Arr;
+use League\Fractal\Manager;
 use Illuminate\Support\Facades\Session;
+use League\Fractal\Serializer\DataArraySerializer;
+use InetStudio\AdminPanel\Base\Services\Back\BaseService;
 use InetStudio\Reviews\Messages\Contracts\Models\MessageModelContract;
 use InetStudio\Reviews\Messages\Contracts\Services\Back\MessagesServiceContract;
-use InetStudio\Reviews\Messages\Contracts\Repositories\MessagesRepositoryContract;
-use InetStudio\Reviews\Messages\Contracts\Http\Requests\Back\SaveMessageRequestContract;
 
 /**
  * Class MessagesService.
  */
-class MessagesService implements MessagesServiceContract
+class MessagesService extends BaseService implements MessagesServiceContract
 {
     /**
-     * @var MessagesRepositoryContract
-     */
-    private $repository;
-
-    /**
      * MessagesService constructor.
-     *
-     * @param MessagesRepositoryContract $repository
      */
-    public function __construct(MessagesRepositoryContract $repository)
+    public function __construct()
     {
-        $this->repository = $repository;
+        parent::__construct(app()->make('InetStudio\Reviews\Messages\Contracts\Models\MessageModelContract'));
     }
 
     /**
-     * Получаем объект модели.
+     * Получаем объект по id (для отображения).
      *
      * @param int $id
-     *
-     * @return MessageModelContract
-     */
-    public function getMessageObject(int $id = 0)
-    {
-        return $this->repository->getItemByID($id);
-    }
-
-    /**
-     * Получаем объекты по списку id.
-     *
-     * @param array|int $ids
-     * @param bool $returnBuilder
+     * @param array $params
      *
      * @return mixed
      */
-    public function getMessagesByIDs($ids, bool $returnBuilder = false)
+    public function getItemByIdForDisplay(int $id = 0, array $params = [])
     {
-        return $this->repository->getItemsByIDs($ids, $returnBuilder);
+        $item = $this->getItemById($id, $params);
+
+        if ($item->id && ! $item->is_read) {
+            $item->update([
+                'is_read' => true,
+            ]);
+        }
+
+        return $item;
     }
 
     /**
      * Сохраняем модель.
      *
-     * @param SaveMessageRequestContract $request
+     * @param array $data
      * @param int $id
      *
      * @return MessageModelContract
      */
-    public function save(SaveMessageRequestContract $request, int $id): MessageModelContract
+    public function save(array $data, int $id): MessageModelContract
     {
         $action = ($id) ? 'отредактирован' : 'создан';
-        $item = $this->repository->save($request->only($this->repository->getModel()->getFillable()), $id);
+
+        $item = $this->saveModel(Arr::only($data, $this->model->getFillable()), $id);
 
         event(app()->makeWith('InetStudio\Reviews\Messages\Contracts\Events\Back\ModifyMessageEventContract', [
             'object' => $item,
@@ -76,28 +68,42 @@ class MessagesService implements MessagesServiceContract
     }
 
     /**
-     * Удаляем модель.
-     *
-     * @param $id
-     *
-     * @return bool
-     */
-    public function destroy(int $id): ?bool
-    {
-        return $this->repository->destroy($id);
-    }
-
-    /**
      * Получаем подсказки.
      *
      * @param string $search
+     * @param $type
      *
      * @return array
      */
-    public function getSuggestions(string $search): array
+    public function getSuggestions(string $search, $type): array
     {
-        $items = $this->repository->searchItems([['message', 'LIKE', '%'.$search.'%']]);
+        $items = $this->model::where([['message', 'LIKE', '%'.$search.'%']])->get();
 
-        return $items;
+        $resource = (app()->makeWith('InetStudio\Reviews\Messages\Contracts\Transformers\Back\SuggestionTransformerContract', [
+            'type' => $type,
+        ]))->transformCollection($items);
+
+        $manager = new Manager();
+        $manager->setSerializer(new DataArraySerializer());
+
+        $transformation = $manager->createData($resource)->toArray();
+
+        if ($type && $type == 'autocomplete') {
+            $data['suggestions'] = $transformation['data'];
+        } else {
+            $data['items'] = $transformation['data'];
+        }
+
+        return $data;
+    }
+
+    /**
+     * Получаем количество непрочитанных отзывов.
+     *
+     * @return mixed
+     */
+    public function getUnreadMessagesCount()
+    {
+        return $this->model::unread()->count();
     }
 }

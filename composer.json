@@ -10,6 +10,7 @@
         }
     ],
     "require": {
+        "arcanedev/no-captcha": "^7.0",
         "inetstudio/widgets": "1.7.*"
     },
     "autoload": {

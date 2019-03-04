@@ -2,75 +2,44 @@
 
 namespace InetStudio\Reviews\Sites\Services\Back;
 
-use Illuminate\Support\Collection;
+use Illuminate\Support\Arr;
+use League\Fractal\Manager;
 use Illuminate\Support\Facades\Session;
+use League\Fractal\Serializer\DataArraySerializer;
+use InetStudio\AdminPanel\Base\Services\Back\BaseService;
 use InetStudio\Reviews\Sites\Contracts\Models\SiteModelContract;
 use InetStudio\Reviews\Sites\Contracts\Services\Back\SitesServiceContract;
-use InetStudio\Reviews\Sites\Contracts\Repositories\SitesRepositoryContract;
-use InetStudio\Reviews\Sites\Contracts\Http\Requests\Back\SaveSiteRequestContract;
 
 /**
  * Class SitesService.
  */
-class SitesService implements SitesServiceContract
+class SitesService extends BaseService implements SitesServiceContract
 {
     /**
-     * @var SitesRepositoryContract
-     */
-    private $repository;
-
-    /**
      * SitesService constructor.
-     *
-     * @param SitesRepositoryContract $repository
      */
-    public function __construct(SitesRepositoryContract $repository)
+    public function __construct()
     {
-        $this->repository = $repository;
-    }
-
-    /**
-     * Получаем объект модели.
-     *
-     * @param int $id
-     *
-     * @return SiteModelContract
-     */
-    public function getSiteObject(int $id = 0)
-    {
-        return $this->repository->getItemByID($id);
-    }
-
-    /**
-     * Получаем объекты по списку id.
-     *
-     * @param array|int $ids
-     * @param bool $returnBuilder
-     *
-     * @return mixed
-     */
-    public function getSitesByIDs($ids, bool $returnBuilder = false)
-    {
-        return $this->repository->getItemsByIDs($ids, $returnBuilder);
+        parent::__construct(app()->make('InetStudio\Reviews\Sites\Contracts\Models\SiteModelContract'));
     }
 
     /**
      * Сохраняем модель.
      *
-     * @param SaveSiteRequestContract $request
+     * @param array $data
      * @param int $id
      *
      * @return SiteModelContract
      */
-    public function save(SaveSiteRequestContract $request, int $id): SiteModelContract
+    public function save(array $data, int $id): SiteModelContract
     {
         $action = ($id) ? 'отредактирован' : 'создан';
 
-        $item = $this->repository->save($request->only($this->repository->getModel()->getFillable()), $id);
+        $item = $this->saveModel(Arr::only($data, $this->model->getFillable()), $id);
 
         $images = (config('reviews_sites.images.conversions.site')) ? array_keys(config('reviews_sites.images.conversions.site')) : [];
         app()->make('InetStudio\Uploads\Contracts\Services\Back\ImagesServiceContract')
-            ->attachToObject($request, $item, $images, 'reviews_sites', 'site');
+            ->attachToObject(request(), $item, $images, 'reviews_sites', 'site');
 
         event(app()->makeWith('InetStudio\Reviews\Sites\Contracts\Events\Back\ModifySiteEventContract', [
             'object' => $item,
@@ -82,28 +51,32 @@ class SitesService implements SitesServiceContract
     }
 
     /**
-     * Удаляем модель.
-     *
-     * @param $id
-     *
-     * @return bool
-     */
-    public function destroy(int $id): ?bool
-    {
-        return $this->repository->destroy($id);
-    }
-
-    /**
      * Получаем подсказки.
      *
      * @param string $search
+     * @param $type
      *
-     * @return Collection
+     * @return array
      */
-    public function getSuggestions(string $search): Collection
+    public function getSuggestions(string $search, $type): array
     {
-        $items = $this->repository->searchItems([['name', 'LIKE', '%'.$search.'%']]);
+        $items = $this->model::where([['name', 'LIKE', '%'.$search.'%']])->get();
 
-        return $items;
+        $resource = (app()->makeWith('InetStudio\Reviews\Sites\Contracts\Transformers\Back\SuggestionTransformerContract', [
+            'type' => $type,
+        ]))->transformCollection($items);
+
+        $manager = new Manager();
+        $manager->setSerializer(new DataArraySerializer());
+
+        $transformation = $manager->createData($resource)->toArray();
+
+        if ($type && $type == 'autocomplete') {
+            $data['suggestions'] = $transformation['data'];
+        } else {
+            $data['items'] = $transformation['data'];
+        }
+
+        return $data;
     }
 }

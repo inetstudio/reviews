@@ -4,8 +4,9 @@ namespace InetStudio\Reviews\Sites\Http\Controllers\Back;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use InetStudio\Reviews\Sites\Http\Responses\Back\Utility\SuggestionsResponse;
+use InetStudio\Reviews\Sites\Contracts\Services\Back\SitesServiceContract;
 use InetStudio\Reviews\Sites\Contracts\Http\Controllers\Back\SitesUtilityControllerContract;
+use InetStudio\Reviews\Sites\Contracts\Http\Responses\Back\Utility\SuggestionsResponseContract;
 
 /**
  * Class SitesUtilityController.
@@ -13,39 +14,22 @@ use InetStudio\Reviews\Sites\Contracts\Http\Controllers\Back\SitesUtilityControl
 class SitesUtilityController extends Controller implements SitesUtilityControllerContract
 {
     /**
-     * Используемые сервисы.
-     *
-     * @var array
-     */
-    protected $services;
-
-    /**
-     * SitesController constructor.
-     */
-    public function __construct()
-    {
-        $this->services['sites'] = app()->make(
-            'InetStudio\Reviews\Sites\Contracts\Services\Back\SitesServiceContract'
-        );
-    }
-
-    /**
      * Возвращаем статьи для поля.
      *
+     * @param SitesServiceContract $sitesService
      * @param Request $request
      *
-     * @return SuggestionsResponse
+     * @return SuggestionsResponseContract
      */
-    public function getSuggestions(Request $request): SuggestionsResponse
+    public function getSuggestions(SitesServiceContract $sitesService, Request $request): SuggestionsResponseContract
     {
         $search = $request->get('q');
-        $type = $request->get('type') ?? '';
+        $type = $request->get('type');
 
-        $suggestions = $this->services['sites']->getSuggestions($search);
+        $data = $sitesService->getSuggestions($search, $type);
 
-        return app()->makeWith(
-            'InetStudio\Reviews\Sites\Http\Responses\Back\Utility\SuggestionsResponse',
-            compact('suggestions', 'type')
-        );
+        return app()->makeWith(SuggestionsResponseContract::class, [
+            'suggestions' => $data,
+        ]);
     }
 }

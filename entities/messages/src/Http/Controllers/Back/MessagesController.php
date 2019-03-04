@@ -3,13 +3,15 @@
 namespace InetStudio\Reviews\Messages\Http\Controllers\Back;
 
 use App\Http\Controllers\Controller;
+use InetStudio\Reviews\Messages\Contracts\Services\Back\MessagesServiceContract;
 use InetStudio\Reviews\Messages\Contracts\Http\Requests\Back\SaveMessageRequestContract;
+use InetStudio\Reviews\Messages\Contracts\Services\Back\MessagesDataTableServiceContract;
 use InetStudio\Reviews\Messages\Contracts\Http\Controllers\Back\MessagesControllerContract;
-use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Messages\FormResponseContract;
-use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Messages\SaveResponseContract;
-use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Messages\ShowResponseContract;
-use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Messages\IndexResponseContract;
-use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Messages\DestroyResponseContract;
+use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Resource\FormResponseContract;
+use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Resource\SaveResponseContract;
+use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Resource\ShowResponseContract;
+use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Resource\IndexResponseContract;
+use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Resource\DestroyResponseContract;
 
 /**
  * Class MessagesController.
@@ -17,31 +19,17 @@ use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Messages\DestroyRe
 class MessagesController extends Controller implements MessagesControllerContract
 {
     /**
-     * Используемые сервисы.
-     *
-     * @var array
-     */
-    protected $services;
-
-    /**
-     * MessagesController constructor.
-     */
-    public function __construct()
-    {
-        $this->services['messages'] = app()->make('InetStudio\Reviews\Messages\Contracts\Services\Back\MessagesServiceContract');
-        $this->services['dataTables'] = app()->make('InetStudio\Reviews\Messages\Contracts\Services\Back\MessagesDataTableServiceContract');
-    }
-
-    /**
      * Список объектов.
      *
+     * @param MessagesDataTableServiceContract $dataTableService
+     * 
      * @return IndexResponseContract
      */
-    public function index(): IndexResponseContract
+    public function index(MessagesDataTableServiceContract $dataTableService): IndexResponseContract
     {
-        $table = $this->services['dataTables']->html();
+        $table = $dataTableService->html();
 
-        return app()->makeWith('InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Messages\IndexResponseContract', [
+        return app()->makeWith(IndexResponseContract::class, [
             'data' => compact('table'),
         ]);
     }
@@ -49,15 +37,18 @@ class MessagesController extends Controller implements MessagesControllerContrac
     /**
      * Получение объекта.
      *
+     * @param MessagesServiceContract $messagesService
      * @param int $id
      *
      * @return ShowResponseContract
      */
-    public function show(int $id = 0): ShowResponseContract
+    public function show(MessagesServiceContract $messagesService, int $id = 0): ShowResponseContract
     {
-        $item = $this->services['messages']->getMessageObject($id);
+        $item = $messagesService->getItemByIdForDisplay($id, [
+            'columns' => ['title', 'user_link', 'rating'],
+        ]);
 
-        return app()->makeWith('InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Messages\ShowResponseContract', [
+        return app()->makeWith(ShowResponseContract::class, [
             'item' => $item,
         ]);
     }
@@ -65,13 +56,15 @@ class MessagesController extends Controller implements MessagesControllerContrac
     /**
      * Добавление объекта.
      *
+     * @param MessagesServiceContract $messagesService
+     *
      * @return FormResponseContract
      */
-    public function create(): FormResponseContract
+    public function create(MessagesServiceContract $messagesService): FormResponseContract
     {
-        $item = $this->services['messages']->getMessageObject();
+        $item = $messagesService->getItemById();
 
-        return app()->makeWith('InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Messages\FormResponseContract', [
+        return app()->makeWith(FormResponseContract::class, [
             'data' => compact('item'),
         ]);
     }
@@ -79,27 +72,31 @@ class MessagesController extends Controller implements MessagesControllerContrac
     /**
      * Создание объекта.
      *
+     * @param MessagesServiceContract $messagesService
      * @param SaveMessageRequestContract $request
      *
      * @return SaveResponseContract
      */
-    public function store(SaveMessageRequestContract $request): SaveResponseContract
+    public function store(MessagesServiceContract $messagesService, SaveMessageRequestContract $request): SaveResponseContract
     {
-        return $this->save($request);
+        return $this->save($messagesService, $request);
     }
 
     /**
      * Редактирование объекта.
      *
+     * @param MessagesServiceContract $messagesService
      * @param int $id
      *
      * @return FormResponseContract
      */
-    public function edit($id = 0): FormResponseContract
+    public function edit(MessagesServiceContract $messagesService, int $id = 0): FormResponseContract
     {
-        $item = $this->services['messages']->getMessageObject($id);
+        $item = $messagesService->getItemByIdForDisplay($id, [
+            'columns' => ['title', 'user_link', 'rating'],
+        ]);
 
-        return app()->makeWith('InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Messages\FormResponseContract', [
+        return app()->makeWith(FormResponseContract::class, [
             'data' => compact('item'),
         ]);
     }
@@ -107,29 +104,33 @@ class MessagesController extends Controller implements MessagesControllerContrac
     /**
      * Обновление объекта.
      *
+     * @param MessagesServiceContract $messagesService
      * @param SaveMessageRequestContract $request
      * @param int $id
      *
      * @return SaveResponseContract
      */
-    public function update(SaveMessageRequestContract $request, int $id = 0): SaveResponseContract
+    public function update(MessagesServiceContract $messagesService, SaveMessageRequestContract $request, int $id = 0): SaveResponseContract
     {
-        return $this->save($request, $id);
+        return $this->save($messagesService, $request, $id);
     }
 
     /**
      * Сохранение объекта.
      *
+     * @param MessagesServiceContract $messagesService
      * @param SaveMessageRequestContract $request
      * @param int $id
      *
      * @return SaveResponseContract
      */
-    private function save(SaveMessageRequestContract $request, int $id = 0): SaveResponseContract
+    protected function save(MessagesServiceContract $messagesService, SaveMessageRequestContract $request, int $id = 0): SaveResponseContract
     {
-        $item = $this->services['messages']->save($request, $id);
+        $data = $request->all();
 
-        return app()->makeWith('InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Messages\SaveResponseContract', [
+        $item = $messagesService->save($data, $id);
+
+        return app()->makeWith(SaveResponseContract::class, [
             'item' => $item,
         ]);
     }
@@ -137,15 +138,16 @@ class MessagesController extends Controller implements MessagesControllerContrac
     /**
      * Удаление объекта.
      *
+     * @param MessagesServiceContract $messagesService
      * @param int $id
      *
      * @return DestroyResponseContract
      */
-    public function destroy(int $id = 0): DestroyResponseContract
+    public function destroy(MessagesServiceContract $messagesService, int $id = 0): DestroyResponseContract
     {
-        $result = $this->services['messages']->destroy($id);
+        $result = $messagesService->destroy($id);
 
-        return app()->makeWith('InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Messages\DestroyResponseContract', [
+        return app()->makeWith(DestroyResponseContract::class, [
             'result' => ($result === null) ? false : $result,
         ]);
     }

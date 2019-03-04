@@ -16,7 +16,7 @@ class SaveSiteRequest extends FormRequest implements SaveSiteRequestContract
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -26,7 +26,7 @@ class SaveSiteRequest extends FormRequest implements SaveSiteRequestContract
      *
      * @return array
      */
-    public function messages()
+    public function messages(): array
     {
         return [
             'name.required' => 'Поле «Название» обязательно для заполнения',
@@ -37,6 +37,7 @@ class SaveSiteRequest extends FormRequest implements SaveSiteRequestContract
             'alias.unique' => 'Такое значение поля «Алиас» уже существует',
 
             'link.url' => 'Поле «Ссылка на сайт» содержит некорректное значение',
+            'link.max' => 'Поле «Ссылка на сайт» не должно превышать 1000 символов',
         ];
     }
 
@@ -44,14 +45,15 @@ class SaveSiteRequest extends FormRequest implements SaveSiteRequestContract
      * Правила проверки запроса.
      *
      * @param Request $request
+     *
      * @return array
      */
-    public function rules(Request $request)
+    public function rules(Request $request): array
     {
         return [
             'name' => 'required|max:255',
             'alias' => 'required|max:255|unique:reviews_sites,alias,'.$request->get('site_id'),
-            'link' => 'url',
+            'link' => 'url|max:1000',
         ];
     }
 }

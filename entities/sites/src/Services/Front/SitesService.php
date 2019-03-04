@@ -2,26 +2,19 @@
 
 namespace InetStudio\Reviews\Sites\Services\Front;
 
+use InetStudio\AdminPanel\Base\Services\Front\BaseService;
 use InetStudio\Reviews\Sites\Contracts\Services\Front\SitesServiceContract;
-use InetStudio\Reviews\Sites\Contracts\Repositories\SitesRepositoryContract;
 
 /**
  * Class SitesService.
  */
-class SitesService implements SitesServiceContract
+class SitesService extends BaseService implements SitesServiceContract
 {
     /**
-     * @var SitesRepositoryContract
-     */
-    private $repository;
-
-    /**
      * SitesService constructor.
-     *
-     * @param SitesRepositoryContract $repository
      */
-    public function __construct(SitesRepositoryContract $repository)
+    public function __construct()
     {
-        $this->repository = $repository;
+        parent::__construct(app()->make('InetStudio\Reviews\Sites\Contracts\Models\SiteModelContract'));
     }
 }

@@ -3,7 +3,6 @@
 namespace InetStudio\Reviews\Messages\Transformers\Back;
 
 use League\Fractal\TransformerAbstract;
-use Illuminate\Support\Str;
 use InetStudio\Reviews\Messages\Contracts\Models\MessageModelContract;
 use InetStudio\Reviews\Messages\Contracts\Transformers\Back\MessageTransformerContract;
 
@@ -24,11 +23,25 @@ class MessageTransformer extends TransformerAbstract implements MessageTransform
     public function transform(MessageModelContract $item): array
     {
         return [
-            'user_name' => $item->user_name,
+            'checkbox' => view('admin.module.reviews.messages::back.partials.datatables.checkbox', [
+                'id' => $item->id,
+            ])->render(),
+            'id' => (int) $item->id,
+            'read' => view('admin.module.reviews.messages::back.partials.datatables.read', [
+                'is_read' => $item->is_read,
+            ])->render(),
+            'active' => view('admin.module.reviews.messages::back.partials.datatables.active', [
+                'id' => $item->id,
+                'is_active' => $item->is_active,
+            ])->render(),
+            'name' => $item->name,
+            'email' => $item->email,
             'title' => $item->title,
-            'message' => Str::words(strip_tags($item->message), 200, '...'),
+            'message' => $item->message,
             'created_at' => (string) $item->created_at,
-            'updated_at' => (string) $item->updated_at,
+            'material' => view('admin.module.reviews.messages::back.partials.datatables.material', [
+                'item' => $item->commentable,
+            ])->render(),
             'actions' => view('admin.module.reviews.messages::back.partials.datatables.actions', [
                 'id' => $item->getAttribute('id'),
             ])->render(),

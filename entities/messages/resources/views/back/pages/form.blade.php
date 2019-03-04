@@ -3,7 +3,7 @@
 @extends('admin::back.layouts.app')
 
 @php
-    $title = ($item->id) ? 'Редактирование сообщения' : 'Добавление сообщения';
+    $title = ($item->id) ? 'Редактирование сообщения' : 'Создание сообщения';
 @endphp
 
 @section('title', $title)
@@ -57,7 +57,7 @@
                                             'data-source' => route('back.reviews.sites.getSuggestions'),
                                         ],
                                         'options' => [
-                                            'values' => $sitesService->getSitesByIDs(old('site_id') ?? $item->site_id, true)->pluck('name', 'id')->toArray(),
+                                            'values' => (old('site_id') ?? $item->site_id) ? $sitesService->getItemByID(old('site_id') ?? $item->site_id)->pluck('name', 'id')->toArray() : [],
                                         ],
                                     ]) !!}
 

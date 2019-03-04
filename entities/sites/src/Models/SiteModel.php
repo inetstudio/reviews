@@ -7,6 +7,7 @@ use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use InetStudio\Uploads\Models\Traits\HasImages;
 use InetStudio\Reviews\Sites\Contracts\Models\SiteModelContract;
+use InetStudio\AdminPanel\Base\Models\Traits\Scopes\BuildQueryScopeTrait;
 
 /**
  * Class SiteModel.
@@ -15,6 +16,7 @@ class SiteModel extends Model implements SiteModelContract, HasMedia
 {
     use HasImages;
     use SoftDeletes;
+    use BuildQueryScopeTrait;
 
     protected $images = [
         'config' => 'reviews_sites',
@@ -37,19 +39,65 @@ class SiteModel extends Model implements SiteModelContract, HasMedia
         'name', 'alias', 'link', 'is_active',
     ];
 
+    /**
+     * Атрибуты, которые должны быть преобразованы в даты.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
+    /**
+     * Загрузка модели.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::$buildQueryScopeDefaults['columns'] = [
+            'id', 'name', 'alias', 'link', 'is_active',
+        ];
+
+        self::$buildQueryScopeDefaults['relations'] = [
+            'messages' => function ($query) {
+                $query->select(['id', 'site_id', 'link', 'user_name', 'message', 'is_active']);
+            },
+        ];
+    }
+
+    /**
+     * Сеттер атрибута name.
+     *
+     * @param $value
+     */
     public function setNameAttribute($value)
     {
-        $this->attributes['name'] = strip_tags($value);
+        $this->attributes['name'] = trim(strip_tags($value));
     }
 
+    /**
+     * Сеттер атрибута alias.
+     *
+     * @param $value
+     */
     public function setAliasAttribute($value)
     {
-        $this->attributes['alias'] = strtolower(strip_tags($value));
+        $this->attributes['alias'] = trim(strtolower(strip_tags($value)));
     }
 
+    /**
+     * Сеттер атрибута link.
+     *
+     * @param $value
+     */
     public function setLinkAttribute($value)
     {
-        $this->attributes['link'] = strip_tags($value);
+        $this->attributes['link'] = trim(strip_tags($value));
     }
 
     /**
@@ -61,18 +109,8 @@ class SiteModel extends Model implements SiteModelContract, HasMedia
     {
         return $this->hasMany(
             app()->make('InetStudio\Reviews\Messages\Contracts\Models\MessageModelContract'),
-            'site_id', 'id'
+            'site_id',
+            'id'
         );
     }
-
-    /**
-     * Атрибуты, которые должны быть преобразованы в даты.
-     *
-     * @var array
-     */
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
 }

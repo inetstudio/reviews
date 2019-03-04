@@ -5,7 +5,6 @@ namespace InetStudio\Reviews\Sites\Services\Back;
 use Yajra\DataTables\DataTables;
 use Yajra\DataTables\Html\Builder;
 use Yajra\DataTables\Services\DataTable;
-use InetStudio\Reviews\Sites\Contracts\Repositories\SitesRepositoryContract;
 use InetStudio\Reviews\Sites\Contracts\Services\Back\SitesDataTableServiceContract;
 
 /**
@@ -14,18 +13,16 @@ use InetStudio\Reviews\Sites\Contracts\Services\Back\SitesDataTableServiceContra
 class SitesDataTableService extends DataTable implements SitesDataTableServiceContract
 {
     /**
-     * @var SitesRepositoryContract
+     * @var mixed SiteModelContract
      */
-    private $repository;
+    public $model;
 
     /**
-     * SitesDataTableService constructor.
-     *
-     * @param SitesRepositoryContract $repository
+     * CommentsDataTableService constructor.
      */
-    public function __construct(SitesRepositoryContract $repository)
+    public function __construct()
     {
-        $this->repository = $repository;
+        $this->model = app()->make('InetStudio\Reviews\Sites\Contracts\Models\SiteModelContract');
     }
 
     /**
@@ -52,7 +49,9 @@ class SitesDataTableService extends DataTable implements SitesDataTableServiceCo
      */
     public function query()
     {
-        $query = $this->repository->getAllItems(true);
+        $query = $this->model->buildQuery([
+            'columns' => ['created_at', 'updated_at'],
+        ]);
 
         return $query;
     }

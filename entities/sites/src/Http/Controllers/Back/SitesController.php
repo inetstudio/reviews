@@ -3,12 +3,14 @@
 namespace InetStudio\Reviews\Sites\Http\Controllers\Back;
 
 use App\Http\Controllers\Controller;
+use InetStudio\Reviews\Sites\Contracts\Services\Back\SitesServiceContract;
 use InetStudio\Reviews\Sites\Contracts\Http\Requests\Back\SaveSiteRequestContract;
+use InetStudio\Reviews\Sites\Contracts\Services\Back\SitesDataTableServiceContract;
 use InetStudio\Reviews\Sites\Contracts\Http\Controllers\Back\SitesControllerContract;
-use InetStudio\Reviews\Sites\Contracts\Http\Responses\Back\Sites\FormResponseContract;
-use InetStudio\Reviews\Sites\Contracts\Http\Responses\Back\Sites\SaveResponseContract;
-use InetStudio\Reviews\Sites\Contracts\Http\Responses\Back\Sites\IndexResponseContract;
-use InetStudio\Reviews\Sites\Contracts\Http\Responses\Back\Sites\DestroyResponseContract;
+use InetStudio\Reviews\Sites\Contracts\Http\Responses\Back\Resource\FormResponseContract;
+use InetStudio\Reviews\Sites\Contracts\Http\Responses\Back\Resource\SaveResponseContract;
+use InetStudio\Reviews\Sites\Contracts\Http\Responses\Back\Resource\IndexResponseContract;
+use InetStudio\Reviews\Sites\Contracts\Http\Responses\Back\Resource\DestroyResponseContract;
 
 /**
  * Class SitesController.
@@ -16,31 +18,17 @@ use InetStudio\Reviews\Sites\Contracts\Http\Responses\Back\Sites\DestroyResponse
 class SitesController extends Controller implements SitesControllerContract
 {
     /**
-     * Используемые сервисы.
-     *
-     * @var array
-     */
-    protected $services;
-
-    /**
-     * SitesController constructor.
-     */
-    public function __construct()
-    {
-        $this->services['sites'] = app()->make('InetStudio\Reviews\Sites\Contracts\Services\Back\SitesServiceContract');
-        $this->services['dataTables'] = app()->make('InetStudio\Reviews\Sites\Contracts\Services\Back\SitesDataTableServiceContract');
-    }
-
-    /**
      * Список объектов.
      *
+     * @param SitesDataTableServiceContract $dataTableService
+     * 
      * @return IndexResponseContract
      */
-    public function index(): IndexResponseContract
+    public function index(SitesDataTableServiceContract $dataTableService): IndexResponseContract
     {
-        $table = $this->services['dataTables']->html();
+        $table = $dataTableService->html();
 
-        return app()->makeWith('InetStudio\Reviews\Sites\Contracts\Http\Responses\Back\Sites\IndexResponseContract', [
+        return app()->makeWith(IndexResponseContract::class, [
             'data' => compact('table'),
         ]);
     }
@@ -48,13 +36,15 @@ class SitesController extends Controller implements SitesControllerContract
     /**
      * Добавление объекта.
      *
+     * @param SitesServiceContract $sitesService
+     * 
      * @return FormResponseContract
      */
-    public function create(): FormResponseContract
+    public function create(SitesServiceContract $sitesService): FormResponseContract
     {
-        $item = $this->services['sites']->getSiteObject();
+        $item = $sitesService->getItemById();
 
-        return app()->makeWith('InetStudio\Reviews\Sites\Contracts\Http\Responses\Back\Sites\FormResponseContract', [
+        return app()->makeWith(FormResponseContract::class, [
             'data' => compact('item'),
         ]);
     }
@@ -62,27 +52,29 @@ class SitesController extends Controller implements SitesControllerContract
     /**
      * Создание объекта.
      *
+     * @param SitesServiceContract $sitesService
      * @param SaveSiteRequestContract $request
      *
      * @return SaveResponseContract
      */
-    public function store(SaveSiteRequestContract $request): SaveResponseContract
+    public function store(SitesServiceContract $sitesService, SaveSiteRequestContract $request): SaveResponseContract
     {
-        return $this->save($request);
+        return $this->save($sitesService, $request);
     }
 
     /**
      * Редактирование объекта.
      *
+     * @param SitesServiceContract $sitesService
      * @param int $id
      *
      * @return FormResponseContract
      */
-    public function edit($id = 0): FormResponseContract
+    public function edit(SitesServiceContract $sitesService, $id = 0): FormResponseContract
     {
-        $item = $this->services['sites']->getSiteObject($id);
+        $item = $sitesService->getItemById($id);
 
-        return app()->makeWith('InetStudio\Reviews\Sites\Contracts\Http\Responses\Back\Sites\FormResponseContract', [
+        return app()->makeWith(FormResponseContract::class, [
             'data' => compact('item'),
         ]);
     }
@@ -90,29 +82,33 @@ class SitesController extends Controller implements SitesControllerContract
     /**
      * Обновление объекта.
      *
+     * @param SitesServiceContract $sitesService
      * @param SaveSiteRequestContract $request
      * @param int $id
      *
      * @return SaveResponseContract
      */
-    public function update(SaveSiteRequestContract $request, int $id = 0): SaveResponseContract
+    public function update(SitesServiceContract $sitesService, SaveSiteRequestContract $request, int $id = 0): SaveResponseContract
     {
-        return $this->save($request, $id);
+        return $this->save($sitesService, $request, $id);
     }
 
     /**
      * Сохранение объекта.
      *
+     * @param SitesServiceContract $sitesService
      * @param SaveSiteRequestContract $request
      * @param int $id
      *
      * @return SaveResponseContract
      */
-    private function save(SaveSiteRequestContract $request, int $id = 0): SaveResponseContract
+    protected function save(SitesServiceContract $sitesService, SaveSiteRequestContract $request, int $id = 0): SaveResponseContract
     {
-        $item = $this->services['sites']->save($request, $id);
+        $data = $request->all();
 
-        return app()->makeWith('InetStudio\Reviews\Sites\Contracts\Http\Responses\Back\Sites\SaveResponseContract', [
+        $item = $sitesService->save($data, $id);
+
+        return app()->makeWith(SaveResponseContract::class, [
             'item' => $item,
         ]);
     }
@@ -120,15 +116,16 @@ class SitesController extends Controller implements SitesControllerContract
     /**
      * Удаление объекта.
      *
+     * @param SitesServiceContract $sitesService
      * @param int $id
      *
      * @return DestroyResponseContract
      */
-    public function destroy(int $id = 0): DestroyResponseContract
+    public function destroy(SitesServiceContract $sitesService, int $id = 0): DestroyResponseContract
     {
-        $result = $this->services['sites']->destroy($id);
+        $result = $sitesService->destroy($id);
 
-        return app()->makeWith('InetStudio\Reviews\Sites\Contracts\Http\Responses\Back\Sites\DestroyResponseContract', [
+        return app()->makeWith(DestroyResponseContract::class, [
             'result' => ($result === null) ? false : $result,
         ]);
     }

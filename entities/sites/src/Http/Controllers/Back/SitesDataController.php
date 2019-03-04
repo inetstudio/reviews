@@ -3,6 +3,7 @@
 namespace InetStudio\Reviews\Sites\Http\Controllers\Back;
 
 use App\Http\Controllers\Controller;
+use InetStudio\Reviews\Sites\Contracts\Services\Back\SitesDataTableServiceContract;
 use InetStudio\Reviews\Sites\Contracts\Http\Controllers\Back\SitesDataControllerContract;
 
 /**
@@ -11,27 +12,14 @@ use InetStudio\Reviews\Sites\Contracts\Http\Controllers\Back\SitesDataController
 class SitesDataController extends Controller implements SitesDataControllerContract
 {
     /**
-     * Используемые сервисы.
-     *
-     * @var array
-     */
-    private $services;
-
-    /**
-     * SitesController constructor.
-     */
-    public function __construct()
-    {
-        $this->services['dataTables'] = app()->make('InetStudio\Reviews\Sites\Contracts\Services\Back\SitesDataTableServiceContract');
-    }
-
-    /**
      * Получаем данные для отображения в таблице.
+     *
+     * @param SitesDataTableServiceContract $dataTableService
      *
      * @return mixed
      */
-    public function data()
+    public function data(SitesDataTableServiceContract $dataTableService)
     {
-        return $this->services['dataTables']->ajax();
+        return $dataTableService->ajax();
     }
 }

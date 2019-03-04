@@ -3,21 +3,33 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Class CreateReviewsMessagesTables.
+ */
 class CreateReviewsMessagesTables extends Migration
 {
+
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
         Schema::create('reviews_messages', function (Blueprint $table) {
             $table->increments('id');
             $table->tinyInteger('site_id')->default(0);
+            $table->boolean('is_read')->default(0);
+            $table->boolean('is_active')->default(0);
+            $table->morphs('reviewable');
             $table->string('title')->default('');
             $table->integer('user_id')->unsigned()->default(0);
-            $table->string('user_name')->nullable();
+            $table->string('name');
+            $table->string('email')->default('');
             $table->string('user_link', 1000)->nullable();
             $table->string('link', 1000)->nullable();
             $table->tinyInteger('rating')->default(0);
             $table->text('message');
-            $table->boolean('is_active')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

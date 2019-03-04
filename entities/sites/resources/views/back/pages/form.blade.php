@@ -1,7 +1,7 @@
 @extends('admin::back.layouts.app')
 
 @php
-    $title = ($item->id) ? 'Редактирование сайта с отзывами' : 'Добавление сайта с отзывами';
+    $title = ($item->id) ? 'Редактирование сайта с отзывами' : 'Создание сайта с отзывами';
 @endphp
 
 @section('title', $title)

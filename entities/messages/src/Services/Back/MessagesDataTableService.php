@@ -5,7 +5,6 @@ namespace InetStudio\Reviews\Messages\Services\Back;
 use Yajra\DataTables\DataTables;
 use Yajra\DataTables\Html\Builder;
 use Yajra\DataTables\Services\DataTable;
-use InetStudio\Reviews\Messages\Contracts\Repositories\MessagesRepositoryContract;
 use InetStudio\Reviews\Messages\Contracts\Services\Back\MessagesDataTableServiceContract;
 
 /**
@@ -14,18 +13,16 @@ use InetStudio\Reviews\Messages\Contracts\Services\Back\MessagesDataTableService
 class MessagesDataTableService extends DataTable implements MessagesDataTableServiceContract
 {
     /**
-     * @var MessagesRepositoryContract
+     * @var
      */
-    private $repository;
+    public $model;
 
     /**
-     * MessagesDataTableService constructor.
-     *
-     * @param MessagesRepositoryContract $repository
+     * CommentsDataTableService constructor.
      */
-    public function __construct(MessagesRepositoryContract $repository)
+    public function __construct()
     {
-        $this->repository = $repository;
+        $this->model = app()->make('InetStudio\Reviews\Messages\Contracts\Models\MessageModelContract');
     }
 
     /**
@@ -41,7 +38,7 @@ class MessagesDataTableService extends DataTable implements MessagesDataTableSer
 
         return DataTables::of($this->query())
             ->setTransformer($transformer)
-            ->rawColumns(['actions'])
+            ->rawColumns(['checkbox', 'read', 'active', 'material', 'actions'])
             ->make();
     }
 
@@ -52,16 +49,19 @@ class MessagesDataTableService extends DataTable implements MessagesDataTableSer
      */
     public function query()
     {
-        $query = $this->repository->getAllItems(true)
-            ->addSelect(['site_id', 'user_name', 'title', 'message']);
+        $query = $this->model->buildQuery([
+            'columns' => ['title', 'created_at'],
+        ]);
 
         return $query;
     }
 
     /**
-     * Optional method if you want to use html builder.
+     * Генерация таблицы.
      *
-     * @return \Yajra\DataTables\Html\Builder
+     * @return Builder
+     *
+     * @throws \Throwable
      */
     public function html(): Builder
     {
@@ -77,15 +77,21 @@ class MessagesDataTableService extends DataTable implements MessagesDataTableSer
      * Получаем колонки.
      *
      * @return array
+     *
+     * @throws \Throwable
      */
     protected function getColumns(): array
     {
         return [
-            ['data' => 'user_name', 'name' => 'user_name', 'title' => 'Пользователь'],
+            ['data' => 'checkbox', 'name' => 'checkbox', 'title' => view('admin.module.reviews.messages::back.partials.datatables.checkbox')
+                ->render(), 'orderable' => false, 'searchable' => false],
+            ['data' => 'read', 'name' => 'is_read', 'title' => 'Прочитано', 'searchable' => false],
+            ['data' => 'active', 'name' => 'is_active', 'title' => 'Активность', 'searchable' => false],
+            ['data' => 'name', 'name' => 'name', 'title' => 'Имя'],
+            ['data' => 'email', 'name' => 'email', 'title' => 'Email'],
             ['data' => 'title', 'name' => 'title', 'title' => 'Заголовок'],
             ['data' => 'message', 'name' => 'message', 'title' => 'Отзыв'],
             ['data' => 'created_at', 'name' => 'created_at', 'title' => 'Дата создания'],
-            ['data' => 'updated_at', 'name' => 'updated_at', 'title' => 'Дата обновления'],
             ['data' => 'actions', 'name' => 'actions', 'title' => 'Действия', 'orderable' => false, 'searchable' => false],
         ];
     }
@@ -113,6 +119,7 @@ class MessagesDataTableService extends DataTable implements MessagesDataTableSer
         $i18n = trans('admin::datatables');
 
         return [
+            'order' => [7, 'desc'],
             'paging' => true,
             'pagingType' => 'full_numbers',
             'searching' => true,

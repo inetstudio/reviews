@@ -15,7 +15,7 @@ class SuggestionTransformer extends TransformerAbstract implements SuggestionTra
     /**
      * @var string
      */
-    private $type;
+    protected $type;
 
     /**
      * SuggestionTransformer constructor.
@@ -38,21 +38,16 @@ class SuggestionTransformer extends TransformerAbstract implements SuggestionTra
      */
     public function transform(SiteModelContract $item): array
     {
-        if ($this->type && $this->type == 'autocomplete') {
-
-            return [
-                'value' => $item->getAttribute('name'),
-                'data' => [
-                    'id' => $item->getAttribute('id'),
-                    'name' => $item->getAttribute('name'),
-                ],
-            ];
-        } else {
-            return [
+        return ($this->type && $this->type == 'autocomplete') ? [
+            'value' => $item->getAttribute('name'),
+            'data' => [
                 'id' => $item->getAttribute('id'),
                 'name' => $item->getAttribute('name'),
-            ];
-        }
+            ],
+        ] : [
+                'id' => $item->getAttribute('id'),
+                'name' => $item->getAttribute('name'),
+        ];
     }
 
     /**

@@ -56,7 +56,8 @@ messagesList.find('table').on('click', '.edit-message', function (event) {
                 messageModal.find('input[name=message_id]').val(data.id);
                 messageModal.find('select[name=site_id]').val(data.site_id).trigger('change');
                 messageModal.find('input[name=title]').val(data.title);
-                messageModal.find('input[name=user_name]').val(data.user_name);
+                messageModal.find('input[name=name]').val(data.name);
+                messageModal.find('input[name=email]').val(data.email);
                 messageModal.find('input[name=user_link]').val(data.user_link);
                 messageModal.find('input[name=link]').val(data.link);
                 messageModal.find('input[name=rating]').val(data.rating);

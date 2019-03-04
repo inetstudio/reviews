@@ -2,6 +2,7 @@
 
 namespace InetStudio\Reviews\Sites\Providers;
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -53,7 +54,7 @@ class SitesServiceProvider extends ServiceProvider
         );
 
         if ($this->app->runningInConsole()) {
-            if (! class_exists('CreateReviewsSitesTables')) {
+            if (! Schema::hasTable('reviews_sites')) {
                 $timestamp = date('Y_m_d_His', time());
                 $this->publishes([
                     __DIR__.'/../../database/migrations/create_reviews_sites_tables.php.stub' => database_path('migrations/'.$timestamp.'_create_reviews_sites_tables.php'),

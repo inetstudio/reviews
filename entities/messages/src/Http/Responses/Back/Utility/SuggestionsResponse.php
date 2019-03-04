@@ -2,11 +2,8 @@
 
 namespace InetStudio\Reviews\Messages\Http\Responses\Back\Utility;
 
-use League\Fractal\Manager;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Collection;
 use Illuminate\Contracts\Support\Responsable;
-use League\Fractal\Serializer\DataArraySerializer;
 use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Utility\SuggestionsResponseContract;
 
 /**
@@ -17,23 +14,16 @@ class SuggestionsResponse implements SuggestionsResponseContract, Responsable
     /**
      * @var array
      */
-    private $suggestions;
-
-    /**
-     * @var string
-     */
-    private $type;
+    protected $suggestions;
 
     /**
      * SuggestionsResponse constructor.
      *
-     * @param Collection $suggestions
-     * @param string $type
+     * @param array $suggestions
      */
-    public function __construct(Collection $suggestions, string $type)
+    public function __construct(array $suggestions)
     {
         $this->suggestions = $suggestions;
-        $this->type = $type;
     }
 
     /**
@@ -45,22 +35,6 @@ class SuggestionsResponse implements SuggestionsResponseContract, Responsable
      */
     public function toResponse($request): JsonResponse
     {
-        $resource = (app()->makeWith(
-            'InetStudio\Reviews\Messages\Contracts\Transformers\Back\SuggestionTransformerContract', [
-            'type' => $this->type,
-        ]))->transformCollection($this->suggestions);
-
-        $manager = new Manager();
-        $manager->setSerializer(new DataArraySerializer());
-
-        $transformation = $manager->createData($resource)->toArray();
-
-        if ($this->type == 'autocomplete') {
-            $data['suggestions'] = $transformation['data'];
-        } else {
-            $data['items'] = $transformation['data'];
-        }
-
-        return response()->json($data);
+        return response()->json($this->suggestions);
     }
 }
