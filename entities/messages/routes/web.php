@@ -19,7 +19,7 @@ Route::group([
 
 Route::group(['namespace' => 'InetStudio\Reviews\Messages\Contracts\Http\Controllers\Front'], function () {
     Route::group(['middleware' => 'web'], function () {
-        Route::post('reviews/more/{type}/{id}', 'MessagesControllerContract@getComments')->name('front.reviews.messages.get');
-        Route::post('reviews/{type}/{id}', 'MessagesControllerContract@sendComment')->name('front.reviews.messages.send');
+        Route::post('reviews/more/{type}/{id}', 'MessagesControllerContract@getMessages')->name('front.reviews.messages.get');
+        Route::post('reviews/{type}/{id}', 'MessagesControllerContract@sendMessage')->name('front.reviews.messages.send');
     });
 });
