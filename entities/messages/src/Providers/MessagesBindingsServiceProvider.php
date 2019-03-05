@@ -22,6 +22,7 @@ class MessagesBindingsServiceProvider extends ServiceProvider
         'InetStudio\Reviews\Messages\Contracts\Models\MessageModelContract' => 'InetStudio\Reviews\Messages\Models\MessageModel',
         'InetStudio\Reviews\Messages\Contracts\Transformers\Back\MessageTransformerContract' => 'InetStudio\Reviews\Messages\Transformers\Back\MessageTransformer',
         'InetStudio\Reviews\Messages\Contracts\Transformers\Back\SuggestionTransformerContract' => 'InetStudio\Reviews\Messages\Transformers\Back\SuggestionTransformer',
+        'InetStudio\Reviews\Messages\Contracts\Transformers\Front\MessageTransformerContract' => 'InetStudio\Reviews\Messages\Transformers\Front\MessageTransformer',
         'InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Moderate\DestroyResponseContract' => 'InetStudio\Reviews\Messages\Http\Responses\Back\Moderate\DestroyResponse',
         'InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Moderate\ReadResponseContract' => 'InetStudio\Reviews\Messages\Http\Responses\Back\Moderate\ReadResponse',
         'InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Moderate\ActivityResponseContract' => 'InetStudio\Reviews\Messages\Http\Responses\Back\Moderate\ActivityResponse',

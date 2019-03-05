@@ -60,6 +60,7 @@ class MessagesService extends BaseService implements MessagesServiceContract
             'user_id' => $usersService->getUserId(),
             'name' => $usersService->getUserName($request),
             'email' => $usersService->getUserEmail($request),
+            'is_active' => 0,
         ]);
 
         $message = $this->saveModel($data);
