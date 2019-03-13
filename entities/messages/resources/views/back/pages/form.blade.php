@@ -71,9 +71,19 @@
                                         ],
                                     ]) !!}
 
-                                    {!! Form::string('user_name', $item->user_name, [
+                                    {!! Form::string('name', $item->name, [
                                         'label' => [
                                             'title' => 'Пользователь',
+                                            'class' => 'col-sm-2 control-label',
+                                        ],
+                                        'field' => [
+                                            'class' => 'form-control',
+                                        ],
+                                    ]) !!}
+
+                                    {!! Form::string('email', $item->email, [
+                                        'label' => [
+                                            'title' => 'Email',
                                             'class' => 'col-sm-2 control-label',
                                         ],
                                         'field' => [

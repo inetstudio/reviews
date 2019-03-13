@@ -39,9 +39,6 @@ class MessageTransformer extends TransformerAbstract implements MessageTransform
             'title' => $item->title,
             'message' => $item->message,
             'created_at' => (string) $item->created_at,
-            'material' => view('admin.module.reviews.messages::back.partials.datatables.material', [
-                'item' => $item->commentable,
-            ])->render(),
             'actions' => view('admin.module.reviews.messages::back.partials.datatables.actions', [
                 'id' => $item->getAttribute('id'),
             ])->render(),
