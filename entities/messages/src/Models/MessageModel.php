@@ -216,4 +216,14 @@ class MessageModel extends Model implements MessageModelContract
             'site_id'
         );
     }
+
+    /**
+     * Полиморфное отношение с остальными моделями.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function reviewable()
+    {
+        return $this->morphTo();
+    }
 }
