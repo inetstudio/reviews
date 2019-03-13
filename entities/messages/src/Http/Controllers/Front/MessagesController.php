@@ -4,8 +4,9 @@ namespace InetStudio\Reviews\Messages\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Arcanedev\NoCaptcha\Rules\CaptchaRule;
 use InetStudio\Reviews\Messages\Contracts\Services\Front\MessagesServiceContract;
-use InetStudio\Reviews\Messages\Contracts\Http\Requests\Front\SendMessageRequestContract;
 use InetStudio\Reviews\Messages\Contracts\Http\Responses\Front\GetMessagesResponseContract;
 use InetStudio\Reviews\Messages\Contracts\Http\Responses\Front\SendMessageResponseContract;
 use InetStudio\Reviews\Messages\Contracts\Http\Controllers\Front\MessagesControllerContract;
@@ -19,17 +20,45 @@ class MessagesController extends Controller implements MessagesControllerContrac
      * Отправка отзыва.
      *
      * @param MessagesServiceContract $messagesService
-     * @param SendMessageRequestContract $request
+     * @param Request $request
      * @param string $type
      * @param string $id
      *
      * @return SendMessageResponseContract
      */
     public function sendMessage(MessagesServiceContract $messagesService,
-                                SendMessageRequestContract $request,
+                                Request $request,
                                 string $type,
                                 string $id): SendMessageResponseContract
     {
+        $rules = [
+            'message' => 'required',
+            'rating' => 'required',
+        ];
+
+        if (! auth()->user()) {
+            $rules = array_merge($rules, [
+                'name' => 'required|max:255',
+                'email' => 'required|max:255|email',
+                'g-recaptcha-response' => [
+                    'required',
+                    new CaptchaRule,
+                ],
+            ]);
+        }
+
+        Validator::make($request->all(), $rules, [
+            'message.required' => 'Поле «Сообщение» обязательно для заполнения',
+            'rating.required' => 'Поле «Рейтинг» обязательно для заполнения',
+            'name.required' => 'Поле «Имя» обязательно для заполнения',
+            'name.max' => 'Поле «Имя» не должно превышать 255 символов',
+            'email.required' => 'Поле «Email» обязательно для заполнения',
+            'email.max' => 'Поле «Email» не должно превышать 255 символов',
+            'email.email' => 'Поле «Email» должно содержать значение в корректном формате',
+            'g-recaptcha-response.required' => 'Поле «Капча» обязательно для заполнения',
+            'g-recaptcha-response.captcha'  => 'Неверный код капча',
+        ])->validate();
+
         $data = $request->only($messagesService->model->getFillable());
 
         $message = $messagesService->saveMessage($data, $type, $id);
