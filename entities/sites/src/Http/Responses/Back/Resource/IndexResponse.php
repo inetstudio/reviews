@@ -2,7 +2,6 @@
 
 namespace InetStudio\Reviews\Sites\Http\Responses\Back\Resource;
 
-use Illuminate\View\View;
 use Illuminate\Contracts\Support\Responsable;
 use InetStudio\Reviews\Sites\Contracts\Http\Responses\Back\Resource\IndexResponseContract;
 
@@ -31,9 +30,9 @@ class IndexResponse implements IndexResponseContract, Responsable
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|View
      */
-    public function toResponse($request): View
+    public function toResponse($request)
     {
         return view('admin.module.reviews.sites::back.pages.index', $this->data);
     }

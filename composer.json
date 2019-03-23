@@ -10,8 +10,8 @@
         }
     ],
     "require": {
-        "arcanedev/no-captcha": "^7.0",
-        "inetstudio/widgets": "1.7.*"
+        "arcanedev/no-captcha": "^9.0",
+        "inetstudio/widgets": "1.8.*"
     },
     "autoload": {
       "psr-4": {
@@ -23,11 +23,11 @@
     "extra": {
         "laravel": {
             "providers": [
-                "InetStudio\\Reviews\\Providers\\ReviewsServiceProvider",
-                "InetStudio\\Reviews\\Messages\\Providers\\MessagesBindingsServiceProvider",
-                "InetStudio\\Reviews\\Messages\\Providers\\MessagesServiceProvider",
-                "InetStudio\\Reviews\\Sites\\Providers\\SitesBindingsServiceProvider",
-                "InetStudio\\Reviews\\Sites\\Providers\\SitesServiceProvider"
+                "InetStudio\\Reviews\\Providers\\ServiceProvider",
+                "InetStudio\\Reviews\\Messages\\Providers\\BindingsServiceProvider",
+                "InetStudio\\Reviews\\Messages\\Providers\\ServiceProvider",
+                "InetStudio\\Reviews\\Sites\\Providers\\BindingsServiceProvider",
+                "InetStudio\\Reviews\\Sites\\Providers\\ServiceProvider"
             ]
         }
     }

@@ -2,7 +2,8 @@
 
 namespace InetStudio\Reviews\Messages\Http\Responses\Back\Utility;
 
-use Illuminate\Http\JsonResponse;
+use League\Fractal\Manager;
+use Illuminate\Support\Collection;
 use Illuminate\Contracts\Support\Responsable;
 use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Utility\SuggestionsResponseContract;
 
@@ -12,29 +13,58 @@ use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Utility\Suggestion
 class SuggestionsResponse implements SuggestionsResponseContract, Responsable
 {
     /**
-     * @var array
+     * @var Collection
      */
-    protected $suggestions;
+    protected $items;
+
+    /**
+     * @var string
+     */
+    protected $type;
 
     /**
      * SuggestionsResponse constructor.
      *
-     * @param array $suggestions
+     * @param Collection $items
+     * @param string $type
      */
-    public function __construct(array $suggestions)
+    public function __construct(Collection $items, string $type = '')
     {
-        $this->suggestions = $suggestions;
+        $this->items = $items;
+        $this->type = $type;
     }
 
     /**
-     * Возвращаем slug по заголовку объекта.
+     * Возвращаем подсказки для поля.
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
-    public function toResponse($request): JsonResponse
+    public function toResponse($request)
     {
-        return response()->json($this->suggestions);
+        $resource = (app()->make('InetStudio\Reviews\Messages\Contracts\Transformers\Back\Utility\SuggestionTransformerContract', [
+            'type' => $this->type,
+        ]))->transformCollection($this->items);
+
+        $serializer = app()->make('InetStudio\AdminPanel\Base\Contracts\Serializers\SimpleDataArraySerializerContract');
+
+        $manager = new Manager();
+        $manager->setSerializer($serializer);
+
+        $transformation = $manager->createData($resource)->toArray();
+
+        $data = [
+            'suggestions' => [],
+            'items' => [],
+        ];
+
+        if ($this->type == 'autocomplete') {
+            $data['suggestions'] = $transformation;
+        } else {
+            $data['items'] = $transformation;
+        }
+
+        return response()->json($data);
     }
 }

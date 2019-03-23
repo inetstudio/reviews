@@ -2,7 +2,7 @@
 
 namespace InetStudio\Reviews\Sites\Console\Commands;
 
-use InetStudio\AdminPanel\Console\Commands\BaseSetupCommand;
+use InetStudio\AdminPanel\Base\Console\Commands\BaseSetupCommand;
 
 /**
  * Class SetupCommand.
@@ -36,7 +36,7 @@ class SetupCommand extends BaseSetupCommand
                 'description' => 'Publish migrations',
                 'command' => 'vendor:publish',
                 'params' => [
-                    '--provider' => 'InetStudio\Reviews\Sites\Providers\SitesServiceProvider',
+                    '--provider' => 'InetStudio\Reviews\Sites\Providers\ServiceProvider',
                     '--tag' => 'migrations',
                 ],
             ],
@@ -50,7 +50,7 @@ class SetupCommand extends BaseSetupCommand
                 'description' => 'Publish config',
                 'command' => 'vendor:publish',
                 'params' => [
-                    '--provider' => 'InetStudio\Reviews\Sites\Providers\SitesServiceProvider',
+                    '--provider' => 'InetStudio\Reviews\Sites\Providers\ServiceProvider',
                     '--tag' => 'config',
                 ],
             ],

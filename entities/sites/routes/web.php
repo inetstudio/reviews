@@ -5,11 +5,10 @@ Route::group([
     'middleware' => ['web', 'back.auth'],
     'prefix' => 'back/reviews',
 ], function () {
-    Route::any('reviews/sites/data', 'SitesDataControllerContract@data')->name('back.reviews.sites.data.index');
-    Route::post('reviews/sites/slug', 'SitesUtilityControllerContract@getSlug')->name('back.reviews.sites.getSlug');
-    Route::post('reviews/sites/suggestions', 'SitesUtilityControllerContract@getSuggestions')->name('back.reviews.sites.getSuggestions');
+    Route::any('reviews/sites/data', 'DataControllerContract@data')->name('back.reviews.sites.data.index');
+    Route::post('reviews/sites/suggestions', 'UtilityControllerContract@getSuggestions')->name('back.reviews.sites.getSuggestions');
 
-    Route::resource('sites', 'SitesControllerContract', ['except' => [
+    Route::resource('sites', 'ResourceControllerContract', ['except' => [
         'show',
     ], 'as' => 'back.reviews']);
 });

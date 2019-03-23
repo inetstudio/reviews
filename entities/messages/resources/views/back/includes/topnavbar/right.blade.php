@@ -1,4 +1,4 @@
-@inject('messagesService', 'InetStudio\Reviews\Messages\Contracts\Services\Back\MessagesServiceContract')
+@inject('messagesService', 'InetStudio\Reviews\Messages\Contracts\Services\Back\ItemsServiceContract')
 
 @php
     $unreadBadge = $messagesService->getUnreadMessagesCount();

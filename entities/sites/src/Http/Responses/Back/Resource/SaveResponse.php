@@ -2,7 +2,6 @@
 
 namespace InetStudio\Reviews\Sites\Http\Responses\Back\Resource;
 
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\Support\Responsable;
 use InetStudio\Reviews\Sites\Contracts\Models\SiteModelContract;
 use InetStudio\Reviews\Sites\Contracts\Http\Responses\Back\Resource\SaveResponseContract;
@@ -32,9 +31,9 @@ class SaveResponse implements SaveResponseContract, Responsable
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return RedirectResponse
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
-    public function toResponse($request): RedirectResponse
+    public function toResponse($request)
     {
         return response()->redirectToRoute('back.reviews.sites.edit', [
             $this->item->fresh()->id,

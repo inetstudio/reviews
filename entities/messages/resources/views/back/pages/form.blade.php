@@ -1,4 +1,4 @@
-@inject('sitesService', 'InetStudio\Reviews\Sites\Contracts\Services\Back\SitesServiceContract')
+@inject('sitesService', 'InetStudio\Reviews\Sites\Contracts\Services\Back\ItemsServiceContract')
 
 @extends('admin::back.layouts.app')
 
@@ -57,7 +57,7 @@
                                             'data-source' => route('back.reviews.sites.getSuggestions'),
                                         ],
                                         'options' => [
-                                            'values' => (old('site_id') ?? $item->site_id) ? $sitesService->getItemByID(old('site_id') ?? $item->site_id)->pluck('name', 'id')->toArray() : [],
+                                            'values' => (old('site_id') ?? $item->site_id) ? $sitesService->getItemById(old('site_id') ?? $item->site_id)->pluck('name', 'id')->toArray() : [],
                                         ],
                                     ]) !!}
 

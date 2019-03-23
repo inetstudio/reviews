@@ -107,8 +107,10 @@ class SiteModel extends Model implements SiteModelContract, HasMedia
      */
     public function messages()
     {
+        $messageModel = app()->make('InetStudio\Reviews\Messages\Contracts\Models\MessageModelContract');
+
         return $this->hasMany(
-            app()->make('InetStudio\Reviews\Messages\Contracts\Models\MessageModelContract'),
+            get_class($messageModel),
             'site_id',
             'id'
         );

@@ -1,0 +1,105 @@
+<?php
+
+namespace InetStudio\Reviews\Messages\Services\Front;
+
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
+use InetStudio\AdminPanel\Base\Services\BaseService;
+use InetStudio\Reviews\Messages\Contracts\Models\MessageModelContract;
+use InetStudio\Reviews\Messages\Contracts\Services\Front\ItemsServiceContract;
+
+/**
+ * Class ItemsService.
+ */
+class ItemsService extends BaseService implements ItemsServiceContract
+{
+    public $availableTypes = [];
+
+    /**
+     * ItemsService constructor.
+     *
+     * @param MessageModelContract $model
+     */
+    public function __construct(MessageModelContract $model)
+    {
+        parent::__construct($model);
+
+        $types = config('reviews_messages.reviewable');
+
+        foreach ($types ?? [] as $type => $modelContract) {
+            $this->availableTypes[$type] = app()->make($modelContract);
+        }
+    }
+
+    /**
+     * Сохраняем отзыв.
+     *
+     * @param array $data
+     * @param string $type
+     * @param int $id
+     *
+     * @return MessageModelContract|null
+     */
+    public function saveMessage(array $data,
+                                string $type,
+                                int $id): ?MessageModelContract
+    {
+        if (! isset($this->availableTypes[$type])) {
+            return null;
+        }
+
+        $usersService = app()->make('InetStudio\ACL\Users\Contracts\Services\Front\UsersServiceContract');
+
+        $request = request();
+        $item = $this->availableTypes[$type]::find($id);
+
+        if (! ($item && $item->id)) {
+            return null;
+        }
+
+        $data = array_merge($data, [
+            'reviewable_id' => $item->id,
+            'reviewable_type' => get_class($item),
+            'user_id' => $usersService->getUserId(),
+            'name' => $usersService->getUserName($request),
+            'email' => $usersService->getUserEmail($request),
+            'is_active' => 0,
+        ]);
+
+        $data = Arr::only($data, $this->model->getFillable());
+
+        $item = $this->saveModel($data);
+
+        if ($item && $item->id) {
+            event(app()->make(
+                'InetStudio\Reviews\Messages\Contracts\Events\Front\SendItemEventContract',
+                compact('item'))
+            );
+        }
+
+        return $item;
+    }
+
+    /**
+     * Получаем отзывы по типу и id материала.
+     *
+     * @param string $type
+     * @param int $id
+     *
+     * @return Collection
+     */
+    public function getMessagesByTypeAndId(string $type, int $id): Collection
+    {
+        if (! isset($this->availableTypes[$type])) {
+            return collect([]);
+        }
+
+        $item = $this->availableTypes[$type]::find($id);
+
+        if (! ($item && $item->id)) {
+            return collect([]);
+        }
+
+        return $item->reviews;
+    }
+}

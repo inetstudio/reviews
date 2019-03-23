@@ -2,7 +2,6 @@
 
 namespace InetStudio\Reviews\Messages\Http\Responses\Back\Resource;
 
-use Illuminate\Http\JsonResponse;
 use Illuminate\Contracts\Support\Responsable;
 use InetStudio\Reviews\Messages\Contracts\Models\MessageModelContract;
 use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Resource\ShowResponseContract;
@@ -32,9 +31,9 @@ class ShowResponse implements ShowResponseContract, Responsable
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
-    public function toResponse($request): JsonResponse
+    public function toResponse($request)
     {
         return response()->json($this->item);
     }

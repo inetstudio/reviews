@@ -135,7 +135,9 @@ class MessageModel extends Model implements MessageModelContract
      */
     public function setMessageAttribute($value)
     {
-        $this->attributes['message'] = trim(str_replace("&nbsp;", ' ', strip_tags((isset($value['text'])) ? $value['text'] : (! is_array($value) ? $value : ''))));
+        $value = (isset($value['text'])) ? $value['text'] : (! is_array($value) ? $value : '');
+
+        $this->attributes['message'] = trim(str_replace("&nbsp;", ' ', strip_tags($value)));
     }
 
     /**
@@ -211,8 +213,10 @@ class MessageModel extends Model implements MessageModelContract
      */
     public function site()
     {
+        $siteModel = app()->make('InetStudio\Reviews\Sites\Contracts\Models\SiteModelContract');
+
         return $this->belongsTo(
-            app()->make('InetStudio\Reviews\Sites\Contracts\Models\SiteModelContract'),
+            get_class($siteModel),
             'site_id'
         );
     }

@@ -2,7 +2,6 @@
 
 namespace InetStudio\Reviews\Messages\Http\Responses\Back\Moderate;
 
-use Illuminate\Http\JsonResponse;
 use Illuminate\Contracts\Support\Responsable;
 use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Moderate\ActivityResponseContract;
 
@@ -31,9 +30,9 @@ class ActivityResponse implements ActivityResponseContract, Responsable
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
-    public function toResponse($request): JsonResponse
+    public function toResponse($request)
     {
         return response()->json([
             'success' => $this->result,
