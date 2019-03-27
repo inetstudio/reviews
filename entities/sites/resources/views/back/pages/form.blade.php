@@ -54,26 +54,17 @@
                                                 'label' => [
                                                     'title' => 'Название',
                                                 ],
-                                                'field' => [
-                                                    'class' => 'form-control',
-                                                ],
                                             ]) !!}
 
                                             {!! Form::string('alias', $item->alias, [
                                                 'label' => [
                                                     'title' => 'Alias',
                                                 ],
-                                                'field' => [
-                                                    'class' => 'form-control',
-                                                ],
                                             ]) !!}
 
                                             {!! Form::string('link', $item->link, [
                                                 'label' => [
                                                     'title' => 'Ссылка на сайт',
-                                                ],
-                                                'field' => [
-                                                    'class' => 'form-control',
                                                 ],
                                             ]) !!}
 

@@ -74,17 +74,11 @@
                                 'label' => [
                                     'title' => 'Заголовок',
                                 ],
-                                'field' => [
-                                    'class' => 'form-control',
-                                ],
                             ]) !!}
 
                             {!! Form::string('name', '', [
                                 'label' => [
                                     'title' => 'Имя пользователя',
-                                ],
-                                'field' => [
-                                    'class' => 'form-control',
                                 ],
                             ]) !!}
 
@@ -92,26 +86,17 @@
                                 'label' => [
                                     'title' => 'Email пользователь',
                                 ],
-                                'field' => [
-                                    'class' => 'form-control',
-                                ],
                             ]) !!}
 
                             {!! Form::string('user_link', '', [
                                 'label' => [
                                     'title' => 'Ссылка на пользователя',
                                 ],
-                                'field' => [
-                                    'class' => 'form-control',
-                                ],
                             ]) !!}
 
                             {!! Form::string('link', '', [
                                 'label' => [
                                     'title' => 'Ссылка на отзыв',
-                                ],
-                                'field' => [
-                                    'class' => 'form-control',
                                 ],
                             ]) !!}
 

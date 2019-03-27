@@ -71,17 +71,11 @@
                                                 'label' => [
                                                     'title' => 'Заголовок',
                                                 ],
-                                                'field' => [
-                                                    'class' => 'form-control',
-                                                ],
                                             ]) !!}
 
                                             {!! Form::string('name', $item->name, [
                                                 'label' => [
                                                     'title' => 'Пользователь',
-                                                ],
-                                                'field' => [
-                                                    'class' => 'form-control',
                                                 ],
                                             ]) !!}
 
@@ -89,26 +83,17 @@
                                                 'label' => [
                                                     'title' => 'Email',
                                                 ],
-                                                'field' => [
-                                                    'class' => 'form-control',
-                                                ],
                                             ]) !!}
 
                                             {!! Form::string('user_link', $item->user_link, [
                                                 'label' => [
                                                     'title' => 'Ссылка на пользователя',
                                                 ],
-                                                'field' => [
-                                                    'class' => 'form-control',
-                                                ],
                                             ]) !!}
 
                                             {!! Form::string('link', $item->link, [
                                                 'label' => [
                                                     'title' => 'Ссылка на отзыв',
-                                                ],
-                                                'field' => [
-                                                    'class' => 'form-control',
                                                 ],
                                             ]) !!}
 
