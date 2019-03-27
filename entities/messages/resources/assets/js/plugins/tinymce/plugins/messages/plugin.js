@@ -95,7 +95,7 @@ messageModal.find('.save').on('click', function (event) {
     data.message.text = window.tinymce.get('modal_message').getContent();
 
     messageModal.find('.form-group').removeClass('has-error');
-    messageModal.find('span.help-block').remove();
+    messageModal.find('span.form-text').remove();
 
     $.ajax({
         'url': form.attr('action'),
@@ -126,7 +126,7 @@ messageModal.find('.save').on('click', function (event) {
                     let errorMessages = data.responseJSON.errors[field];
 
                     errorMessages.forEach(function (errorMessage) {
-                        let errorElement = $('<span class="help-block m-b-none">'+errorMessage+'</span>');
+                        let errorElement = $('<span class="form-text m-b-none">'+errorMessage+'</span>');
 
                         errorElement.insertAfter(input);
                     })

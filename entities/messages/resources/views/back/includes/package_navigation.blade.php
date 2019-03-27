@@ -5,5 +5,5 @@
 @endphp
 
 <li class="{{ isActiveRoute('back.reviews.messages.*') }}">
-    <a href="{{ route('back.reviews.messages.index') }}"><span class="nav-label">Сообщения</span><span class="label label-primary pull-right">{{ $unreadBadge }}</span></a>
+    <a href="{{ route('back.reviews.messages.index') }}">Сообщения<span class="label label-primary float-right">{{ $unreadBadge }}</span></a>
 </li>

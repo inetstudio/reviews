@@ -138,7 +138,7 @@ messages.init = function () {
             let modal = $(this);
 
             modal.find('.form-group').removeClass('has-error');
-            modal.find('span.help-block').remove();
+            modal.find('span.form-text').remove();
 
             modal.find('.modal-header h1').text('Создание отзыва');
             modal.find('form').attr('action', route('back.reviews.messages.store'));

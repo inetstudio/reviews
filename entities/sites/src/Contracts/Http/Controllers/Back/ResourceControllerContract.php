@@ -25,7 +25,7 @@ interface ResourceControllerContract
     public function index(DataTableServiceContract $dataTableService): IndexResponseContract;
 
     /**
-     * Добавление объекта.
+     * Создание объекта.
      *
      * @param ItemsServiceContract $resourceService
      *
