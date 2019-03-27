@@ -1,7 +1,7 @@
 @extends('admin::back.layouts.app')
 
 @php
-    $title = ($item->id) ? 'Редактирование сайта с отзывами' : 'Создание сайта с отзывами';
+    $title = ($item->id) ? 'Редактирование сайта' : 'Создание сайта';
 @endphp
 
 @section('title', $title)
@@ -61,7 +61,7 @@
 
                                             {!! Form::string('alias', $item->alias, [
                                                 'label' => [
-                                                    'title' => 'alias',
+                                                    'title' => 'Alias',
                                                 ],
                                                 'field' => [
                                                     'class' => 'form-control',

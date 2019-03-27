@@ -1,7 +1,7 @@
 @extends('admin::back.layouts.app')
 
 @php
-    $title = 'Сайты с отзывами';
+    $title = 'Сайты';
 @endphp
 
 @section('title', $title)
