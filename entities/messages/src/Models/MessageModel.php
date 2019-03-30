@@ -74,7 +74,7 @@ class MessageModel extends Model implements MessageModelContract, HasMedia
             'media' => function ($query) {
                 $query->select(['id', 'model_id', 'model_type', 'collection_name', 'file_name', 'disk', 'mime_type', 'custom_properties', 'responsive_images']);
             },
-            
+
             'site' => function ($query) {
                 $query->select(['id', 'name', 'alias', 'link', 'is_active']);
             },
