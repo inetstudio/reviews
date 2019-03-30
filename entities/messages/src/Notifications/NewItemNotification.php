@@ -66,7 +66,7 @@ class NewItemNotification extends Notification implements NewItemNotificationCon
     public function toDatabase($notifiable): array
     {
         return [
-            'review_id' => $this->item->id,
+            'review_id' => $this->item['id'],
         ];
     }
 }
