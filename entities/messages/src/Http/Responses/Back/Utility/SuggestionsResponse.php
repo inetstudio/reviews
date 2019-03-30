@@ -40,6 +40,8 @@ class SuggestionsResponse implements SuggestionsResponseContract, Responsable
      * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
+     *
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function toResponse($request)
     {

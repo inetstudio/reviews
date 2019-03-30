@@ -78,7 +78,7 @@ class ItemsService extends BaseService implements ItemsServiceContract
 
         $item = $this->saveModel($data);
 
-        if ($item && $item->id) {
+        if ($item && $item['id']) {
             event(app()->make(
                 'InetStudio\Reviews\Messages\Contracts\Events\Front\SendItemEventContract',
                 compact('item'))

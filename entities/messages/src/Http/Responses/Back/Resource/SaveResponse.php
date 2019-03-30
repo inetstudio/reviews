@@ -36,17 +36,17 @@ class SaveResponse implements SaveResponseContract, Responsable
      */
     public function toResponse($request)
     {
-        $this->item = $this->item->fresh();
+        $item = $this->item->fresh();
 
         if ($request->ajax()) {
             return response()->json([
                 'success' => true,
-                'id' => $this->item->id,
-                'title' => ($this->item->title) ? $this->item->title : Str::limit($this->item->message, '100', '...'),
+                'id' => $item['id'],
+                'title' => ($item['title']) ? $item['title'] : Str::limit($item['message'], '100', '...'),
             ], 200);
         } else {
             return response()->redirectToRoute('back.reviews.messages.edit', [
-                $this->item->id,
+                $item['id'],
             ]);
         }
     }

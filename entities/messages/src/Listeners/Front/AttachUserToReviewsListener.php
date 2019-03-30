@@ -25,10 +25,10 @@ class AttachUserToReviewsListener implements AttachUserToReviewsListenerContract
 
         $reviewsService->model::where([
             ['user_id', '=', 0],
-            ['email', '=', $user->email],
+            ['email', '=', $user['email']],
         ])->update([
-            'user_id' => $user->id,
-            'name' => $user->name,
+            'user_id' => $user['id'],
+            'name' => $user['name'],
         ]);
     }
 }

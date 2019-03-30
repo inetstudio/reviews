@@ -37,7 +37,7 @@ class ItemsController extends Controller implements ItemsControllerContract
 
         $item = $messagesService->saveMessage($data, $type, $id);
 
-        $result = ($item && isset($item->id));
+        $result = ($item && isset($item['id']));
 
         return $this->app->make(SendItemResponseContract::class, compact('result'));
     }
