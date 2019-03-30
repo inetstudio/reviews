@@ -33,7 +33,7 @@ interface ResourceControllerContract
      *
      * @return ShowResponseContract
      */
-    public function show(ItemsServiceContract $resourceService, 
+    public function show(ItemsServiceContract $resourceService,
                          int $id = 0): ShowResponseContract;
 
     /**
@@ -53,7 +53,7 @@ interface ResourceControllerContract
      *
      * @return SaveResponseContract
      */
-    public function store(ItemsServiceContract $resourceService, 
+    public function store(ItemsServiceContract $resourceService,
                           SaveItemRequestContract $request): SaveResponseContract;
 
     /**
@@ -64,7 +64,7 @@ interface ResourceControllerContract
      *
      * @return FormResponseContract
      */
-    public function edit(ItemsServiceContract $resourceService, 
+    public function edit(ItemsServiceContract $resourceService,
                          int $id = 0): FormResponseContract;
 
     /**
@@ -76,7 +76,7 @@ interface ResourceControllerContract
      *
      * @return SaveResponseContract
      */
-    public function update(ItemsServiceContract $resourceService, 
+    public function update(ItemsServiceContract $resourceService,
                            SaveItemRequestContract $request, int $id = 0): SaveResponseContract;
 
     /**
@@ -87,6 +87,6 @@ interface ResourceControllerContract
      *
      * @return DestroyResponseContract
      */
-    public function destroy(ItemsServiceContract $resourceService, 
+    public function destroy(ItemsServiceContract $resourceService,
                             int $id = 0): DestroyResponseContract;
 }

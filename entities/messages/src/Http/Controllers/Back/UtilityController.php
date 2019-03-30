@@ -24,7 +24,7 @@ class UtilityController extends Controller implements UtilityControllerContract
      *
      * @throws BindingResolutionException
      */
-    public function getSuggestions(UtilityServiceContract $utilityService, 
+    public function getSuggestions(UtilityServiceContract $utilityService,
                                    Request $request): SuggestionsResponseContract
     {
         $search = $request->get('q', '');

@@ -70,7 +70,7 @@ class ItemsController extends Controller implements ItemsControllerContract
                     'stop' => (($page + 1) * $limit >= $items->count()),
                     'items' => $items->slice($page * $limit, $limit),
                 ],
-            ]
+            ],
         ]);
     }
 }

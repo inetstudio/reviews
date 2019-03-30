@@ -14,7 +14,7 @@ class SendItemEvent implements SendItemEventContract
     use SerializesModels;
 
     /**
-     * @var MessageModelContract 
+     * @var MessageModelContract
      */
     public $item;
 

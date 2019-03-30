@@ -14,7 +14,7 @@ return [
 
     'queue' => [
         'enable' => false,
-        'name' => 'reviews_notify'
+        'name' => 'reviews_notify',
     ],
 
     'reviewable' => [
