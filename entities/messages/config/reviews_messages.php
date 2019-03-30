@@ -25,16 +25,17 @@ return [
         'quality' => 100,
         'conversions' => [
             'message' => [
-                'message' => [
+                'review' => [
                     'default' => [
                         [
-                            'name' => 'message_admin',
-                            'size' => [
+                            'name' => 'review_admin',
+                            'fit' => [
                                 'width' => 140,
+                                'height' => 140,
                             ],
                         ],
                         [
-                            'name' => 'message_front',
+                            'name' => 'review_front',
                             'fit' => [
                                 'width' => 300,
                                 'height' => 300,

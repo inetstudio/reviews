@@ -31,6 +31,7 @@ class ServiceProvider extends BaseServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
+                'InetStudio\Reviews\Messages\Console\Commands\CreateFoldersCommand',
                 'InetStudio\Reviews\Messages\Console\Commands\SetupCommand',
             ]);
         }
@@ -44,6 +45,10 @@ class ServiceProvider extends BaseServiceProvider
         $this->publishes([
             __DIR__.'/../../config/reviews_messages.php' => config_path('reviews_messages.php'),
         ], 'config');
+
+        $this->mergeConfigFrom(
+            __DIR__.'/../../config/filesystems.php', 'filesystems.disks'
+        );
 
         if ($this->app->runningInConsole()) {
             if (! Schema::hasTable('reviews_messages')) {
