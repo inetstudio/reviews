@@ -146,7 +146,7 @@ class MessageModel extends Model implements MessageModelContract, HasMedia
     {
         $value = (isset($value['text'])) ? $value['text'] : (! is_array($value) ? $value : '');
 
-        $this->attributes['message'] = trim(str_replace("&nbsp;", ' ', strip_tags($value)));
+        $this->attributes['message'] = trim(str_replace('&nbsp;', ' ', strip_tags($value)));
     }
 
     /**
@@ -213,7 +213,7 @@ class MessageModel extends Model implements MessageModelContract, HasMedia
     public function scopeInactive($query)
     {
         return $query->where('is_active', 0);
-    }    
+    }
 
     /**
      * Обратное отношение "один ко многим" с моделью сайта.

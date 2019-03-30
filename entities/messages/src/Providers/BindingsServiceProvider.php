@@ -11,8 +11,8 @@ use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 class BindingsServiceProvider extends BaseServiceProvider implements DeferrableProvider
 {
     /**
-    * @var  array
-    */
+     * @var  array
+     */
     public $bindings = [
         'InetStudio\Reviews\Messages\Contracts\Mail\NewItemMailContract' => 'InetStudio\Reviews\Messages\Mail\NewItemMail',
         'InetStudio\Reviews\Messages\Contracts\Models\MessageModelContract' => 'InetStudio\Reviews\Messages\Models\MessageModel',

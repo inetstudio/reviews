@@ -22,7 +22,7 @@ class ResourceController extends Controller implements ResourceControllerContrac
      * Список объектов.
      *
      * @param DataTableServiceContract $dataTableService
-     * 
+     *
      * @return IndexResponseContract
      *
      * @throws BindingResolutionException
@@ -40,7 +40,7 @@ class ResourceController extends Controller implements ResourceControllerContrac
      * Создание объекта.
      *
      * @param ItemsServiceContract $resourceService
-     * 
+     *
      * @return FormResponseContract
      *
      * @throws BindingResolutionException
