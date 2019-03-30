@@ -10,6 +10,7 @@
         }
     ],
     "require": {
+        "inetstudio/admin-panel": "1.8.*",
         "arcanedev/no-captcha": "^9.0",
         "inetstudio/widgets": "1.8.*"
     },
