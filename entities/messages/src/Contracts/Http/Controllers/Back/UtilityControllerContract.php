@@ -12,7 +12,7 @@ use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Utility\Suggestion
 interface UtilityControllerContract
 {
     /**
-     * Возвращаем сайты для поля.
+     * Возвращаем сообщения для поля.
      *
      * @param UtilityServiceContract $utilityService
      * @param Request $request

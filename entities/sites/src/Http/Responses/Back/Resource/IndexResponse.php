@@ -30,7 +30,7 @@ class IndexResponse implements IndexResponseContract, Responsable
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|View
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function toResponse($request)
     {

@@ -3,8 +3,6 @@
 namespace InetStudio\Reviews\Messages\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Arcanedev\NoCaptcha\Rules\CaptchaRule;
 use InetStudio\AdminPanel\Base\Http\Controllers\Controller;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\Reviews\Messages\Contracts\Services\Front\ItemsServiceContract;
@@ -24,7 +22,7 @@ class ItemsController extends Controller implements ItemsControllerContract
      * @param ItemsServiceContract $messagesService
      * @param SendItemRequestContract $request
      * @param string $type
-     * @param string $id
+     * @param int $id
      *
      * @return SendItemResponseContract
      *
@@ -33,7 +31,7 @@ class ItemsController extends Controller implements ItemsControllerContract
     public function sendMessage(ItemsServiceContract $messagesService,
                                 SendItemRequestContract $request,
                                 string $type,
-                                string $id): SendItemResponseContract
+                                int $id): SendItemResponseContract
     {
         $data = $request->all();
 
@@ -50,7 +48,7 @@ class ItemsController extends Controller implements ItemsControllerContract
      * @param ItemsServiceContract $messagesService
      * @param Request $request
      * @param string $type
-     * @param string $id
+     * @param int $id
      *
      * @return GetItemsResponseContract
      *
@@ -59,7 +57,7 @@ class ItemsController extends Controller implements ItemsControllerContract
     public function getMessages(ItemsServiceContract $messagesService,
                                 Request $request,
                                 string $type,
-                                string $id): GetItemsResponseContract
+                                int $id): GetItemsResponseContract
     {
         $page = ($request->filled('page')) ? $request->get('page') - 1 : 0;
         $limit = ($request->filled('limit')) ? $request->get('limit') : 3;

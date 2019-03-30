@@ -19,14 +19,14 @@ interface ItemsControllerContract
      * @param ItemsServiceContract $messagesService
      * @param SendItemRequestContract $request
      * @param string $type
-     * @param string $id
+     * @param int $id
      *
      * @return SendItemResponseContract
      */
     public function sendMessage(ItemsServiceContract $messagesService,
                                 SendItemRequestContract $request,
                                 string $type,
-                                string $id): SendItemResponseContract;
+                                int $id): SendItemResponseContract;
 
     /**
      * Получаем отзывы к материалу.
@@ -34,12 +34,12 @@ interface ItemsControllerContract
      * @param ItemsServiceContract $messagesService
      * @param Request $request
      * @param string $type
-     * @param string $id
+     * @param int $id
      *
      * @return GetItemsResponseContract
      */
     public function getMessages(ItemsServiceContract $messagesService,
                                 Request $request,
                                 string $type,
-                                string $id): GetItemsResponseContract;
+                                int $id): GetItemsResponseContract;
 }

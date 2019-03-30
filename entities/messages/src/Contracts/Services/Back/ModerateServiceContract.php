@@ -2,10 +2,12 @@
 
 namespace InetStudio\Reviews\Messages\Contracts\Services\Back;
 
+use InetStudio\AdminPanel\Base\Contracts\Services\BaseServiceContract;
+
 /**
  * Interface ModerateServiceContract.
  */
-interface ModerateServiceContract
+interface ModerateServiceContract extends BaseServiceContract
 {
     /**
      * Изменение активности.

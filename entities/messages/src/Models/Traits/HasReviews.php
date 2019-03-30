@@ -2,6 +2,8 @@
 
 namespace InetStudio\Reviews\Messages\Models\Traits;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
+
 /**
  * Trait HasReviews.
  */
@@ -11,6 +13,8 @@ trait HasReviews
      * Get Review class name.
      *
      * @return string
+     *
+     * @throws BindingResolutionException
      */
     public static function getReviewClassName(): string
     {
@@ -23,6 +27,8 @@ trait HasReviews
      * Set the polymorphic relation.
      *
      * @return mixed
+     *
+     * @throws BindingResolutionException
      */
     public function reviews()
     {
