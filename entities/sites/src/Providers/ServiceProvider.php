@@ -12,8 +12,6 @@ class ServiceProvider extends BaseServiceProvider
 {
     /**
      * Загрузка сервиса.
-     *
-     * @return void
      */
     public function boot(): void
     {
@@ -25,8 +23,6 @@ class ServiceProvider extends BaseServiceProvider
 
     /**
      * Регистрация команд.
-     *
-     * @return void
      */
     protected function registerConsoleCommands(): void
     {
@@ -40,8 +36,6 @@ class ServiceProvider extends BaseServiceProvider
 
     /**
      * Регистрация ресурсов.
-     *
-     * @return void
      */
     protected function registerPublishes(): void
     {
@@ -65,8 +59,6 @@ class ServiceProvider extends BaseServiceProvider
 
     /**
      * Регистрация путей.
-     *
-     * @return void
      */
     protected function registerRoutes(): void
     {
@@ -75,8 +67,6 @@ class ServiceProvider extends BaseServiceProvider
 
     /**
      * Регистрация представлений.
-     *
-     * @return void
      */
     protected function registerViews(): void
     {

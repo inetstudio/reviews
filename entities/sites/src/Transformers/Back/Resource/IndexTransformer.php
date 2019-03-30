@@ -2,6 +2,7 @@
 
 namespace InetStudio\Reviews\Sites\Transformers\Back\Resource;
 
+use Throwable;
 use League\Fractal\TransformerAbstract;
 use InetStudio\Reviews\Sites\Contracts\Models\SiteModelContract;
 use InetStudio\Reviews\Sites\Contracts\Transformers\Back\Resource\IndexTransformerContract;
@@ -18,7 +19,7 @@ class IndexTransformer extends TransformerAbstract implements IndexTransformerCo
      *
      * @return array
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function transform(SiteModelContract $item): array
     {

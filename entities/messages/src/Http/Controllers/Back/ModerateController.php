@@ -4,6 +4,7 @@ namespace InetStudio\Reviews\Messages\Http\Controllers\Back;
 
 use Illuminate\Http\Request;
 use InetStudio\AdminPanel\Base\Http\Controllers\Controller;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\Reviews\Messages\Contracts\Services\Back\ModerateServiceContract;
 use InetStudio\Reviews\Messages\Contracts\Http\Controllers\Back\ModerateControllerContract;
 use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Moderate\ReadResponseContract;
@@ -22,6 +23,8 @@ class ModerateController extends Controller implements ModerateControllerContrac
      * @param ModerateServiceContract $moderateService
      *
      * @return ActivityResponseContract
+     *
+     * @throws BindingResolutionException
      */
     public function activity(Request $request,
                              ModerateServiceContract $moderateService): ActivityResponseContract
@@ -40,6 +43,8 @@ class ModerateController extends Controller implements ModerateControllerContrac
      * @param ModerateServiceContract $moderateService
      *
      * @return ReadResponseContract
+     *
+     * @throws BindingResolutionException
      */
     public function read(Request $request,
                          ModerateServiceContract $moderateService): ReadResponseContract
@@ -58,6 +63,8 @@ class ModerateController extends Controller implements ModerateControllerContrac
      * @param ModerateServiceContract $moderateService
      *
      * @return DestroyResponseContract
+     *
+     * @throws BindingResolutionException
      */
     public function destroy(Request $request,
                             ModerateServiceContract $moderateService): DestroyResponseContract

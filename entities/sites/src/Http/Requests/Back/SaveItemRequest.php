@@ -2,7 +2,6 @@
 
 namespace InetStudio\Reviews\Sites\Http\Requests\Back;
 
-use Illuminate\Http\Request;
 use Illuminate\Foundation\Http\FormRequest;
 use InetStudio\Reviews\Sites\Contracts\Http\Requests\Back\SaveItemRequestContract;
 
@@ -44,15 +43,13 @@ class SaveItemRequest extends FormRequest implements SaveItemRequestContract
     /**
      * Правила проверки запроса.
      *
-     * @param Request $request
-     *
      * @return array
      */
-    public function rules(Request $request): array
+    public function rules(): array
     {
         return [
             'name' => 'required|max:255',
-            'alias' => 'required|max:255|unique:reviews_sites,alias,'.$request->get('site_id'),
+            'alias' => 'required|max:255|unique:reviews_sites,alias,'.$this->get('site_id'),
             'link' => 'url|max:1000',
         ];
     }

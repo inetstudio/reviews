@@ -2,6 +2,7 @@
 
 namespace InetStudio\Reviews\Messages\Listeners\Front;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\Reviews\Messages\Contracts\Listeners\Front\AttachUserToReviewsListenerContract;
 
 /**
@@ -14,7 +15,7 @@ class AttachUserToReviewsListener implements AttachUserToReviewsListenerContract
      *
      * @param $event
      *
-     * @return void
+     * @throws BindingResolutionException
      */
     public function handle($event): void
     {

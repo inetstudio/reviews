@@ -5,6 +5,7 @@ namespace InetStudio\Reviews\Messages\Services\Front;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use InetStudio\AdminPanel\Base\Services\BaseService;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\Reviews\Messages\Contracts\Models\MessageModelContract;
 use InetStudio\Reviews\Messages\Contracts\Services\Front\ItemsServiceContract;
 
@@ -13,12 +14,17 @@ use InetStudio\Reviews\Messages\Contracts\Services\Front\ItemsServiceContract;
  */
 class ItemsService extends BaseService implements ItemsServiceContract
 {
+    /**
+     * @var array
+     */
     public $availableTypes = [];
 
     /**
      * ItemsService constructor.
      *
      * @param MessageModelContract $model
+     *
+     * @throws BindingResolutionException
      */
     public function __construct(MessageModelContract $model)
     {
@@ -39,6 +45,8 @@ class ItemsService extends BaseService implements ItemsServiceContract
      * @param int $id
      *
      * @return MessageModelContract|null
+     *
+     * @throws BindingResolutionException
      */
     public function saveMessage(array $data,
                                 string $type,

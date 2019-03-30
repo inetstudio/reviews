@@ -3,6 +3,7 @@
 namespace InetStudio\Reviews\Messages\Http\Controllers\Back;
 
 use InetStudio\AdminPanel\Base\Http\Controllers\Controller;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\Reviews\Messages\Contracts\Services\Back\ItemsServiceContract;
 use InetStudio\Reviews\Messages\Contracts\Services\Back\DataTableServiceContract;
 use InetStudio\Reviews\Messages\Contracts\Http\Requests\Back\SaveItemRequestContract;
@@ -24,6 +25,8 @@ class ResourceController extends Controller implements ResourceControllerContrac
      * @param DataTableServiceContract $dataTableService
      * 
      * @return IndexResponseContract
+     *
+     * @throws BindingResolutionException
      */
     public function index(DataTableServiceContract $dataTableService): IndexResponseContract
     {
@@ -41,6 +44,8 @@ class ResourceController extends Controller implements ResourceControllerContrac
      * @param int $id
      *
      * @return ShowResponseContract
+     *
+     * @throws BindingResolutionException
      */
     public function show(ItemsServiceContract $resourceService,
                          int $id = 0): ShowResponseContract
@@ -58,6 +63,8 @@ class ResourceController extends Controller implements ResourceControllerContrac
      * @param ItemsServiceContract $resourceService
      *
      * @return FormResponseContract
+     *
+     * @throws BindingResolutionException
      */
     public function create(ItemsServiceContract $resourceService): FormResponseContract
     {
@@ -75,6 +82,8 @@ class ResourceController extends Controller implements ResourceControllerContrac
      * @param SaveItemRequestContract $request
      *
      * @return SaveResponseContract
+     *
+     * @throws BindingResolutionException
      */
     public function store(ItemsServiceContract $resourceService,
                           SaveItemRequestContract $request): SaveResponseContract
@@ -89,6 +98,8 @@ class ResourceController extends Controller implements ResourceControllerContrac
      * @param int $id
      *
      * @return FormResponseContract
+     *
+     * @throws BindingResolutionException
      */
     public function edit(ItemsServiceContract $resourceService,
                          int $id = 0): FormResponseContract
@@ -110,6 +121,8 @@ class ResourceController extends Controller implements ResourceControllerContrac
      * @param int $id
      *
      * @return SaveResponseContract
+     *
+     * @throws BindingResolutionException
      */
     public function update(ItemsServiceContract $resourceService,
                            SaveItemRequestContract $request,
@@ -126,6 +139,8 @@ class ResourceController extends Controller implements ResourceControllerContrac
      * @param int $id
      *
      * @return SaveResponseContract
+     *
+     * @throws BindingResolutionException
      */
     protected function save(ItemsServiceContract $resourceService,
                             SaveItemRequestContract $request,
@@ -145,6 +160,8 @@ class ResourceController extends Controller implements ResourceControllerContrac
      * @param int $id
      *
      * @return DestroyResponseContract
+     *
+     * @throws BindingResolutionException
      */
     public function destroy(ItemsServiceContract $resourceService,
                             int $id = 0): DestroyResponseContract

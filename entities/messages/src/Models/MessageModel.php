@@ -4,20 +4,31 @@ namespace InetStudio\Reviews\Messages\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use InetStudio\ACL\Users\Models\Traits\HasUser;
+use InetStudio\Uploads\Models\Traits\HasImages;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\Reviews\Messages\Contracts\Models\MessageModelContract;
 use InetStudio\AdminPanel\Base\Models\Traits\Scopes\BuildQueryScopeTrait;
 
 /**
  * Class MessageModel.
  */
-class MessageModel extends Model implements MessageModelContract
+class MessageModel extends Model implements MessageModelContract, HasMedia
 {
     use HasUser;
+    use HasImages;
     use Notifiable;
     use SoftDeletes;
     use BuildQueryScopeTrait;
+
+    protected $images = [
+        'config' => 'reviews_messages',
+        'model' => 'message',
+    ];
 
     /**
      * Связанная с моделью таблица.
@@ -49,8 +60,6 @@ class MessageModel extends Model implements MessageModelContract
 
     /**
      * Загрузка модели.
-     *
-     * @return void
      */
     protected static function boot()
     {
@@ -73,7 +82,7 @@ class MessageModel extends Model implements MessageModelContract
      *
      * @param $value
      */
-    public function setTitleAttribute($value)
+    public function setTitleAttribute($value): void
     {
         $this->attributes['title'] = trim(strip_tags($value));
     }
@@ -83,7 +92,7 @@ class MessageModel extends Model implements MessageModelContract
      *
      * @param $value
      */
-    public function setUserIdAttribute($value)
+    public function setUserIdAttribute($value): void
     {
         $this->attributes['user_id'] = (int) trim(strip_tags($value));
     }
@@ -93,7 +102,7 @@ class MessageModel extends Model implements MessageModelContract
      *
      * @param $value
      */
-    public function setUserNameAttribute($value)
+    public function setUserNameAttribute($value): void
     {
         $this->attributes['user_name'] = trim(strip_tags($value));
     }
@@ -103,7 +112,7 @@ class MessageModel extends Model implements MessageModelContract
      *
      * @param $value
      */
-    public function setUserLinkAttribute($value)
+    public function setUserLinkAttribute($value): void
     {
         $this->attributes['user_link'] = trim(strip_tags($value));
     }
@@ -113,7 +122,7 @@ class MessageModel extends Model implements MessageModelContract
      *
      * @param $value
      */
-    public function setLinkAttribute($value)
+    public function setLinkAttribute($value): void
     {
         $this->attributes['link'] = trim(strip_tags($value));
     }
@@ -123,7 +132,7 @@ class MessageModel extends Model implements MessageModelContract
      *
      * @param $value
      */
-    public function setRatingAttribute($value)
+    public function setRatingAttribute($value): void
     {
         $this->attributes['rating'] = (int) trim(strip_tags($value));
     }
@@ -133,7 +142,7 @@ class MessageModel extends Model implements MessageModelContract
      *
      * @param $value
      */
-    public function setMessageAttribute($value)
+    public function setMessageAttribute($value): void
     {
         $value = (isset($value['text'])) ? $value['text'] : (! is_array($value) ? $value : '');
 
@@ -145,7 +154,7 @@ class MessageModel extends Model implements MessageModelContract
      *
      * @param $value
      */
-    public function setIsActiveAttribute($value)
+    public function setIsActiveAttribute($value): void
     {
         $this->attributes['is_active'] = (bool) trim(strip_tags($value));
     }
@@ -155,7 +164,7 @@ class MessageModel extends Model implements MessageModelContract
      *
      * @param $value
      */
-    public function setReviewableTypeAttribute($value)
+    public function setReviewableTypeAttribute($value): void
     {
         $this->attributes['reviewable_type'] = trim(strip_tags($value));
     }
@@ -165,7 +174,7 @@ class MessageModel extends Model implements MessageModelContract
      *
      * @param $value
      */
-    public function setReviewableIdAttribute($value)
+    public function setReviewableIdAttribute($value): void
     {
         $this->attributes['reviewable_id'] = (int) trim(strip_tags($value));
     }
@@ -209,9 +218,11 @@ class MessageModel extends Model implements MessageModelContract
     /**
      * Обратное отношение "один ко многим" с моделью сайта.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
+     *
+     * @throws BindingResolutionException
      */
-    public function site()
+    public function site(): BelongsTo
     {
         $siteModel = app()->make('InetStudio\Reviews\Sites\Contracts\Models\SiteModelContract');
 
@@ -224,9 +235,9 @@ class MessageModel extends Model implements MessageModelContract
     /**
      * Полиморфное отношение с остальными моделями.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     * @return MorphTo
      */
-    public function reviewable()
+    public function reviewable(): MorphTo
     {
         return $this->morphTo();
     }

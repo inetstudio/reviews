@@ -4,6 +4,7 @@ namespace InetStudio\Reviews\Messages\Contracts\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
 use InetStudio\Reviews\Messages\Contracts\Services\Front\ItemsServiceContract;
+use InetStudio\Reviews\Messages\Contracts\Http\Requests\Front\SendItemRequestContract;
 use InetStudio\Reviews\Messages\Contracts\Http\Responses\Front\GetItemsResponseContract;
 use InetStudio\Reviews\Messages\Contracts\Http\Responses\Front\SendItemResponseContract;
 
@@ -16,14 +17,14 @@ interface ItemsControllerContract
      * Отправка отзыва.
      *
      * @param ItemsServiceContract $messagesService
-     * @param Request $request
+     * @param SendItemRequestContract $request
      * @param string $type
      * @param string $id
      *
      * @return SendItemResponseContract
      */
     public function sendMessage(ItemsServiceContract $messagesService,
-                                Request $request,
+                                SendItemRequestContract $request,
                                 string $type,
                                 string $id): SendItemResponseContract;
 

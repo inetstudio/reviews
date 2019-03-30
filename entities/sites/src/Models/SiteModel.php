@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use InetStudio\Uploads\Models\Traits\HasImages;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\Reviews\Sites\Contracts\Models\SiteModelContract;
 use InetStudio\AdminPanel\Base\Models\Traits\Scopes\BuildQueryScopeTrait;
 
@@ -52,8 +54,6 @@ class SiteModel extends Model implements SiteModelContract, HasMedia
 
     /**
      * Загрузка модели.
-     *
-     * @return void
      */
     protected static function boot()
     {
@@ -75,7 +75,7 @@ class SiteModel extends Model implements SiteModelContract, HasMedia
      *
      * @param $value
      */
-    public function setNameAttribute($value)
+    public function setNameAttribute($value): void
     {
         $this->attributes['name'] = trim(strip_tags($value));
     }
@@ -85,7 +85,7 @@ class SiteModel extends Model implements SiteModelContract, HasMedia
      *
      * @param $value
      */
-    public function setAliasAttribute($value)
+    public function setAliasAttribute($value): void
     {
         $this->attributes['alias'] = trim(strtolower(strip_tags($value)));
     }
@@ -95,7 +95,7 @@ class SiteModel extends Model implements SiteModelContract, HasMedia
      *
      * @param $value
      */
-    public function setLinkAttribute($value)
+    public function setLinkAttribute($value): void
     {
         $this->attributes['link'] = trim(strip_tags($value));
     }
@@ -103,9 +103,11 @@ class SiteModel extends Model implements SiteModelContract, HasMedia
     /**
      * Отношение "один ко многим" с моделью отзывов.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
+     *
+     * @throws BindingResolutionException
      */
-    public function messages()
+    public function messages(): HasMany
     {
         $messageModel = app()->make('InetStudio\Reviews\Messages\Contracts\Models\MessageModelContract');
 

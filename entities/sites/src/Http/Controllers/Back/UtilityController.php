@@ -4,6 +4,7 @@ namespace InetStudio\Reviews\Sites\Http\Controllers\Back;
 
 use Illuminate\Http\Request;
 use InetStudio\AdminPanel\Base\Http\Controllers\Controller;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\Reviews\Sites\Contracts\Services\Back\UtilityServiceContract;
 use InetStudio\Reviews\Sites\Contracts\Http\Controllers\Back\UtilityControllerContract;
 use InetStudio\Reviews\Sites\Contracts\Http\Responses\Back\Utility\SuggestionsResponseContract;
@@ -20,6 +21,8 @@ class UtilityController extends Controller implements UtilityControllerContract
      * @param Request $request
      *
      * @return SuggestionsResponseContract
+     *
+     * @throws BindingResolutionException
      */
     public function getSuggestions(UtilityServiceContract $utilityService,
                                    Request $request): SuggestionsResponseContract

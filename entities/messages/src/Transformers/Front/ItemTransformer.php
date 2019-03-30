@@ -2,6 +2,7 @@
 
 namespace InetStudio\Reviews\Messages\Transformers\Front;
 
+use Throwable;
 use League\Fractal\TransformerAbstract;
 use League\Fractal\Resource\Collection as FractalCollection;
 use InetStudio\Reviews\Messages\Contracts\Models\MessageModelContract;
@@ -19,7 +20,7 @@ class ItemTransformer extends TransformerAbstract implements ItemTransformerCont
      *
      * @return array
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function transform(MessageModelContract $item): array
     {

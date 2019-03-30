@@ -2,6 +2,7 @@
 
 namespace InetStudio\Reviews\Messages\Listeners;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\Reviews\Messages\Contracts\Listeners\SendEmailToAdminListenerContract;
 
 /**
@@ -14,9 +15,9 @@ class SendEmailToAdminListener implements SendEmailToAdminListenerContract
      *
      * @param object $event
      *
-     * @return void
+     * @throws BindingResolutionException
      */
-    public function handle($event)
+    public function handle($event): void
     {
         $item = $event->item;
 

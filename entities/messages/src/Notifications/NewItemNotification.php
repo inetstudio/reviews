@@ -3,6 +3,7 @@
 namespace InetStudio\Reviews\Messages\Notifications;
 
 use Illuminate\Notifications\Notification;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\Reviews\Messages\Contracts\Mail\NewItemMailContract;
 use InetStudio\Reviews\Messages\Contracts\Models\MessageModelContract;
 use InetStudio\Reviews\Messages\Contracts\Notifications\NewItemNotificationContract;
@@ -47,6 +48,8 @@ class NewItemNotification extends Notification implements NewItemNotificationCon
      * @param $notifiable
      *
      * @return NewItemMailContract
+     *
+     * @throws BindingResolutionException
      */
     public function toMail($notifiable): NewItemMailContract
     {

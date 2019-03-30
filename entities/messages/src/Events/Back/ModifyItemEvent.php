@@ -19,7 +19,7 @@ class ModifyItemEvent implements ModifyItemEventContract
     public $item;
 
     /**
-     * ModifyMessageEvent constructor.
+     * ModifyItemEvent constructor.
      *
      * @param MessageModelContract $item
      */

@@ -2,6 +2,8 @@
 
 namespace InetStudio\Reviews\Messages\Services\Back;
 
+use Exception;
+use Throwable;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\JsonResponse;
 use Yajra\DataTables\Html\Builder;
@@ -15,7 +17,7 @@ use InetStudio\Reviews\Messages\Contracts\Services\Back\DataTableServiceContract
 class DataTableService extends DataTable implements DataTableServiceContract
 {
     /**
-     * @var
+     * @var MessageModelContract
      */
     public $model;
 
@@ -34,7 +36,7 @@ class DataTableService extends DataTable implements DataTableServiceContract
      *
      * @return JsonResponse
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function ajax(): JsonResponse
     {
@@ -65,7 +67,7 @@ class DataTableService extends DataTable implements DataTableServiceContract
      *
      * @return Builder
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function html(): Builder
     {
@@ -83,7 +85,7 @@ class DataTableService extends DataTable implements DataTableServiceContract
      *
      * @return array
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
     protected function getColumns(): array
     {

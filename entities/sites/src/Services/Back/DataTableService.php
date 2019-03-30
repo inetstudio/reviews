@@ -2,6 +2,7 @@
 
 namespace InetStudio\Reviews\Sites\Services\Back;
 
+use Exception;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\JsonResponse;
 use Yajra\DataTables\Html\Builder;
@@ -34,7 +35,7 @@ class DataTableService extends DataTable implements DataTableServiceContract
      *
      * @return JsonResponse
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function ajax(): JsonResponse
     {

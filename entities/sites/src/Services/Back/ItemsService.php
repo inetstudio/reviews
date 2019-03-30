@@ -5,6 +5,7 @@ namespace InetStudio\Reviews\Sites\Services\Back;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Session;
 use InetStudio\AdminPanel\Base\Services\BaseService;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\Reviews\Sites\Contracts\Models\SiteModelContract;
 use InetStudio\Reviews\Sites\Contracts\Services\Back\ItemsServiceContract;
 
@@ -30,6 +31,8 @@ class ItemsService extends BaseService implements ItemsServiceContract
      * @param int $id
      *
      * @return SiteModelContract
+     *
+     * @throws BindingResolutionException
      */
     public function save(array $data, int $id): SiteModelContract
     {
