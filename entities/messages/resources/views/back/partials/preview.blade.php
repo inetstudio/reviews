@@ -3,7 +3,7 @@
         $media = $item->getMedia('files')
     @endphp
     @foreach ($media as $mediaItem)
-        @if ($mediaItem->mime_type == 'image/jpeg')
+        @if (in_array($mediaItem->mime_type, ['image/jpeg', 'image/png']))
             <a data-fancybox="carousel-{{ $item['id'] }}" href="{{ url($mediaItem->getUrl()) }}" {!! (! $loop->first) ? 'style="display: none"' : '' !!}>
                 <img src="{{ url($mediaItem->getUrl('review_admin_'.$conversion)) }}" class=" m-b-md img-fluid" alt="post_image">
             </a>
