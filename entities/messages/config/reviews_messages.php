@@ -28,7 +28,7 @@ return [
                 'review' => [
                     'default' => [
                         [
-                            'name' => 'review_admin',
+                            'name' => 'review_admin_index',
                             'fit' => [
                                 'width' => 140,
                                 'height' => 140,
@@ -37,8 +37,8 @@ return [
                         [
                             'name' => 'review_front',
                             'fit' => [
-                                'width' => 300,
-                                'height' => 300,
+                                'width' => 160,
+                                'height' => 160,
                             ],
                         ],
                     ],

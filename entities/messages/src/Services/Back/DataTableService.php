@@ -96,6 +96,7 @@ class DataTableService extends DataTable implements DataTableServiceContract
             ['data' => 'active', 'name' => 'is_active', 'title' => 'Активность', 'searchable' => false],
             ['data' => 'name', 'name' => 'name', 'title' => 'Имя'],
             ['data' => 'email', 'name' => 'email', 'title' => 'Email'],
+            ['data' => 'media', 'name' => 'media', 'title' => 'Медиа', 'orderable' => false, 'searchable' => false],
             ['data' => 'title', 'name' => 'title', 'title' => 'Заголовок'],
             ['data' => 'message', 'name' => 'message', 'title' => 'Отзыв'],
             ['data' => 'created_at', 'name' => 'created_at', 'title' => 'Дата создания'],
@@ -126,7 +127,7 @@ class DataTableService extends DataTable implements DataTableServiceContract
         $i18n = trans('admin::datatables');
 
         return [
-            'order' => [7, 'desc'],
+            'order' => [8, 'desc'],
             'paging' => true,
             'pagingType' => 'full_numbers',
             'searching' => true,

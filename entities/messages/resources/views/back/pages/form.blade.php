@@ -52,6 +52,19 @@
                                     <div id="collapseMain" class="collapse show" aria-expanded="true">
                                         <div class="panel-body">
 
+                                            <div class="form-group row ">
+                                                <label for="ean" class="col-sm-2 col-form-label font-bold font-bold">Медиа</label>
+                                                <div class="col-sm-10">
+                                                    <div class="product-image">
+                                                        @include('admin.module.reviews.messages::back.partials.preview', [
+                                                            'item' => $item,
+                                                            'conversion' => 'index'
+                                                        ])
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+
                                             {!! Form::dropdown('site_id', $item->site_id, [
                                                 'label' => [
                                                     'title' => 'Сайт с отзывами',
