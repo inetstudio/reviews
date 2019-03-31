@@ -42,6 +42,9 @@ class SendItemRequest extends FormRequest implements SendItemRequestContract
 
             'g-recaptcha-response.required' => 'Поле «Капча» обязательно для заполнения',
             'g-recaptcha-response.captcha'  => 'Неверный код капча',
+
+            'files.*.mimes' => 'Допустимый формат изображений - jpeg, jpg, png',
+            'files.*.max' => 'Максимальный размер изображения - 5 Мб',
         ];
     }
 
@@ -55,6 +58,7 @@ class SendItemRequest extends FormRequest implements SendItemRequestContract
         $rules = [
             'message' => 'required',
             'rating' => 'required',
+            'files.*' => 'required|mimes:jpg,jpeg,png|max:5000',
         ];
 
         if (! auth()->user()) {
