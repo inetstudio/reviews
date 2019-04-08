@@ -94,17 +94,19 @@ class MessageModel extends Model implements MessageModelContract, HasMedia
 
         self::$buildQueryScopeDefaults['relations'] = [
             'media' => function ($query) {
-                $query->select([
-                    'id',
-                    'model_id',
-                    'model_type',
-                    'collection_name',
-                    'file_name',
-                    'disk',
-                    'mime_type',
-                    'custom_properties',
-                    'responsive_images'
-                ]);
+                $query->select(
+                    [
+                        'id',
+                        'model_id',
+                        'model_type',
+                        'collection_name',
+                        'file_name',
+                        'disk',
+                        'mime_type',
+                        'custom_properties',
+                        'responsive_images'
+                    ]
+                );
             },
 
             'site' => function ($query) {

@@ -35,7 +35,7 @@ class SendEmailToAdminListener implements SendEmailToAdminListenerContract
                     'InetStudio\Reviews\Messages\Contracts\Notifications\NewItemQueueableNotificationContract',
                     compact('item')
                 )
-                ->onQueue($queue)
+                    ->onQueue($queue)
             );
 
             return;

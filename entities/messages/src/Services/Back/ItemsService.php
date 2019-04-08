@@ -37,9 +37,11 @@ class ItemsService extends BaseService implements ItemsServiceContract
         $item = $this->getItemById($id, $params);
 
         if ($item->id && ! $item->is_read) {
-            $item->update([
-                'is_read' => true,
-            ]);
+            $item->update(
+                [
+                    'is_read' => true,
+                ]
+            );
         }
 
         return $item;
@@ -63,9 +65,11 @@ class ItemsService extends BaseService implements ItemsServiceContract
 
         $item = $this->saveModel($data, $id);
 
-        event(app()->make(
-            'InetStudio\Reviews\Messages\Contracts\Events\Back\ModifyItemEventContract',
-            compact('item'))
+        event(
+            app()->make(
+                'InetStudio\Reviews\Messages\Contracts\Events\Back\ModifyItemEventContract',
+                compact('item')
+            )
         );
 
         Session::flash('success', 'Отзыв успешно '.$action);

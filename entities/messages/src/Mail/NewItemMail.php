@@ -44,13 +44,15 @@ class NewItemMail extends Mailable implements NewItemMailContract
         return $this->from(config('mail.from.address'), config('mail.from.name'))
             ->to($to, '')
             ->subject($subject)
-            ->withSwiftMessage(function ($item) use ($headers) {
-                $itemHeaders = $item->getHeaders();
+            ->withSwiftMessage(
+                function ($item) use ($headers) {
+                    $itemHeaders = $item->getHeaders();
 
-                foreach ($headers as $header => $value) {
-                    $itemHeaders->addTextHeader($header, $value);
+                    foreach ($headers as $header => $value) {
+                        $itemHeaders->addTextHeader($header, $value);
+                    }
                 }
-            })
+            )
             ->view('admin.module.reviews.messages::mails.message_admins', ['item' => $this->item]);
     }
 }

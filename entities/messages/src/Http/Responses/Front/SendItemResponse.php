@@ -35,11 +35,13 @@ class SendItemResponse implements SendItemResponseContract, Responsable
      */
     public function toResponse($request)
     {
-        return response()->json([
-            'success' => $this->result,
-            'message' => ($this->result)
-                ? trans('reviews::messages.send_success')
-                : trans('reviews::messages.send_fail'),
-        ]);
+        return response()->json(
+            [
+                'success' => $this->result,
+                'message' => ($this->result)
+                    ? trans('reviews::messages.send_success')
+                    : trans('reviews::messages.send_fail'),
+            ]
+        );
     }
 }

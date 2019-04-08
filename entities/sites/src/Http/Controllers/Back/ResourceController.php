@@ -31,9 +31,12 @@ class ResourceController extends Controller implements ResourceControllerContrac
     {
         $table = $dataTableService->html();
 
-        return $this->app->make(IndexResponseContract::class, [
-            'data' => compact('table'),
-        ]);
+        return $this->app->make(
+            IndexResponseContract::class,
+            [
+                'data' => compact('table'),
+            ]
+        );
     }
 
     /**
@@ -49,9 +52,12 @@ class ResourceController extends Controller implements ResourceControllerContrac
     {
         $item = $resourceService->getItemById();
 
-        return $this->app->make(FormResponseContract::class, [
-            'data' => compact('item'),
-        ]);
+        return $this->app->make(
+            FormResponseContract::class,
+            [
+                'data' => compact('item'),
+            ]
+        );
     }
 
     /**
@@ -83,9 +89,12 @@ class ResourceController extends Controller implements ResourceControllerContrac
     {
         $item = $resourceService->getItemById($id);
 
-        return $this->app->make(FormResponseContract::class, [
-            'data' => compact('item'),
-        ]);
+        return $this->app->make(
+            FormResponseContract::class,
+            [
+                'data' => compact('item'),
+            ]
+        );
     }
 
     /**
@@ -127,9 +136,12 @@ class ResourceController extends Controller implements ResourceControllerContrac
 
         $item = $resourceService->save($data, $id);
 
-        return $this->app->make(SaveResponseContract::class, [
-            'item' => $item,
-        ]);
+        return $this->app->make(
+            SaveResponseContract::class,
+            [
+                'item' => $item,
+            ]
+        );
     }
 
     /**
@@ -146,8 +158,11 @@ class ResourceController extends Controller implements ResourceControllerContrac
     {
         $result = $resourceService->destroy($id);
 
-        return $this->app->make(DestroyResponseContract::class, [
-            'result' => ($result === null) ? false : $result,
-        ]);
+        return $this->app->make(
+            DestroyResponseContract::class,
+            [
+                'result' => ($result === null) ? false : $result,
+            ]
+        );
     }
 }

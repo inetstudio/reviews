@@ -35,8 +35,10 @@ class ReadResponse implements ReadResponseContract, Responsable
      */
     public function toResponse($request)
     {
-        return response()->json([
-            'success' => $this->result,
-        ]);
+        return response()->json(
+            [
+                'success' => $this->result,
+            ]
+        );
     }
 }

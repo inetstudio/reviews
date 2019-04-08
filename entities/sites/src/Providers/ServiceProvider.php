@@ -27,10 +27,12 @@ class ServiceProvider extends BaseServiceProvider
     protected function registerConsoleCommands(): void
     {
         if ($this->app->runningInConsole()) {
-            $this->commands([
-                'InetStudio\Reviews\Sites\Console\Commands\SetupCommand',
-                'InetStudio\Reviews\Sites\Console\Commands\CreateFoldersCommand',
-            ]);
+            $this->commands(
+                [
+                    'InetStudio\Reviews\Sites\Console\Commands\SetupCommand',
+                    'InetStudio\Reviews\Sites\Console\Commands\CreateFoldersCommand',
+                ]
+            );
         }
     }
 
@@ -39,9 +41,11 @@ class ServiceProvider extends BaseServiceProvider
      */
     protected function registerPublishes(): void
     {
-        $this->publishes([
-            __DIR__.'/../../config/reviews_sites.php' => config_path('reviews_sites.php'),
-        ], 'config');
+        $this->publishes(
+            [
+                __DIR__.'/../../config/reviews_sites.php' => config_path('reviews_sites.php'),
+            ], 'config'
+        );
 
         $this->mergeConfigFrom(
             __DIR__.'/../../config/filesystems.php', 'filesystems.disks'
@@ -50,9 +54,13 @@ class ServiceProvider extends BaseServiceProvider
         if ($this->app->runningInConsole()) {
             if (! Schema::hasTable('reviews_sites')) {
                 $timestamp = date('Y_m_d_His', time());
-                $this->publishes([
-                    __DIR__.'/../../database/migrations/create_reviews_sites_tables.php.stub' => database_path('migrations/'.$timestamp.'_create_reviews_sites_tables.php'),
-                ], 'migrations');
+                $this->publishes(
+                    [
+                        __DIR__.'/../../database/migrations/create_reviews_sites_tables.php.stub' => database_path(
+                            'migrations/'.$timestamp.'_create_reviews_sites_tables.php'
+                        ),
+                    ], 'migrations'
+                );
             }
         }
     }

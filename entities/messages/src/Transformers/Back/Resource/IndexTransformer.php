@@ -24,17 +24,26 @@ class IndexTransformer extends TransformerAbstract implements IndexTransformerCo
     public function transform(MessageModelContract $item): array
     {
         return [
-            'checkbox' => view('admin.module.reviews.messages::back.partials.datatables.checkbox', [
-                'id' => $item['id'],
-            ])->render(),
+            'checkbox' => view(
+                'admin.module.reviews.messages::back.partials.datatables.checkbox',
+                [
+                    'id' => $item['id'],
+                ]
+            )->render(),
             'id' => (int) $item['id'],
-            'read' => view('admin.module.reviews.messages::back.partials.datatables.read', [
-                'is_read' => $item['is_read'],
-            ])->render(),
-            'active' => view('admin.module.reviews.messages::back.partials.datatables.active', [
-                'id' => $item['id'],
-                'is_active' => $item['is_active'],
-            ])->render(),
+            'read' => view(
+                'admin.module.reviews.messages::back.partials.datatables.read',
+                [
+                    'is_read' => $item['is_read'],
+                ]
+            )->render(),
+            'active' => view(
+                'admin.module.reviews.messages::back.partials.datatables.active',
+                [
+                    'id' => $item['id'],
+                    'is_active' => $item['is_active'],
+                ]
+            )->render(),
             'name' => $item['name'],
             'email' => $item['email'],
             'media' => view('admin.module.reviews.messages::back.partials.datatables.media', compact('item'))
@@ -42,9 +51,12 @@ class IndexTransformer extends TransformerAbstract implements IndexTransformerCo
             'title' => $item['title'],
             'message' => $item['message'],
             'created_at' => (string) $item['created_at'],
-            'actions' => view('admin.module.reviews.messages::back.partials.datatables.actions', [
-                'id' => $item['id'],
-            ])->render(),
+            'actions' => view(
+                'admin.module.reviews.messages::back.partials.datatables.actions',
+                [
+                    'id' => $item['id'],
+                ]
+            )->render(),
         ];
     }
 }

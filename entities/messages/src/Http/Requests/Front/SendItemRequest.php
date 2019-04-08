@@ -62,14 +62,16 @@ class SendItemRequest extends FormRequest implements SendItemRequestContract
         ];
 
         if (! auth()->user()) {
-            $rules = array_merge($rules, [
+            $rules = array_merge(
+                $rules, [
                 'name' => 'required|max:255',
                 'email' => 'required|max:255|email',
                 'g-recaptcha-response' => [
                     'required',
                     new CaptchaRule,
                 ],
-            ]);
+            ]
+            );
         }
 
         return $rules;

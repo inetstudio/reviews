@@ -68,14 +68,16 @@ class ItemsService extends BaseService implements ItemsServiceContract
 
         $files = $data['files'];
 
-        $data = array_merge($data, [
+        $data = array_merge(
+            $data, [
             'reviewable_id' => $reviewable->id,
             'reviewable_type' => get_class($reviewable),
             'user_id' => $usersService->getUserId(),
             'name' => $usersService->getUserName($request),
             'email' => $usersService->getUserEmail($request),
             'is_active' => 0,
-        ]);
+        ]
+        );
 
         $data = Arr::only($data, $this->model->getFillable());
 
@@ -85,9 +87,11 @@ class ItemsService extends BaseService implements ItemsServiceContract
             ->attachFilesToObject($item, $files, 'reviews_messages');
 
         if (isset($item['id'])) {
-            event(app()->make(
-                'InetStudio\Reviews\Messages\Contracts\Events\Front\SendItemEventContract',
-                compact('item'))
+            event(
+                app()->make(
+                    'InetStudio\Reviews\Messages\Contracts\Events\Front\SendItemEventContract',
+                    compact('item')
+                )
             );
         }
 

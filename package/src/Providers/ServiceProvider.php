@@ -24,9 +24,11 @@ class ServiceProvider extends BaseServiceProvider
     protected function registerConsoleCommands(): void
     {
         if ($this->app->runningInConsole()) {
-            $this->commands([
-                'InetStudio\Reviews\Console\Commands\SetupCommand',
-            ]);
+            $this->commands(
+                [
+                    'InetStudio\Reviews\Console\Commands\SetupCommand',
+                ]
+            );
         }
     }
 

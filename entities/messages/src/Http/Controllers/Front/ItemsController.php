@@ -67,13 +67,15 @@ class ItemsController extends Controller implements ItemsControllerContract
 
         $items = $messagesService->getMessagesByTypeAndId($type, $id)->sortByDesc('datetime');
 
-        return $this->app->make(GetItemsResponseContract::class, [
+        return $this->app->make(
+            GetItemsResponseContract::class, [
             'data' => [
                 'messages' => [
                     'stop' => (($page + 1) * $limit >= $items->count()),
                     'items' => $items->slice($page * $limit, $limit),
                 ],
             ],
-        ]);
+        ]
+        );
     }
 }

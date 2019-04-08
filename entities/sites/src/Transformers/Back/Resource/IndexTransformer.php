@@ -28,9 +28,12 @@ class IndexTransformer extends TransformerAbstract implements IndexTransformerCo
             'alias' => $item['alias'],
             'created_at' => (string) $item['created_at'],
             'updated_at' => (string) $item['updated_at'],
-            'actions' => view('admin.module.reviews.sites::back.partials.datatables.actions', [
-                'id' => $item['id'],
-            ])->render(),
+            'actions' => view(
+                'admin.module.reviews.sites::back.partials.datatables.actions',
+                [
+                    'id' => $item['id'],
+                ]
+            )->render(),
         ];
     }
 }

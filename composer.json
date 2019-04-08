@@ -1,35 +1,35 @@
 {
-    "name": "inetstudio/reviews",
-    "description": "Package for reviews",
-    "homepage": "https://github.com/inetstudio/reviews",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Konstantin Bukin",
-            "email": "bukin@inetstudio.ru"
-        }
-    ],
-    "require": {
-        "inetstudio/admin-panel": "1.8.*",
-        "arcanedev/no-captcha": "^9.0",
-        "inetstudio/widgets": "1.8.*"
-    },
-    "autoload": {
-      "psr-4": {
-        "InetStudio\\Reviews\\": "package/src",
-        "InetStudio\\Reviews\\Messages\\": "entities/messages/src",
-        "InetStudio\\Reviews\\Sites\\": "entities/sites/src"
-      }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "InetStudio\\Reviews\\Providers\\ServiceProvider",
-                "InetStudio\\Reviews\\Messages\\Providers\\BindingsServiceProvider",
-                "InetStudio\\Reviews\\Messages\\Providers\\ServiceProvider",
-                "InetStudio\\Reviews\\Sites\\Providers\\BindingsServiceProvider",
-                "InetStudio\\Reviews\\Sites\\Providers\\ServiceProvider"
-            ]
-        }
+  "name": "inetstudio/reviews",
+  "description": "Package for reviews",
+  "homepage": "https://github.com/inetstudio/reviews",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Konstantin Bukin",
+      "email": "bukin@inetstudio.ru"
     }
+  ],
+  "require": {
+    "inetstudio/admin-panel": "1.8.*",
+    "arcanedev/no-captcha": "^9.0",
+    "inetstudio/widgets": "1.8.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "InetStudio\\Reviews\\": "package/src",
+      "InetStudio\\Reviews\\Messages\\": "entities/messages/src",
+      "InetStudio\\Reviews\\Sites\\": "entities/sites/src"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "InetStudio\\Reviews\\Providers\\ServiceProvider",
+        "InetStudio\\Reviews\\Messages\\Providers\\BindingsServiceProvider",
+        "InetStudio\\Reviews\\Messages\\Providers\\ServiceProvider",
+        "InetStudio\\Reviews\\Sites\\Providers\\BindingsServiceProvider",
+        "InetStudio\\Reviews\\Sites\\Providers\\ServiceProvider"
+      ]
+    }
+  }
 }

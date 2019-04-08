@@ -9,15 +9,11 @@ Route::group(
         'prefix' => 'back/reviews',
     ],
     function () {
-        Route::any(
-            'reviews/sites/data',
-            'DataControllerContract@data'
-        )->name('back.reviews.sites.data.index');
+        Route::any('reviews/sites/data', 'DataControllerContract@data')
+            ->name('back.reviews.sites.data.index');
 
-        Route::post(
-            'reviews/sites/suggestions',
-            'UtilityControllerContract@getSuggestions'
-        )->name('back.reviews.sites.getSuggestions');
+        Route::post('reviews/sites/suggestions', 'UtilityControllerContract@getSuggestions')
+            ->name('back.reviews.sites.getSuggestions');
 
         Route::resource(
             'sites',

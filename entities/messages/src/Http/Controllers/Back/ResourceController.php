@@ -32,9 +32,12 @@ class ResourceController extends Controller implements ResourceControllerContrac
     {
         $table = $dataTableService->html();
 
-        return $this->app->make(IndexResponseContract::class, [
-            'data' => compact('table'),
-        ]);
+        return $this->app->make(
+            IndexResponseContract::class,
+            [
+                'data' => compact('table'),
+            ]
+        );
     }
 
     /**
@@ -51,9 +54,11 @@ class ResourceController extends Controller implements ResourceControllerContrac
         ItemsServiceContract $resourceService,
         int $id = 0
     ): ShowResponseContract {
-        $item = $resourceService->getItemByIdForDisplay($id, [
+        $item = $resourceService->getItemByIdForDisplay(
+            $id, [
             'columns' => ['title', 'user_link', 'rating'],
-        ]);
+        ]
+        );
 
         return $this->app->make(ShowResponseContract::class, compact('item'));
     }
@@ -71,9 +76,12 @@ class ResourceController extends Controller implements ResourceControllerContrac
     {
         $item = $resourceService->getItemById();
 
-        return $this->app->make(FormResponseContract::class, [
-            'data' => compact('item'),
-        ]);
+        return $this->app->make(
+            FormResponseContract::class,
+            [
+                'data' => compact('item'),
+            ]
+        );
     }
 
     /**
@@ -107,13 +115,18 @@ class ResourceController extends Controller implements ResourceControllerContrac
         ItemsServiceContract $resourceService,
         int $id = 0
     ): FormResponseContract {
-        $item = $resourceService->getItemByIdForDisplay($id, [
+        $item = $resourceService->getItemByIdForDisplay(
+            $id, [
             'columns' => ['title', 'user_link', 'rating'],
-        ]);
+        ]
+        );
 
-        return $this->app->make(FormResponseContract::class, [
-            'data' => compact('item'),
-        ]);
+        return $this->app->make(
+            FormResponseContract::class,
+            [
+                'data' => compact('item'),
+            ]
+        );
     }
 
     /**
@@ -174,8 +187,11 @@ class ResourceController extends Controller implements ResourceControllerContrac
     ): DestroyResponseContract {
         $result = $resourceService->destroy($id);
 
-        return $this->app->make(DestroyResponseContract::class, [
-            'result' => ($result === null) ? false : $result,
-        ]);
+        return $this->app->make(
+            DestroyResponseContract::class,
+            [
+                'result' => ($result === null) ? false : $result,
+            ]
+        );
     }
 }

@@ -43,10 +43,12 @@ class SuggestionsResponse implements SuggestionsResponseContract, Responsable
      */
     public function toResponse($request)
     {
-        $resource = (app()->make('InetStudio\Reviews\Sites\Contracts\Transformers\Back\Utility\SuggestionTransformerContract',
+        $resource = (app()->make(
+            'InetStudio\Reviews\Sites\Contracts\Transformers\Back\Utility\SuggestionTransformerContract',
             [
                 'type' => $this->type,
-            ]))->transformCollection($this->items);
+            ]
+        ))->transformCollection($this->items);
 
         $serializer = app()->make('InetStudio\AdminPanel\Base\Contracts\Serializers\SimpleDataArraySerializerContract');
 

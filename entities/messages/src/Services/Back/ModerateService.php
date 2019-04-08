@@ -35,15 +35,19 @@ class ModerateService extends BaseService implements ModerateServiceContract
         $items = $this->getItemById($ids, $params);
 
         foreach ($items as $item) {
-            $item->update([
-                'is_active' => ! $item->is_active,
-                'is_read' => 1,
-            ]);
+            $item->update(
+                [
+                    'is_active' => ! $item->is_active,
+                    'is_read' => 1,
+                ]
+            );
 
-            event(app()->make(
-                'InetStudio\Reviews\Messages\Contracts\Events\Back\ModifyItemEventContract',
-                compact('item')
-            ));
+            event(
+                app()->make(
+                    'InetStudio\Reviews\Messages\Contracts\Events\Back\ModifyItemEventContract',
+                    compact('item')
+                )
+            );
         }
 
         return true;
@@ -64,14 +68,18 @@ class ModerateService extends BaseService implements ModerateServiceContract
         $items = $this->getItemById($ids, $params);
 
         foreach ($items as $item) {
-            $item->update([
-                'is_read' => 1,
-            ]);
+            $item->update(
+                [
+                    'is_read' => 1,
+                ]
+            );
 
-            event(app()->make(
-                'InetStudio\Reviews\Messages\Contracts\Events\Back\ModifyItemEventContract',
-                compact('item')
-            ));
+            event(
+                app()->make(
+                    'InetStudio\Reviews\Messages\Contracts\Events\Back\ModifyItemEventContract',
+                    compact('item')
+                )
+            );
         }
 
         return true;
