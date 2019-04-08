@@ -26,14 +26,16 @@ class ServiceProvider extends BaseServiceProvider
      */
     protected function registerConsoleCommands(): void
     {
-        if ($this->app->runningInConsole()) {
-            $this->commands(
-                [
-                    'InetStudio\Reviews\Sites\Console\Commands\SetupCommand',
-                    'InetStudio\Reviews\Sites\Console\Commands\CreateFoldersCommand',
-                ]
-            );
+        if (! $this->app->runningInConsole()) {
+            return;
         }
+
+        $this->commands(
+            [
+                'InetStudio\Reviews\Sites\Console\Commands\SetupCommand',
+                'InetStudio\Reviews\Sites\Console\Commands\CreateFoldersCommand',
+            ]
+        );
     }
 
     /**
@@ -51,18 +53,22 @@ class ServiceProvider extends BaseServiceProvider
             __DIR__.'/../../config/filesystems.php', 'filesystems.disks'
         );
 
-        if ($this->app->runningInConsole()) {
-            if (! Schema::hasTable('reviews_sites')) {
-                $timestamp = date('Y_m_d_His', time());
-                $this->publishes(
-                    [
-                        __DIR__.'/../../database/migrations/create_reviews_sites_tables.php.stub' => database_path(
-                            'migrations/'.$timestamp.'_create_reviews_sites_tables.php'
-                        ),
-                    ], 'migrations'
-                );
-            }
+        if (! $this->app->runningInConsole()) {
+            return;
         }
+
+        if (Schema::hasTable('reviews_sites')) {
+            return;
+        }
+
+        $timestamp = date('Y_m_d_His', time());
+        $this->publishes(
+            [
+                __DIR__.'/../../database/migrations/create_reviews_sites_tables.php.stub' => database_path(
+                    'migrations/'.$timestamp.'_create_reviews_sites_tables.php'
+                ),
+            ], 'migrations'
+        );
     }
 
     /**

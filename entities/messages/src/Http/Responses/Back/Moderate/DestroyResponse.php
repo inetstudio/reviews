@@ -12,7 +12,7 @@ use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Moderate\DestroyRe
 class DestroyResponse implements DestroyResponseContract, Responsable
 {
     /**
-     * @var bool
+     * @var boolean
      */
     protected $result;
 

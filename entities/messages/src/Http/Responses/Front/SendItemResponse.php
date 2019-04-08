@@ -12,7 +12,7 @@ use InetStudio\Reviews\Messages\Contracts\Http\Responses\Front\SendItemResponseC
 class SendItemResponse implements SendItemResponseContract, Responsable
 {
     /**
-     * @var bool
+     * @var boolean
      */
     protected $result;
 

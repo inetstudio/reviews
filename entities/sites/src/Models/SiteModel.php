@@ -20,6 +20,9 @@ class SiteModel extends Model implements SiteModelContract, HasMedia
     use SoftDeletes;
     use BuildQueryScopeTrait;
 
+    /**
+     * @var array 
+     */
     protected $images = [
         'config' => 'reviews_sites',
         'model' => 'site',

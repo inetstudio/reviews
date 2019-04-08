@@ -12,7 +12,7 @@ use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Moderate\ReadRespo
 class ReadResponse implements ReadResponseContract, Responsable
 {
     /**
-     * @var bool
+     * @var boolean
      */
     protected $result;
 

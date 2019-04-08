@@ -23,7 +23,7 @@ class AttachUserToReviewsListener implements AttachUserToReviewsListenerContract
 
         $user = $event->user;
 
-        $reviewsService->model::where(
+        $reviewsService->getModel()::where(
             [
                 ['user_id', '=', 0],
                 ['email', '=', $user['email']],

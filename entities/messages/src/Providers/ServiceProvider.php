@@ -61,7 +61,7 @@ class ServiceProvider extends BaseServiceProvider
         }
 
         if (Schema::hasTable('reviews_messages')) {
-
+            return;
         }
 
         $timestamp = date('Y_m_d_His', time());
