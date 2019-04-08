@@ -21,7 +21,7 @@ class SiteModel extends Model implements SiteModelContract, HasMedia
     use BuildQueryScopeTrait;
 
     /**
-     * @var array 
+     * @var array
      */
     protected $images = [
         'config' => 'reviews_sites',

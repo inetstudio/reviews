@@ -36,4 +36,20 @@ interface SendItemRequestContract
      * @return array
      */
     public function all($keys = null);
+
+    /**
+     * Retrieve an input item from the request.
+     *
+     * @param  string|null  $key
+     * @param  string|array|null  $default
+     * @return string|array|null
+     */
+    public function input($key = null, $default = null);
+
+    /**
+     * Get an array of all of the files on the request.
+     *
+     * @return array
+     */
+    public function allFiles();
 }
