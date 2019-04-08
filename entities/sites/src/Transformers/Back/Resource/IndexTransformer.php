@@ -15,7 +15,7 @@ class IndexTransformer extends TransformerAbstract implements IndexTransformerCo
     /**
      * Трансформация данных.
      *
-     * @param SiteModelContract $item
+     * @param  SiteModelContract  $item
      *
      * @return array
      *

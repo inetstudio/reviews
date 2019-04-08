@@ -13,8 +13,8 @@ interface ItemsServiceContract extends BaseServiceContract
     /**
      * Получаем объект по id (для отображения).
      *
-     * @param int $id
-     * @param array $params
+     * @param  int  $id
+     * @param  array  $params
      *
      * @return MessageModelContract|null
      */
@@ -23,8 +23,8 @@ interface ItemsServiceContract extends BaseServiceContract
     /**
      * Сохраняем модель.
      *
-     * @param array $data
-     * @param int $id
+     * @param  array  $data
+     * @param  int  $id
      *
      * @return MessageModelContract
      */

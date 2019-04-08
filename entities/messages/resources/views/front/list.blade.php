@@ -8,6 +8,7 @@
 
 @if (! $messages['stop'])
     <div class="skin-btn-wrap">
-        <a class="skin-btn skin-btn-reg ajax-loader" data-target=".article-comments_list" href="{{ route('front.reviews.messages.get', ['type' => $type, 'id' => $id]) }}">Больше отзывов</a>
+        <a class="skin-btn skin-btn-reg ajax-loader" data-target=".article-comments_list"
+           href="{{ route('front.reviews.messages.get', ['type' => $type, 'id' => $id]) }}">Больше отзывов</a>
     </div>
 @endif

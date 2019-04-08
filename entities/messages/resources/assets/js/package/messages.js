@@ -114,8 +114,8 @@ messages.init = function () {
             type: "error"
         });
     }
-    
-    $(document).ready(function(){
+
+    $(document).ready(function () {
 
         if ($('.rating').length > 0) {
             $('.rating').rateYo({

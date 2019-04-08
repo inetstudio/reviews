@@ -14,7 +14,7 @@ class ItemsService extends BaseService implements ItemsServiceContract
     /**
      * SitesService constructor.
      *
-     * @param SiteModelContract $model
+     * @param  SiteModelContract  $model
      */
     public function __construct(SiteModelContract $model)
     {

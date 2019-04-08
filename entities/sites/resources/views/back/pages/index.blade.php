@@ -31,5 +31,5 @@
 @endsection
 
 @pushonce('scripts:datatables_reviews_sites_index')
-    {!! $table->scripts() !!}
+{!! $table->scripts() !!}
 @endpushonce

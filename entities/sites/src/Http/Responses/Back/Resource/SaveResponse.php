@@ -19,7 +19,7 @@ class SaveResponse implements SaveResponseContract, Responsable
     /**
      * SaveResponse constructor.
      *
-     * @param SiteModelContract $item
+     * @param  SiteModelContract  $item
      */
     public function __construct(SiteModelContract $item)
     {
@@ -29,7 +29,7 @@ class SaveResponse implements SaveResponseContract, Responsable
     /**
      * Возвращаем ответ при сохранении объекта.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */

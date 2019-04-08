@@ -22,7 +22,7 @@ class NewItemMail extends Mailable implements NewItemMailContract
     /**
      * NewItemMail constructor.
      *
-     * @param MessageModelContract $item
+     * @param  MessageModelContract  $item
      */
     public function __construct(MessageModelContract $item)
     {
@@ -36,8 +36,8 @@ class NewItemMail extends Mailable implements NewItemMailContract
      */
     public function build(): self
     {
-        $subject = config('app.name').' | '.((config('reviews_messages.mails_admins.subject')) ? config('reviews_messages.mails_admins.subject') : 'Новый отзыв');
-        $headers = (config('reviews_messages.mails_admins.headers')) ? config('reviews_messages.mails_admins.headers') : [];
+        $subject = config('app.name').' | '.config('reviews_messages.mails_admins.subject', 'Новый отзыв');
+        $headers = config('reviews_messages.mails_admins.headers', []);
 
         $to = config('reviews_messages.mails_admins.to');
 

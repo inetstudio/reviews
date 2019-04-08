@@ -3,6 +3,7 @@
 namespace InetStudio\Reviews\Messages\Http\Responses\Back\Resource;
 
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Illuminate\Contracts\Support\Responsable;
 use InetStudio\Reviews\Messages\Contracts\Models\MessageModelContract;
 use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Resource\SaveResponseContract;
@@ -20,7 +21,7 @@ class SaveResponse implements SaveResponseContract, Responsable
     /**
      * SaveResponse constructor.
      *
-     * @param MessageModelContract $item
+     * @param  MessageModelContract  $item
      */
     public function __construct(MessageModelContract $item)
     {
@@ -30,9 +31,9 @@ class SaveResponse implements SaveResponseContract, Responsable
     /**
      * Возвращаем ответ при сохранении объекта.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  Request  $request
      *
-     * @return mixed
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
     public function toResponse($request)
     {

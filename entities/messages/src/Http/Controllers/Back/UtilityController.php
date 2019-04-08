@@ -17,16 +17,17 @@ class UtilityController extends Controller implements UtilityControllerContract
     /**
      * Возвращаем статьи для поля.
      *
-     * @param UtilityServiceContract $utilityService
-     * @param Request $request
+     * @param  UtilityServiceContract  $utilityService
+     * @param  Request  $request
      *
      * @return SuggestionsResponseContract
      *
      * @throws BindingResolutionException
      */
-    public function getSuggestions(UtilityServiceContract $utilityService,
-                                   Request $request): SuggestionsResponseContract
-    {
+    public function getSuggestions(
+        UtilityServiceContract $utilityService,
+        Request $request
+    ): SuggestionsResponseContract {
         $search = $request->get('q', '');
         $type = $request->get('type', '');
 

@@ -21,7 +21,7 @@ class NewItemNotification extends Notification implements NewItemNotificationCon
     /**
      * NewItemNotification constructor.
      *
-     * @param MessageModelContract $item
+     * @param  MessageModelContract  $item
      */
     public function __construct(MessageModelContract $item)
     {
@@ -31,14 +31,15 @@ class NewItemNotification extends Notification implements NewItemNotificationCon
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      *
      * @return array
      */
     public function via($notifiable): array
     {
         return [
-            'mail', 'database',
+            'mail',
+            'database',
         ];
     }
 
@@ -59,7 +60,7 @@ class NewItemNotification extends Notification implements NewItemNotificationCon
     /**
      * Get the array representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      *
      * @return array
      */

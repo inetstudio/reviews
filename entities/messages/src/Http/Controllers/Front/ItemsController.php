@@ -19,20 +19,21 @@ class ItemsController extends Controller implements ItemsControllerContract
     /**
      * Отправка отзыва.
      *
-     * @param ItemsServiceContract $messagesService
-     * @param SendItemRequestContract $request
-     * @param string $type
-     * @param int $id
+     * @param  ItemsServiceContract  $messagesService
+     * @param  SendItemRequestContract  $request
+     * @param  string  $type
+     * @param  int  $id
      *
      * @return SendItemResponseContract
      *
      * @throws BindingResolutionException
      */
-    public function sendMessage(ItemsServiceContract $messagesService,
-                                SendItemRequestContract $request,
-                                string $type,
-                                int $id): SendItemResponseContract
-    {
+    public function sendMessage(
+        ItemsServiceContract $messagesService,
+        SendItemRequestContract $request,
+        string $type,
+        int $id
+    ): SendItemResponseContract {
         $data = $request->input();
         $data['files'] = $request->allFiles();
 
@@ -46,20 +47,21 @@ class ItemsController extends Controller implements ItemsControllerContract
     /**
      * Получаем отзывы к материалу.
      *
-     * @param ItemsServiceContract $messagesService
-     * @param Request $request
-     * @param string $type
-     * @param int $id
+     * @param  ItemsServiceContract  $messagesService
+     * @param  Request  $request
+     * @param  string  $type
+     * @param  int  $id
      *
      * @return GetItemsResponseContract
      *
      * @throws BindingResolutionException
      */
-    public function getMessages(ItemsServiceContract $messagesService,
-                                Request $request,
-                                string $type,
-                                int $id): GetItemsResponseContract
-    {
+    public function getMessages(
+        ItemsServiceContract $messagesService,
+        Request $request,
+        string $type,
+        int $id
+    ): GetItemsResponseContract {
         $page = ($request->filled('page')) ? $request->get('page') - 1 : 0;
         $limit = ($request->filled('limit')) ? $request->get('limit') : 3;
 

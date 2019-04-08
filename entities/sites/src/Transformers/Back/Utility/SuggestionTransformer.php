@@ -20,7 +20,7 @@ class SuggestionTransformer extends TransformerAbstract implements SuggestionTra
     /**
      * SuggestionTransformer constructor.
      *
-     * @param string $type
+     * @param  string  $type
      */
     public function __construct(string $type = '')
     {
@@ -30,7 +30,7 @@ class SuggestionTransformer extends TransformerAbstract implements SuggestionTra
     /**
      * Трансформация данных.
      *
-     * @param SiteModelContract $item
+     * @param  SiteModelContract  $item
      *
      * @return array
      */
@@ -41,10 +41,12 @@ class SuggestionTransformer extends TransformerAbstract implements SuggestionTra
             'name' => $item['name'],
         ];
 
-        return ($this->type == 'autocomplete') ? [
-            'value' => $item['name'],
-            'data' => $itemData,
-        ] : $itemData;
+        return ($this->type == 'autocomplete')
+            ? [
+                'value' => $item['name'],
+                'data' => $itemData,
+            ]
+            : $itemData;
     }
 
     /**

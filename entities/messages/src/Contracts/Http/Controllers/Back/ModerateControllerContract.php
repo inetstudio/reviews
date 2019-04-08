@@ -16,33 +16,39 @@ interface ModerateControllerContract
     /**
      * Изменение активности.
      *
-     * @param Request $request
-     * @param ModerateServiceContract $moderateService
+     * @param  Request  $request
+     * @param  ModerateServiceContract  $moderateService
      *
      * @return ActivityResponseContract
      */
-    public function activity(Request $request,
-                             ModerateServiceContract $moderateService): ActivityResponseContract;
+    public function activity(
+        Request $request,
+        ModerateServiceContract $moderateService
+    ): ActivityResponseContract;
 
     /**
      * Пометка "прочитано".
      *
-     * @param Request $request
-     * @param ModerateServiceContract $moderateService
+     * @param  Request  $request
+     * @param  ModerateServiceContract  $moderateService
      *
      * @return ReadResponseContract
      */
-    public function read(Request $request,
-                         ModerateServiceContract $moderateService): ReadResponseContract;
+    public function read(
+        Request $request,
+        ModerateServiceContract $moderateService
+    ): ReadResponseContract;
 
     /**
      * Удаление комментариев.
      *
-     * @param Request $request
-     * @param ModerateServiceContract $moderateService
+     * @param  Request  $request
+     * @param  ModerateServiceContract  $moderateService
      *
      * @return DestroyResponseContract
      */
-    public function destroy(Request $request,
-                            ModerateServiceContract $moderateService): DestroyResponseContract;
+    public function destroy(
+        Request $request,
+        ModerateServiceContract $moderateService
+    ): DestroyResponseContract;
 }

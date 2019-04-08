@@ -22,7 +22,7 @@ class ResourceController extends Controller implements ResourceControllerContrac
     /**
      * Список объектов.
      *
-     * @param DataTableServiceContract $dataTableService
+     * @param  DataTableServiceContract  $dataTableService
      *
      * @return IndexResponseContract
      *
@@ -40,16 +40,17 @@ class ResourceController extends Controller implements ResourceControllerContrac
     /**
      * Получение объекта.
      *
-     * @param ItemsServiceContract $resourceService
-     * @param int $id
+     * @param  ItemsServiceContract  $resourceService
+     * @param  int  $id
      *
      * @return ShowResponseContract
      *
      * @throws BindingResolutionException
      */
-    public function show(ItemsServiceContract $resourceService,
-                         int $id = 0): ShowResponseContract
-    {
+    public function show(
+        ItemsServiceContract $resourceService,
+        int $id = 0
+    ): ShowResponseContract {
         $item = $resourceService->getItemByIdForDisplay($id, [
             'columns' => ['title', 'user_link', 'rating'],
         ]);
@@ -60,7 +61,7 @@ class ResourceController extends Controller implements ResourceControllerContrac
     /**
      * Создание объекта.
      *
-     * @param ItemsServiceContract $resourceService
+     * @param  ItemsServiceContract  $resourceService
      *
      * @return FormResponseContract
      *
@@ -78,32 +79,34 @@ class ResourceController extends Controller implements ResourceControllerContrac
     /**
      * Создание объекта.
      *
-     * @param ItemsServiceContract $resourceService
-     * @param SaveItemRequestContract $request
+     * @param  ItemsServiceContract  $resourceService
+     * @param  SaveItemRequestContract  $request
      *
      * @return SaveResponseContract
      *
      * @throws BindingResolutionException
      */
-    public function store(ItemsServiceContract $resourceService,
-                          SaveItemRequestContract $request): SaveResponseContract
-    {
+    public function store(
+        ItemsServiceContract $resourceService,
+        SaveItemRequestContract $request
+    ): SaveResponseContract {
         return $this->save($resourceService, $request);
     }
 
     /**
      * Редактирование объекта.
      *
-     * @param ItemsServiceContract $resourceService
-     * @param int $id
+     * @param  ItemsServiceContract  $resourceService
+     * @param  int  $id
      *
      * @return FormResponseContract
      *
      * @throws BindingResolutionException
      */
-    public function edit(ItemsServiceContract $resourceService,
-                         int $id = 0): FormResponseContract
-    {
+    public function edit(
+        ItemsServiceContract $resourceService,
+        int $id = 0
+    ): FormResponseContract {
         $item = $resourceService->getItemByIdForDisplay($id, [
             'columns' => ['title', 'user_link', 'rating'],
         ]);
@@ -116,36 +119,38 @@ class ResourceController extends Controller implements ResourceControllerContrac
     /**
      * Обновление объекта.
      *
-     * @param ItemsServiceContract $resourceService
-     * @param SaveItemRequestContract $request
-     * @param int $id
+     * @param  ItemsServiceContract  $resourceService
+     * @param  SaveItemRequestContract  $request
+     * @param  int  $id
      *
      * @return SaveResponseContract
      *
      * @throws BindingResolutionException
      */
-    public function update(ItemsServiceContract $resourceService,
-                           SaveItemRequestContract $request,
-                           int $id = 0): SaveResponseContract
-    {
+    public function update(
+        ItemsServiceContract $resourceService,
+        SaveItemRequestContract $request,
+        int $id = 0
+    ): SaveResponseContract {
         return $this->save($resourceService, $request, $id);
     }
 
     /**
      * Сохранение объекта.
      *
-     * @param ItemsServiceContract $resourceService
-     * @param SaveItemRequestContract $request
-     * @param int $id
+     * @param  ItemsServiceContract  $resourceService
+     * @param  SaveItemRequestContract  $request
+     * @param  int  $id
      *
      * @return SaveResponseContract
      *
      * @throws BindingResolutionException
      */
-    protected function save(ItemsServiceContract $resourceService,
-                            SaveItemRequestContract $request,
-                            int $id = 0): SaveResponseContract
-    {
+    protected function save(
+        ItemsServiceContract $resourceService,
+        SaveItemRequestContract $request,
+        int $id = 0
+    ): SaveResponseContract {
         $data = $request->all();
 
         $item = $resourceService->save($data, $id);
@@ -156,16 +161,17 @@ class ResourceController extends Controller implements ResourceControllerContrac
     /**
      * Удаление объекта.
      *
-     * @param ItemsServiceContract $resourceService
-     * @param int $id
+     * @param  ItemsServiceContract  $resourceService
+     * @param  int  $id
      *
      * @return DestroyResponseContract
      *
      * @throws BindingResolutionException
      */
-    public function destroy(ItemsServiceContract $resourceService,
-                            int $id = 0): DestroyResponseContract
-    {
+    public function destroy(
+        ItemsServiceContract $resourceService,
+        int $id = 0
+    ): DestroyResponseContract {
         $result = $resourceService->destroy($id);
 
         return $this->app->make(DestroyResponseContract::class, [

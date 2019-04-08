@@ -12,8 +12,8 @@ interface ModerateServiceContract extends BaseServiceContract
     /**
      * Изменение активности.
      *
-     * @param mixed $ids
-     * @param array $params
+     * @param  mixed  $ids
+     * @param  array  $params
      *
      * @return bool
      */
@@ -23,7 +23,7 @@ interface ModerateServiceContract extends BaseServiceContract
      * Пометка "прочитано".
      *
      * @param $ids
-     * @param array $params
+     * @param  array  $params
      *
      * @return bool
      */

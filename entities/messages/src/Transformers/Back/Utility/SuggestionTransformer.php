@@ -2,7 +2,6 @@
 
 namespace InetStudio\Reviews\Messages\Transformers\Back\Utility;
 
-use Throwable;
 use League\Fractal\TransformerAbstract;
 use League\Fractal\Resource\Collection as FractalCollection;
 use InetStudio\Reviews\Messages\Contracts\Models\MessageModelContract;
@@ -31,11 +30,9 @@ class SuggestionTransformer extends TransformerAbstract implements SuggestionTra
     /**
      * Подготовка данных для отображения в выпадающих списках.
      *
-     * @param MessageModelContract $item
+     * @param  MessageModelContract  $item
      *
      * @return array
-     *
-     * @throws Throwable
      */
     public function transform(MessageModelContract $item): array
     {

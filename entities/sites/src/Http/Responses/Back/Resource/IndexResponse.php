@@ -18,7 +18,7 @@ class IndexResponse implements IndexResponseContract, Responsable
     /**
      * IndexResponse constructor.
      *
-     * @param array $data
+     * @param  array  $data
      */
     public function __construct(array $data)
     {
@@ -28,7 +28,7 @@ class IndexResponse implements IndexResponseContract, Responsable
     /**
      * Возвращаем ответ при открытии списка объектов.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */

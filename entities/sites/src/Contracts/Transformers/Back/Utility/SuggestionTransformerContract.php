@@ -13,7 +13,7 @@ interface SuggestionTransformerContract
     /**
      * Трансформация данных.
      *
-     * @param SiteModelContract $item
+     * @param  SiteModelContract  $item
      *
      * @return array
      */

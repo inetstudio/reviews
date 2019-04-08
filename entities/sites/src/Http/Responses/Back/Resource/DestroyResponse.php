@@ -18,7 +18,7 @@ class DestroyResponse implements DestroyResponseContract, Responsable
     /**
      * DestroyResponse constructor.
      *
-     * @param bool $result
+     * @param  bool  $result
      */
     public function __construct(bool $result)
     {
@@ -28,7 +28,7 @@ class DestroyResponse implements DestroyResponseContract, Responsable
     /**
      * Возвращаем ответ при удалении объекта.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */

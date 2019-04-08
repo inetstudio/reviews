@@ -15,7 +15,7 @@ class UtilityService extends BaseService implements UtilityServiceContract
     /**
      * UtilityService constructor.
      *
-     * @param SiteModelContract $model
+     * @param  SiteModelContract  $model
      */
     public function __construct(SiteModelContract $model)
     {
@@ -25,7 +25,7 @@ class UtilityService extends BaseService implements UtilityServiceContract
     /**
      * Получаем подсказки.
      *
-     * @param string $search
+     * @param  string  $search
      *
      * @return Collection
      */

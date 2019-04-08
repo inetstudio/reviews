@@ -17,7 +17,7 @@ class ItemsService extends BaseService implements ItemsServiceContract
     /**
      * ItemsService constructor.
      *
-     * @param MessageModelContract $model
+     * @param  MessageModelContract  $model
      */
     public function __construct(MessageModelContract $model)
     {
@@ -27,8 +27,8 @@ class ItemsService extends BaseService implements ItemsServiceContract
     /**
      * Получаем объект по id (для отображения).
      *
-     * @param int $id
-     * @param array $params
+     * @param  int  $id
+     * @param  array  $params
      *
      * @return MessageModelContract|null
      */
@@ -48,8 +48,8 @@ class ItemsService extends BaseService implements ItemsServiceContract
     /**
      * Сохраняем модель.
      *
-     * @param array $data
-     * @param int $id
+     * @param  array  $data
+     * @param  int  $id
      *
      * @return MessageModelContract
      *

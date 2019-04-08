@@ -24,7 +24,7 @@ class DataTableService extends DataTable implements DataTableServiceContract
     /**
      * DataTableService constructor.
      *
-     * @param MessageModelContract $model
+     * @param  MessageModelContract  $model
      */
     public function __construct(MessageModelContract $model)
     {
@@ -90,8 +90,14 @@ class DataTableService extends DataTable implements DataTableServiceContract
     protected function getColumns(): array
     {
         return [
-            ['data' => 'checkbox', 'name' => 'checkbox', 'title' => view('admin.module.reviews.messages::back.partials.datatables.checkbox')
-                ->render(), 'orderable' => false, 'searchable' => false, ],
+            [
+                'data' => 'checkbox',
+                'name' => 'checkbox',
+                'title' => view('admin.module.reviews.messages::back.partials.datatables.checkbox')
+                    ->render(),
+                'orderable' => false,
+                'searchable' => false,
+            ],
             ['data' => 'read', 'name' => 'is_read', 'title' => 'Прочитано', 'searchable' => false],
             ['data' => 'active', 'name' => 'is_active', 'title' => 'Активность', 'searchable' => false],
             ['data' => 'name', 'name' => 'name', 'title' => 'Имя'],
@@ -100,7 +106,13 @@ class DataTableService extends DataTable implements DataTableServiceContract
             ['data' => 'title', 'name' => 'title', 'title' => 'Заголовок'],
             ['data' => 'message', 'name' => 'message', 'title' => 'Отзыв'],
             ['data' => 'created_at', 'name' => 'created_at', 'title' => 'Дата создания'],
-            ['data' => 'actions', 'name' => 'actions', 'title' => 'Действия', 'orderable' => false, 'searchable' => false],
+            [
+                'data' => 'actions',
+                'name' => 'actions',
+                'title' => 'Действия',
+                'orderable' => false,
+                'searchable' => false
+            ],
         ];
     }
 
@@ -124,7 +136,7 @@ class DataTableService extends DataTable implements DataTableServiceContract
      */
     protected function getParameters(): array
     {
-        $i18n = trans('admin::datatables');
+        $translation = trans('admin::datatables');
 
         return [
             'order' => [8, 'desc'],
@@ -133,7 +145,7 @@ class DataTableService extends DataTable implements DataTableServiceContract
             'searching' => true,
             'info' => false,
             'searchDelay' => 350,
-            'language' => $i18n,
+            'language' => $translation,
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace InetStudio\Reviews\Messages\Http\Responses\Back\Resource;
 
+use Illuminate\Http\Request;
 use Illuminate\Contracts\Support\Responsable;
 use InetStudio\Reviews\Messages\Contracts\Models\MessageModelContract;
 use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Resource\ShowResponseContract;
@@ -19,7 +20,7 @@ class ShowResponse implements ShowResponseContract, Responsable
     /**
      * ShowResponse constructor.
      *
-     * @param MessageModelContract $item
+     * @param  MessageModelContract  $item
      */
     public function __construct(MessageModelContract $item)
     {
@@ -29,7 +30,7 @@ class ShowResponse implements ShowResponseContract, Responsable
     /**
      * Возвращаем ответ при получении объекта.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  Request  $request
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */

@@ -21,7 +21,7 @@ class SendItemEvent implements SendItemEventContract
     /**
      * SendItemEvent constructor.
      *
-     * @param MessageModelContract $item
+     * @param  MessageModelContract  $item
      */
     public function __construct(MessageModelContract $item)
     {

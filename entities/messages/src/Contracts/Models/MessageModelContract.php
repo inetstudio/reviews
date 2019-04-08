@@ -10,14 +10,14 @@ use Illuminate\Contracts\Routing\UrlRoutable;
 use Illuminate\Contracts\Queue\QueueableEntity;
 
 /**
- * Interface SiteModelContract.
+ * Interface MessageModelContract.
  */
 interface MessageModelContract extends ArrayAccess, Arrayable, Jsonable, JsonSerializable, QueueableEntity, UrlRoutable
 {
     /**
      * Reload a fresh model instance from the database.
      *
-     * @param array|string $with
+     * @param  array|string  $with
      *
      * @return static|null
      */

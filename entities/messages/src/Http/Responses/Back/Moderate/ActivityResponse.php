@@ -2,6 +2,7 @@
 
 namespace InetStudio\Reviews\Messages\Http\Responses\Back\Moderate;
 
+use Illuminate\Http\Request;
 use Illuminate\Contracts\Support\Responsable;
 use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Moderate\ActivityResponseContract;
 
@@ -18,7 +19,7 @@ class ActivityResponse implements ActivityResponseContract, Responsable
     /**
      * ActivityResponse constructor.
      *
-     * @param bool $result
+     * @param  bool  $result
      */
     public function __construct(bool $result)
     {
@@ -28,7 +29,7 @@ class ActivityResponse implements ActivityResponseContract, Responsable
     /**
      * Возвращаем ответ при изменении активности.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  Request  $request
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */

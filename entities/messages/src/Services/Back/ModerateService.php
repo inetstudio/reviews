@@ -3,6 +3,7 @@
 namespace InetStudio\Reviews\Messages\Services\Back;
 
 use InetStudio\AdminPanel\Base\Services\BaseService;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\Reviews\Messages\Contracts\Models\MessageModelContract;
 use InetStudio\Reviews\Messages\Contracts\Services\Back\ModerateServiceContract;
 
@@ -14,7 +15,7 @@ class ModerateService extends BaseService implements ModerateServiceContract
     /**
      * ModerateService constructor.
      *
-     * @param MessageModelContract $model
+     * @param  MessageModelContract  $model
      */
     public function __construct(MessageModelContract $model)
     {
@@ -22,12 +23,12 @@ class ModerateService extends BaseService implements ModerateServiceContract
     }
 
     /**
-     * Изменение активности.
-     *
-     * @param mixed $ids
-     * @param array $params
+     * @param  mixed  $ids
+     * @param  array  $params
      *
      * @return bool
+     *
+     * @throws BindingResolutionException
      */
     public function updateActivity($ids, array $params = []): bool
     {
@@ -52,9 +53,11 @@ class ModerateService extends BaseService implements ModerateServiceContract
      * Пометка "прочитано".
      *
      * @param $ids
-     * @param array $params
+     * @param  array  $params
      *
      * @return bool
+     *
+     * @throws BindingResolutionException
      */
     public function updateRead($ids, array $params = []): bool
     {

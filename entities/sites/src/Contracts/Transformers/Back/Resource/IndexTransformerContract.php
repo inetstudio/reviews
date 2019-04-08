@@ -12,7 +12,7 @@ interface IndexTransformerContract
     /**
      * Трансформация данных.
      *
-     * @param SiteModelContract $item
+     * @param  SiteModelContract  $item
      *
      * @return array
      */

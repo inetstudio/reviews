@@ -13,7 +13,7 @@ interface ItemTransformerContract
     /**
      * Трансформация данных.
      *
-     * @param MessageModelContract $item
+     * @param  MessageModelContract  $item
      *
      * @return array
      */

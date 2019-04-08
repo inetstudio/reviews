@@ -19,17 +19,18 @@ class ModerateController extends Controller implements ModerateControllerContrac
     /**
      * Изменение активности.
      *
-     * @param Request $request
-     * @param ModerateServiceContract $moderateService
+     * @param  Request  $request
+     * @param  ModerateServiceContract  $moderateService
      *
      * @return ActivityResponseContract
      *
      * @throws BindingResolutionException
      */
-    public function activity(Request $request,
-                             ModerateServiceContract $moderateService): ActivityResponseContract
-    {
-        $ids = $request->get('messages') ?? [];
+    public function activity(
+        Request $request,
+        ModerateServiceContract $moderateService
+    ): ActivityResponseContract {
+        $ids = $request->get('messages', []);
 
         $result = $moderateService->updateActivity($ids);
 
@@ -39,17 +40,18 @@ class ModerateController extends Controller implements ModerateControllerContrac
     /**
      * Пометка "прочитано".
      *
-     * @param Request $request
-     * @param ModerateServiceContract $moderateService
+     * @param  Request  $request
+     * @param  ModerateServiceContract  $moderateService
      *
      * @return ReadResponseContract
      *
      * @throws BindingResolutionException
      */
-    public function read(Request $request,
-                         ModerateServiceContract $moderateService): ReadResponseContract
-    {
-        $ids = $request->get('messages') ?? [];
+    public function read(
+        Request $request,
+        ModerateServiceContract $moderateService
+    ): ReadResponseContract {
+        $ids = $request->get('messages', []);
 
         $result = $moderateService->updateRead($ids);
 
@@ -57,19 +59,20 @@ class ModerateController extends Controller implements ModerateControllerContrac
     }
 
     /**
-     * Удаление комментариев.
+     * Удаление отзывов.
      *
-     * @param Request $request
-     * @param ModerateServiceContract $moderateService
+     * @param  Request  $request
+     * @param  ModerateServiceContract  $moderateService
      *
      * @return DestroyResponseContract
      *
      * @throws BindingResolutionException
      */
-    public function destroy(Request $request,
-                            ModerateServiceContract $moderateService): DestroyResponseContract
-    {
-        $ids = $request->get('messages') ?? [];
+    public function destroy(
+        Request $request,
+        ModerateServiceContract $moderateService
+    ): DestroyResponseContract {
+        $ids = $request->get('messages', []);
 
         $result = $moderateService->destroy($ids);
 

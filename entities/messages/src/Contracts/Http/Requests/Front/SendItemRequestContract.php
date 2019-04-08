@@ -31,7 +31,7 @@ interface SendItemRequestContract
     /**
      * Get all of the input and files for the request.
      *
-     * @param array|mixed $keys
+     * @param  array|mixed  $keys
      *
      * @return array
      */

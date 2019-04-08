@@ -20,7 +20,7 @@ messagesList.find('.save').on('click', function (event) {
             params: {
                 ids: ids
             },
-            additional_info : {
+            additional_info: {
                 titles: titles
             }
         }, {
@@ -63,7 +63,7 @@ messagesList.find('table').on('click', '.edit-message', function (event) {
                 messageModal.find('input[name=rating]').val(data.rating);
                 messageModal.find('.rating').rateYo('option', 'rating', data.rating);
                 window.tinymce.get('modal_message').setContent(data.message);
-                messageModal.find('[name=is_active][value='+data.is_active+']').iCheck('check');
+                messageModal.find('[name=is_active][value=' + data.is_active + ']').iCheck('check');
 
                 $('#message_modal').modal();
             }
@@ -104,7 +104,7 @@ messageModal.find('.save').on('click', function (event) {
         'dataType': 'json',
         'success': function (data) {
             if (data.success === true) {
-                let existElement = messagesList.find('[data-id='+data.id+']');
+                let existElement = messagesList.find('[data-id=' + data.id + ']');
 
                 if (existElement.length > 0) {
                     existElement.find('.message-title span').text(data.title);
@@ -118,7 +118,7 @@ messageModal.find('.save').on('click', function (event) {
         'error': function (data) {
             for (let field in data.responseJSON.errors) {
                 let fieldName = dotToArray(field);
-                let input = messageModal.find('[name="'+fieldName+'"]');
+                let input = messageModal.find('[name="' + fieldName + '"]');
 
                 if (input.length > 0) {
                     input.parents('.form-group').addClass('has-error');
@@ -126,7 +126,7 @@ messageModal.find('.save').on('click', function (event) {
                     let errorMessages = data.responseJSON.errors[field];
 
                     errorMessages.forEach(function (errorMessage) {
-                        let errorElement = $('<span class="form-text m-b-none">'+errorMessage+'</span>');
+                        let errorElement = $('<span class="form-text m-b-none">' + errorMessage + '</span>');
 
                         errorElement.insertAfter(input);
                     })
@@ -140,12 +140,12 @@ window.tinymce.PluginManager.add('reviews.messages', function (editor) {
     editor.addButton('add_messages_list', {
         title: 'Отзывы',
         icon: 'bubble',
-        onclick: function() {
+        onclick: function () {
             let content = editor.selection.getContent();
 
             contentEditor = editor;
 
-            if (content !== '' && ! /<img class="content-widget".+data-type="reviews\.messages".+\/>/g.test(content)) {
+            if (content !== '' && !/<img class="content-widget".+data-type="reviews\.messages".+\/>/g.test(content)) {
                 swal({
                     title: "Ошибка",
                     text: "Необходимо выбрать виджет-отзывы",
@@ -196,5 +196,5 @@ function dotToArray(field) {
         result += (index === 0) ? '[' : '][';
     });
 
-    return result.substr(0, result.length-1);
+    return result.substr(0, result.length - 1);
 }

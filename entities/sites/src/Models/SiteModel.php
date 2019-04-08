@@ -38,7 +38,10 @@ class SiteModel extends Model implements SiteModelContract, HasMedia
      * @var array
      */
     protected $fillable = [
-        'name', 'alias', 'link', 'is_active',
+        'name',
+        'alias',
+        'link',
+        'is_active',
     ];
 
     /**
@@ -60,7 +63,11 @@ class SiteModel extends Model implements SiteModelContract, HasMedia
         parent::boot();
 
         self::$buildQueryScopeDefaults['columns'] = [
-            'id', 'name', 'alias', 'link', 'is_active',
+            'id',
+            'name',
+            'alias',
+            'link',
+            'is_active',
         ];
 
         self::$buildQueryScopeDefaults['relations'] = [

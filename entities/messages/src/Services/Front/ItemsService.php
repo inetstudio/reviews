@@ -22,7 +22,7 @@ class ItemsService extends BaseService implements ItemsServiceContract
     /**
      * ItemsService constructor.
      *
-     * @param MessageModelContract $model
+     * @param  MessageModelContract  $model
      *
      * @throws BindingResolutionException
      */
@@ -40,18 +40,19 @@ class ItemsService extends BaseService implements ItemsServiceContract
     /**
      * Сохраняем отзыв.
      *
-     * @param array $data
-     * @param string $type
-     * @param int $id
+     * @param  array  $data
+     * @param  string  $type
+     * @param  int  $id
      *
      * @return MessageModelContract|null
      *
      * @throws BindingResolutionException
      */
-    public function saveMessage(array $data,
-                                string $type,
-                                int $id): ?MessageModelContract
-    {
+    public function saveMessage(
+        array $data,
+        string $type,
+        int $id
+    ): ?MessageModelContract {
         if (! isset($this->availableTypes[$type])) {
             return null;
         }
@@ -59,17 +60,17 @@ class ItemsService extends BaseService implements ItemsServiceContract
         $usersService = app()->make('InetStudio\ACL\Users\Contracts\Services\Front\UsersServiceContract');
 
         $request = request();
-        $item = $this->availableTypes[$type]::find($id);
+        $reviewable = $this->availableTypes[$type]::find($id);
 
-        if (! ($item && $item->id)) {
+        if (! $reviewable) {
             return null;
         }
 
         $files = $data['files'];
 
         $data = array_merge($data, [
-            'reviewable_id' => $item->id,
-            'reviewable_type' => get_class($item),
+            'reviewable_id' => $reviewable->id,
+            'reviewable_type' => get_class($reviewable),
             'user_id' => $usersService->getUserId(),
             'name' => $usersService->getUserName($request),
             'email' => $usersService->getUserEmail($request),
@@ -83,7 +84,7 @@ class ItemsService extends BaseService implements ItemsServiceContract
         app()->make('InetStudio\Uploads\Contracts\Services\Front\ItemsServiceContract')
             ->attachFilesToObject($item, $files, 'reviews_messages');
 
-        if ($item && $item['id']) {
+        if (isset($item['id'])) {
             event(app()->make(
                 'InetStudio\Reviews\Messages\Contracts\Events\Front\SendItemEventContract',
                 compact('item'))
@@ -96,8 +97,8 @@ class ItemsService extends BaseService implements ItemsServiceContract
     /**
      * Получаем отзывы по типу и id материала.
      *
-     * @param string $type
-     * @param int $id
+     * @param  string  $type
+     * @param  int  $id
      *
      * @return Collection
      */

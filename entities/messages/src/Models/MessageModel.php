@@ -25,6 +25,9 @@ class MessageModel extends Model implements MessageModelContract, HasMedia
     use SoftDeletes;
     use BuildQueryScopeTrait;
 
+    /**
+     * @var array
+     */
     protected $images = [
         'config' => 'reviews_messages',
         'model' => 'message',
@@ -43,8 +46,19 @@ class MessageModel extends Model implements MessageModelContract, HasMedia
      * @var array
      */
     protected $fillable = [
-        'site_id', 'title', 'user_id', 'name', 'email', 'user_link',
-        'link', 'rating', 'message', 'is_active', 'is_read', 'reviewable_id', 'reviewable_type',
+        'site_id',
+        'title',
+        'user_id',
+        'name',
+        'email',
+        'user_link',
+        'link',
+        'rating',
+        'message',
+        'is_active',
+        'is_read',
+        'reviewable_id',
+        'reviewable_type',
     ];
 
     /**
@@ -66,13 +80,31 @@ class MessageModel extends Model implements MessageModelContract, HasMedia
         parent::boot();
 
         self::$buildQueryScopeDefaults['columns'] = [
-            'id', 'site_id', 'link', 'name', 'email', 'message', 'is_active', 'is_read',
-            'reviewable_id', 'reviewable_type',
+            'id',
+            'site_id',
+            'link',
+            'name',
+            'email',
+            'message',
+            'is_active',
+            'is_read',
+            'reviewable_id',
+            'reviewable_type',
         ];
 
         self::$buildQueryScopeDefaults['relations'] = [
             'media' => function ($query) {
-                $query->select(['id', 'model_id', 'model_type', 'collection_name', 'file_name', 'disk', 'mime_type', 'custom_properties', 'responsive_images']);
+                $query->select([
+                    'id',
+                    'model_id',
+                    'model_type',
+                    'collection_name',
+                    'file_name',
+                    'disk',
+                    'mime_type',
+                    'custom_properties',
+                    'responsive_images'
+                ]);
             },
 
             'site' => function ($query) {

@@ -13,21 +13,23 @@ interface ItemsServiceContract
     /**
      * Сохраняем отзыв.
      *
-     * @param array $data
-     * @param string $type
-     * @param int $id
+     * @param  array  $data
+     * @param  string  $type
+     * @param  int  $id
      *
      * @return MessageModelContract|null
      */
-    public function saveMessage(array $data,
-                                string $type,
-                                int $id): ?MessageModelContract;
+    public function saveMessage(
+        array $data,
+        string $type,
+        int $id
+    ): ?MessageModelContract;
 
     /**
      * Получаем отзывы по типу и id материала.
      *
-     * @param string $type
-     * @param int $id
+     * @param  string  $type
+     * @param  int  $id
      *
      * @return Collection
      */

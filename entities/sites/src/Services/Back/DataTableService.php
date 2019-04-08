@@ -23,7 +23,7 @@ class DataTableService extends DataTable implements DataTableServiceContract
     /**
      * DataTableService constructor.
      *
-     * @param SiteModelContract $model
+     * @param  SiteModelContract  $model
      */
     public function __construct(SiteModelContract $model)
     {
@@ -89,7 +89,13 @@ class DataTableService extends DataTable implements DataTableServiceContract
             ['data' => 'alias', 'name' => 'alias', 'title' => 'Алиас'],
             ['data' => 'created_at', 'name' => 'created_at', 'title' => 'Дата создания'],
             ['data' => 'updated_at', 'name' => 'updated_at', 'title' => 'Дата обновления'],
-            ['data' => 'actions', 'name' => 'actions', 'title' => 'Действия', 'orderable' => false, 'searchable' => false],
+            [
+                'data' => 'actions',
+                'name' => 'actions',
+                'title' => 'Действия',
+                'orderable' => false,
+                'searchable' => false
+            ],
         ];
     }
 

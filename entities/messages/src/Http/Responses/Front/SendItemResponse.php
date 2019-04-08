@@ -2,6 +2,7 @@
 
 namespace InetStudio\Reviews\Messages\Http\Responses\Front;
 
+use Illuminate\Http\Request;
 use Illuminate\Contracts\Support\Responsable;
 use InetStudio\Reviews\Messages\Contracts\Http\Responses\Front\SendItemResponseContract;
 
@@ -18,7 +19,7 @@ class SendItemResponse implements SendItemResponseContract, Responsable
     /**
      * SendItemResponse constructor.
      *
-     * @param bool $result
+     * @param  bool  $result
      */
     public function __construct(bool $result)
     {
@@ -28,7 +29,7 @@ class SendItemResponse implements SendItemResponseContract, Responsable
     /**
      * Возвращаем ответ при удалении объекта.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  Request  $request
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
