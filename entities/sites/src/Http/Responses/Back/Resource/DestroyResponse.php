@@ -11,7 +11,7 @@ use InetStudio\Reviews\Sites\Contracts\Http\Responses\Back\Resource\DestroyRespo
 class DestroyResponse implements DestroyResponseContract, Responsable
 {
     /**
-     * @var boolean
+     * @var bool
      */
     protected $result;
 

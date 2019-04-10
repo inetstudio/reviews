@@ -12,7 +12,7 @@ use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Moderate\ActivityR
 class ActivityResponse implements ActivityResponseContract, Responsable
 {
     /**
-     * @var boolean
+     * @var bool
      */
     protected $result;
 
