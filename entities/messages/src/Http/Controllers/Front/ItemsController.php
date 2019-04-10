@@ -35,6 +35,7 @@ class ItemsController extends Controller implements ItemsControllerContract
         int $id
     ): SendItemResponseContract {
         $data = $request->input();
+        $data = ($data) ? (array) $data : [];
         $data['files'] = $request->allFiles();
 
         $item = $messagesService->saveMessage($data, $type, $id);
