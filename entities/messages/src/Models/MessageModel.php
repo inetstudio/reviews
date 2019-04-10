@@ -104,7 +104,7 @@ class MessageModel extends Model implements MessageModelContract, HasMedia
                         'disk',
                         'mime_type',
                         'custom_properties',
-                        'responsive_images'
+                        'responsive_images',
                     ]
                 );
             },

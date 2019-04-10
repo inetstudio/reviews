@@ -28,7 +28,7 @@ Route::group(
             'messages',
             'ResourceControllerContract',
             [
-                'as' => 'back.reviews'
+                'as' => 'back.reviews',
             ]
         );
     }
@@ -47,4 +47,3 @@ Route::group(
             ->name('front.reviews.messages.send');
     }
 );
-
