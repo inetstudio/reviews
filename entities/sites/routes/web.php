@@ -22,7 +22,7 @@ Route::group(
                 'except' => [
                     'show',
                 ],
-                'as' => 'back.reviews'
+                'as' => 'back.reviews',
             ]
         );
     }
