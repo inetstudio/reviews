@@ -2,13 +2,13 @@
 
 namespace InetStudio\Reviews\Sites\Http\Responses\Back\Resource;
 
-use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Http\Request;
 use InetStudio\Reviews\Sites\Contracts\Http\Responses\Back\Resource\DestroyResponseContract;
 
 /**
  * Class DestroyResponse.
  */
-class DestroyResponse implements DestroyResponseContract, Responsable
+class DestroyResponse implements DestroyResponseContract
 {
     /**
      * @var bool
@@ -28,7 +28,7 @@ class DestroyResponse implements DestroyResponseContract, Responsable
     /**
      * Возвращаем ответ при удалении объекта.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */

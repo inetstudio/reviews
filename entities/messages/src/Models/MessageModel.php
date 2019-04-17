@@ -4,7 +4,6 @@ namespace InetStudio\Reviews\Messages\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use InetStudio\ACL\Users\Models\Traits\HasUser;
 use InetStudio\Uploads\Models\Traits\HasImages;
@@ -17,7 +16,7 @@ use InetStudio\AdminPanel\Base\Models\Traits\Scopes\BuildQueryScopeTrait;
 /**
  * Class MessageModel.
  */
-class MessageModel extends Model implements MessageModelContract, HasMedia
+class MessageModel extends Model implements MessageModelContract
 {
     use HasUser;
     use HasImages;

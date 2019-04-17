@@ -3,13 +3,12 @@
 namespace InetStudio\Reviews\Messages\Http\Responses\Front;
 
 use Illuminate\Http\Request;
-use Illuminate\Contracts\Support\Responsable;
 use InetStudio\Reviews\Messages\Contracts\Http\Responses\Front\SendItemResponseContract;
 
 /**
  * Class SendItemResponse.
  */
-class SendItemResponse implements SendItemResponseContract, Responsable
+class SendItemResponse implements SendItemResponseContract
 {
     /**
      * @var bool

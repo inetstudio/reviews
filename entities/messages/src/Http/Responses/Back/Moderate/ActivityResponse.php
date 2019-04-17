@@ -3,13 +3,12 @@
 namespace InetStudio\Reviews\Messages\Http\Responses\Back\Moderate;
 
 use Illuminate\Http\Request;
-use Illuminate\Contracts\Support\Responsable;
 use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Moderate\ActivityResponseContract;
 
 /**
  * Class ActivityResponse.
  */
-class ActivityResponse implements ActivityResponseContract, Responsable
+class ActivityResponse implements ActivityResponseContract
 {
     /**
      * @var bool

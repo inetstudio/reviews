@@ -4,13 +4,13 @@ namespace InetStudio\Reviews\Sites\Http\Responses\Back\Utility;
 
 use League\Fractal\Manager;
 use Illuminate\Support\Collection;
-use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\Reviews\Sites\Contracts\Http\Responses\Back\Utility\SuggestionsResponseContract;
 
 /**
  * Class SuggestionsResponse.
  */
-class SuggestionsResponse implements SuggestionsResponseContract, Responsable
+class SuggestionsResponse implements SuggestionsResponseContract
 {
     /**
      * @var Collection
@@ -40,6 +40,8 @@ class SuggestionsResponse implements SuggestionsResponseContract, Responsable
      * @param  \Illuminate\Http\Request  $request
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
+     *
+     * @throws BindingResolutionException
      */
     public function toResponse($request)
     {

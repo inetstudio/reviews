@@ -3,13 +3,12 @@
 namespace InetStudio\Reviews\Messages\Http\Responses\Front;
 
 use Illuminate\Http\Request;
-use Illuminate\Contracts\Support\Responsable;
 use InetStudio\Reviews\Messages\Contracts\Http\Responses\Front\GetItemsResponseContract;
 
 /**
  * Class GetItemsResponse.
  */
-class GetItemsResponse implements GetItemsResponseContract, Responsable
+class GetItemsResponse implements GetItemsResponseContract
 {
     /**
      * @var array

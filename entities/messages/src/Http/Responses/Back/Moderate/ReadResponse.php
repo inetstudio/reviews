@@ -3,13 +3,12 @@
 namespace InetStudio\Reviews\Messages\Http\Responses\Back\Moderate;
 
 use Illuminate\Http\Request;
-use Illuminate\Contracts\Support\Responsable;
 use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Moderate\ReadResponseContract;
 
 /**
  * Class ReadResponse.
  */
-class ReadResponse implements ReadResponseContract, Responsable
+class ReadResponse implements ReadResponseContract
 {
     /**
      * @var bool

@@ -3,7 +3,6 @@
 namespace InetStudio\Reviews\Sites\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use InetStudio\Uploads\Models\Traits\HasImages;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -14,7 +13,7 @@ use InetStudio\AdminPanel\Base\Models\Traits\Scopes\BuildQueryScopeTrait;
 /**
  * Class SiteModel.
  */
-class SiteModel extends Model implements SiteModelContract, HasMedia
+class SiteModel extends Model implements SiteModelContract
 {
     use HasImages;
     use SoftDeletes;

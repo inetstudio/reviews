@@ -2,13 +2,13 @@
 
 namespace InetStudio\Reviews\Sites\Http\Responses\Back\Resource;
 
-use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Http\Request;
 use InetStudio\Reviews\Sites\Contracts\Http\Responses\Back\Resource\FormResponseContract;
 
 /**
  * Class FormResponse.
  */
-class FormResponse implements FormResponseContract, Responsable
+class FormResponse implements FormResponseContract
 {
     /**
      * @var array
@@ -28,7 +28,7 @@ class FormResponse implements FormResponseContract, Responsable
     /**
      * Возвращаем ответ при открытии формы объекта.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */

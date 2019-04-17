@@ -3,13 +3,12 @@
 namespace InetStudio\Reviews\Messages\Http\Responses\Back\Resource;
 
 use Illuminate\Http\Request;
-use Illuminate\Contracts\Support\Responsable;
 use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Resource\FormResponseContract;
 
 /**
  * Class FormResponse.
  */
-class FormResponse implements FormResponseContract, Responsable
+class FormResponse implements FormResponseContract
 {
     /**
      * @var array

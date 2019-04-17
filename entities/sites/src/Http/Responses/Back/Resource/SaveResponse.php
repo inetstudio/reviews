@@ -2,14 +2,14 @@
 
 namespace InetStudio\Reviews\Sites\Http\Responses\Back\Resource;
 
-use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Http\Request;
 use InetStudio\Reviews\Sites\Contracts\Models\SiteModelContract;
 use InetStudio\Reviews\Sites\Contracts\Http\Responses\Back\Resource\SaveResponseContract;
 
 /**
  * Class SaveResponse.
  */
-class SaveResponse implements SaveResponseContract, Responsable
+class SaveResponse implements SaveResponseContract
 {
     /**
      * @var SiteModelContract
@@ -29,7 +29,7 @@ class SaveResponse implements SaveResponseContract, Responsable
     /**
      * Возвращаем ответ при сохранении объекта.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */

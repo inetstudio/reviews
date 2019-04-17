@@ -3,13 +3,12 @@
 namespace InetStudio\Reviews\Messages\Http\Responses\Back\Resource;
 
 use Illuminate\Http\Request;
-use Illuminate\Contracts\Support\Responsable;
 use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Resource\DestroyResponseContract;
 
 /**
  * Class DestroyResponse.
  */
-class DestroyResponse implements DestroyResponseContract, Responsable
+class DestroyResponse implements DestroyResponseContract
 {
     /**
      * @var bool

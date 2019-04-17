@@ -3,14 +3,13 @@
 namespace InetStudio\Reviews\Messages\Http\Responses\Back\Resource;
 
 use Illuminate\Http\Request;
-use Illuminate\Contracts\Support\Responsable;
 use InetStudio\Reviews\Messages\Contracts\Models\MessageModelContract;
 use InetStudio\Reviews\Messages\Contracts\Http\Responses\Back\Resource\ShowResponseContract;
 
 /**
  * Class ShowResponse.
  */
-class ShowResponse implements ShowResponseContract, Responsable
+class ShowResponse implements ShowResponseContract
 {
     /**
      * @var MessageModelContract
