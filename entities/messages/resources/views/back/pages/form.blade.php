@@ -72,7 +72,7 @@
                                                 'title' => 'Сайт с отзывами',
                                             ],
                                             'field' => [
-                                                'class' => 'select2 form-control',
+                                                'class' => 'select2-drop form-control',
                                                 'data-placeholder' => 'Выберите сайт',
                                                 'style' => 'width: 100%',
                                                 'data-source' => route('back.reviews.sites.getSuggestions'),
