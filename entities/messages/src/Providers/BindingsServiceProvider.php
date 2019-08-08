@@ -47,6 +47,7 @@ class BindingsServiceProvider extends BaseServiceProvider implements DeferrableP
         'InetStudio\Reviews\Messages\Contracts\Services\Back\DataTableServiceContract' => 'InetStudio\Reviews\Messages\Services\Back\DataTableService',
         'InetStudio\Reviews\Messages\Contracts\Services\Back\ModerateServiceContract' => 'InetStudio\Reviews\Messages\Services\Back\ModerateService',
         'InetStudio\Reviews\Messages\Contracts\Services\Back\UtilityServiceContract' => 'InetStudio\Reviews\Messages\Services\Back\UtilityService',
+        'InetStudio\Reviews\Messages\Contracts\Services\Front\FeedsServiceContract' => 'InetStudio\Reviews\Messages\Services\Front\FeedsService',
         'InetStudio\Reviews\Messages\Contracts\Services\Front\ItemsServiceContract' => 'InetStudio\Reviews\Messages\Services\Front\ItemsService',
     ];
 
