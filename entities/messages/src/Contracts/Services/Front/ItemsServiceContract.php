@@ -2,7 +2,6 @@
 
 namespace InetStudio\Reviews\Messages\Contracts\Services\Front;
 
-use Illuminate\Support\Collection;
 use InetStudio\Reviews\Messages\Contracts\Models\MessageModelContract;
 
 /**
@@ -30,8 +29,9 @@ interface ItemsServiceContract
      *
      * @param  string  $type
      * @param  int  $id
+     * @param  array  $params
      *
-     * @return Collection
+     * @return mixed
      */
-    public function getMessagesByTypeAndId(string $type, int $id): Collection;
+    public function getItemsByTypeAndId(string $type, int $id, array $params = []);
 }

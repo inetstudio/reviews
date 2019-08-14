@@ -30,11 +30,7 @@ class ItemsService extends BaseService implements ItemsServiceContract
     {
         parent::__construct($model);
 
-        $types = config('reviews_messages.reviewable');
-
-        foreach ($types ?? [] as $type => $modelContract) {
-            $this->availableTypes[$type] = app()->make($modelContract);
-        }
+        $this->availableTypes = config('reviews_messages.reviewable', []);
     }
 
     /**
@@ -103,16 +99,21 @@ class ItemsService extends BaseService implements ItemsServiceContract
      *
      * @param  string  $type
      * @param  int  $id
+     * @param  array  $params
      *
-     * @return Collection
+     * @return mixed
+     *
+     * @throws BindingResolutionException
      */
-    public function getMessagesByTypeAndId(string $type, int $id): Collection
+    public function getItemsByTypeAndId(string $type, int $id, array $params = [])
     {
         if (! isset($this->availableTypes[$type])) {
             return collect([]);
         }
 
-        $item = $this->availableTypes[$type]::find($id);
+        $model = app()->make($this->availableTypes[$type]);
+
+        $item = $model::find($id);
 
         if (! ($item && $item->id)) {
             return collect([]);
