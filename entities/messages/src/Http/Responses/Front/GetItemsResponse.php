@@ -2,38 +2,56 @@
 
 namespace InetStudio\Reviews\Messages\Http\Responses\Front;
 
-use Illuminate\Http\Request;
+use InetStudio\AdminPanel\Base\Http\Responses\BaseResponse;
 use InetStudio\Reviews\Messages\Contracts\Http\Responses\Front\GetItemsResponseContract;
+use InetStudio\Reviews\Messages\Contracts\Services\Front\ItemsServiceContract as MessagesServiceContract;
 
 /**
  * Class GetItemsResponse.
  */
-class GetItemsResponse implements GetItemsResponseContract
+class GetItemsResponse extends BaseResponse implements GetItemsResponseContract
 {
     /**
-     * @var array
+     * @var MessagesServiceContract
      */
-    protected $data;
+    protected $messagesService;
 
     /**
      * GetItemsResponse constructor.
      *
-     * @param  array  $data
+     * @param  MessagesServiceContract  $messagesService
      */
-    public function __construct(array $data)
-    {
-        $this->data = $data;
+    public function __construct(
+        MessagesServiceContract $messagesService
+    ) {
+        $this->messagesService = $messagesService;
+
+        $this->render = true;
+        $this->view = 'admin.module.reviews.messages::front.ajax.more';
     }
 
     /**
-     * Возвращаем ответ при открытии списка объектов.
+     * Prepare response data.
      *
-     * @param  Request  $request
+     * @param $request
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
+     * @return array
      */
-    public function toResponse($request)
+    protected function prepare($request): array
     {
-        return view('admin.module.reviews.messages::front.ajax.more', $this->data);
+        $type = $request->route('type');
+        $id = $request->route('id');
+
+        $page = ($request->filled('page')) ? $request->get('page') - 1 : 0;
+        $limit = ($request->filled('limit')) ? $request->get('limit') : 3;
+
+        $items = $this->messagesService->getItemsByTypeAndId($type, $id)->sortByDesc('datetime');
+
+        return [
+            'messages' => [
+                'stop' => (($page + 1) * $limit >= $items->count()),
+                'items' => $items->slice($page * $limit, $limit),
+            ],
+        ];
     }
 }

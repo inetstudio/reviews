@@ -48,35 +48,12 @@ class ItemsController extends Controller implements ItemsControllerContract
     /**
      * Получаем отзывы к материалу.
      *
-     * @param  ItemsServiceContract  $messagesService
-     * @param  Request  $request
-     * @param  string  $type
-     * @param  int  $id
+     * @param  GetItemsResponseContract  $response
      *
      * @return GetItemsResponseContract
-     *
-     * @throws BindingResolutionException
      */
-    public function getMessages(
-        ItemsServiceContract $messagesService,
-        Request $request,
-        string $type,
-        int $id
-    ): GetItemsResponseContract {
-        $page = ($request->filled('page')) ? $request->get('page') - 1 : 0;
-        $limit = ($request->filled('limit')) ? $request->get('limit') : 3;
-
-        $items = $messagesService->getMessagesByTypeAndId($type, $id)->sortByDesc('datetime');
-
-        return $this->app->make(
-            GetItemsResponseContract::class, [
-            'data' => [
-                'messages' => [
-                    'stop' => (($page + 1) * $limit >= $items->count()),
-                    'items' => $items->slice($page * $limit, $limit),
-                ],
-            ],
-        ]
-        );
+    public function getItems(GetItemsResponseContract $response): GetItemsResponseContract
+    {
+        return $response;
     }
 }

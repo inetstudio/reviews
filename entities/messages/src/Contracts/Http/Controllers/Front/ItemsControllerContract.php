@@ -2,7 +2,6 @@
 
 namespace InetStudio\Reviews\Messages\Contracts\Http\Controllers\Front;
 
-use Illuminate\Http\Request;
 use InetStudio\Reviews\Messages\Contracts\Services\Front\ItemsServiceContract;
 use InetStudio\Reviews\Messages\Contracts\Http\Requests\Front\SendItemRequestContract;
 use InetStudio\Reviews\Messages\Contracts\Http\Responses\Front\GetItemsResponseContract;
@@ -33,17 +32,9 @@ interface ItemsControllerContract
     /**
      * Получаем отзывы к материалу.
      *
-     * @param  ItemsServiceContract  $messagesService
-     * @param  Request  $request
-     * @param  string  $type
-     * @param  int  $id
+     * @param  GetItemsResponseContract  $response
      *
      * @return GetItemsResponseContract
      */
-    public function getMessages(
-        ItemsServiceContract $messagesService,
-        Request $request,
-        string $type,
-        int $id
-    ): GetItemsResponseContract;
+    public function getItems(GetItemsResponseContract $response): GetItemsResponseContract;
 }

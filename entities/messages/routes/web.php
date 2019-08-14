@@ -40,7 +40,7 @@ Route::group(
         'middleware' => ['web'],
     ],
     function () {
-        Route::post('reviews/more/{type}/{id}', 'ItemsControllerContract@getMessages')
+        Route::post('reviews/more/{type}/{id}', 'ItemsControllerContract@getItems')
             ->name('front.reviews.messages.get');
 
         Route::post('reviews/{type}/{id}', 'ItemsControllerContract@sendMessage')
