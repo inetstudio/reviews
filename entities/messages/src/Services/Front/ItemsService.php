@@ -56,7 +56,9 @@ class ItemsService extends BaseService implements ItemsServiceContract
         $usersService = app()->make('InetStudio\ACL\Users\Contracts\Services\Front\UsersServiceContract');
 
         $request = request();
-        $reviewable = $this->availableTypes[$type]::find($id);
+
+        $model = app()->make($this->availableTypes[$type]);
+        $reviewable = $model::find($id);
 
         if (! $reviewable) {
             return null;
@@ -67,7 +69,7 @@ class ItemsService extends BaseService implements ItemsServiceContract
         $data = array_merge(
             $data, [
             'reviewable_id' => $reviewable->id,
-            'reviewable_type' => get_class($reviewable),
+            'reviewable_type' => $reviewable->getTable(),
             'user_id' => $usersService->getUserId(),
             'name' => $usersService->getUserName($request),
             'email' => $usersService->getUserEmail($request),
