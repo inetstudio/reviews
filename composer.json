@@ -10,9 +10,9 @@
     }
   ],
   "require": {
-    "inetstudio/admin-panel": "1.8.*",
-    "arcanedev/no-captcha": "^9.0",
-    "inetstudio/widgets": "1.8.*"
+    "inetstudio/admin-panel": "^6.0",
+    "arcanedev/no-captcha": "^10.0",
+    "inetstudio/widgets": "^6.0"
   },
   "autoload": {
     "psr-4": {
