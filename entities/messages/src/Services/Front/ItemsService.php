@@ -3,7 +3,6 @@
 namespace InetStudio\Reviews\Messages\Services\Front;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 use InetStudio\AdminPanel\Base\Services\BaseService;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\Reviews\Messages\Contracts\Models\MessageModelContract;
