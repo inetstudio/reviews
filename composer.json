@@ -11,7 +11,7 @@
   ],
   "require": {
     "inetstudio/admin-panel": "^6.0",
-    "arcanedev/no-captcha": "^10.0",
+    "inetstudio/captcha": "^6.0",
     "inetstudio/widgets": "^6.0"
   },
   "autoload": {
