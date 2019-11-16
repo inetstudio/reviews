@@ -52,7 +52,7 @@ class ItemsService extends BaseService implements ItemsServiceContract
             return null;
         }
 
-        $usersService = app()->make('InetStudio\ACL\Users\Contracts\Services\Front\UsersServiceContract');
+        $usersService = app()->make('InetStudio\ACL\Users\Contracts\Services\Front\ItemsServiceContract');
 
         $request = request();
 
