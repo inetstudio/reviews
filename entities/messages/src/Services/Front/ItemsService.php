@@ -63,7 +63,9 @@ class ItemsService extends BaseService implements ItemsServiceContract
             return null;
         }
 
-        $files = $data['files'];
+        $files = [
+            'files' => $data['files'],
+        ];
 
         $data = array_merge(
             $data, [
