@@ -2,7 +2,7 @@
 
 namespace InetStudio\Reviews\Messages\Http\Controllers\Front;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use InetStudio\AdminPanel\Base\Http\Controllers\Controller;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\Reviews\Messages\Contracts\Services\Front\ItemsServiceContract;
@@ -36,7 +36,7 @@ class ItemsController extends Controller implements ItemsControllerContract
     ): SendItemResponseContract {
         $data = $request->input();
         $data = ($data) ? (array) $data : [];
-        $data['files'] = $request->allFiles();
+        $data['files'] = Arr::flatten(Arr::wrap($request->allFiles()));
 
         $item = $messagesService->saveMessage($data, $type, $id);
 
