@@ -7,4 +7,5 @@ namespace InetStudio\Reviews\Messages\Contracts\Listeners;
  */
 interface SendEmailToAdminListenerContract
 {
+    public function handle($event): void;
 }
