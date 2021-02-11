@@ -137,13 +137,23 @@ class MessageModel extends Model implements MessageModelContract
     }
 
     /**
-     * Сеттер атрибута user_name.
+     * Сеттер атрибута name.
      *
      * @param $value
      */
-    public function setUserNameAttribute($value): void
+    public function setNameAttribute($value): void
     {
-        $this->attributes['user_name'] = trim(strip_tags($value));
+        $this->attributes['name'] = trim(strip_tags($value));
+    }
+
+    /**
+     * Сеттер атрибута email.
+     *
+     * @param $value
+     */
+    public function setEmailAttribute($value): void
+    {
+        $this->attributes['email'] = trim(strip_tags($value));
     }
 
     /**
