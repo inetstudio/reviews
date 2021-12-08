@@ -4,7 +4,7 @@ namespace InetStudio\Reviews\Sites\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use InetStudio\Uploads\Models\Traits\HasImages;
+use InetStudio\UploadsPackage\Uploads\Models\Traits\HasMedia;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\Reviews\Sites\Contracts\Models\SiteModelContract;
@@ -15,17 +15,9 @@ use InetStudio\AdminPanel\Base\Models\Traits\Scopes\BuildQueryScopeTrait;
  */
 class SiteModel extends Model implements SiteModelContract
 {
-    use HasImages;
+    use HasMedia;
     use SoftDeletes;
     use BuildQueryScopeTrait;
-
-    /**
-     * @var array
-     */
-    protected $images = [
-        'config' => 'reviews_sites',
-        'model' => 'site',
-    ];
 
     /**
      * Связанная с моделью таблица.
@@ -125,5 +117,10 @@ class SiteModel extends Model implements SiteModelContract
             'site_id',
             'id'
         );
+    }
+
+    public function getMediaConfig(): array
+    {
+        return config('reviews_sites.media', []);
     }
 }

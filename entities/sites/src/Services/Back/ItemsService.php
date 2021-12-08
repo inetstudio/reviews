@@ -41,11 +41,13 @@ class ItemsService extends BaseService implements ItemsServiceContract
         $itemData = Arr::only($data, $this->model->getFillable());
         $item = $this->saveModel($itemData, $id);
 
-        $images = (config('reviews_sites.images.conversions.site')) ? array_keys(
-            config('reviews_sites.images.conversions.site')
-        ) : [];
-        app()->make('InetStudio\Uploads\Contracts\Services\Back\ImagesServiceContract')
-            ->attachToObject(request(), $item, $images, 'reviews_sites', 'site');
+        resolve(
+            'InetStudio\UploadsPackage\Uploads\Contracts\Actions\AttachMediaToObjectActionContract',
+            [
+                'item' => $item,
+                'media' => Arr::get($data, 'media', []),
+            ]
+        )->execute();
 
         event(app()->make('InetStudio\Reviews\Sites\Contracts\Events\Back\ModifyItemEventContract', compact('item')));
 

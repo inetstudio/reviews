@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use InetStudio\ACL\Users\Models\Traits\HasUser;
-use InetStudio\Uploads\Models\Traits\HasImages;
+use InetStudio\UploadsPackage\Uploads\Models\Traits\HasMedia;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -19,18 +19,10 @@ use InetStudio\AdminPanel\Base\Models\Traits\Scopes\BuildQueryScopeTrait;
 class MessageModel extends Model implements MessageModelContract
 {
     use HasUser;
-    use HasImages;
+    use HasMedia;
     use Notifiable;
     use SoftDeletes;
     use BuildQueryScopeTrait;
-
-    /**
-     * @var array
-     */
-    protected $images = [
-        'config' => 'reviews_messages',
-        'model' => 'message',
-    ];
 
     /**
      * Связанная с моделью таблица.
@@ -289,5 +281,10 @@ class MessageModel extends Model implements MessageModelContract
     public function reviewable(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    public function getMediaConfig(): array
+    {
+        return config('reviews_messages.media', []);
     }
 }

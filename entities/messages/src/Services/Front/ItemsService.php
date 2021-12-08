@@ -82,8 +82,13 @@ class ItemsService extends BaseService implements ItemsServiceContract
 
         $item = $this->saveModel($data);
 
-        app()->make('InetStudio\Uploads\Contracts\Services\Front\ItemsServiceContract')
-            ->attachFilesToObject($item, $files, 'reviews_messages');
+        resolve(
+            'InetStudio\UploadsPackage\Uploads\Contracts\Actions\AttachMediaToObjectActionContract',
+            [
+                'item' => $item,
+                'media' => Arr::get($data, 'media', []),
+            ]
+        )->execute();
 
         if (isset($item['id'])) {
             event(
