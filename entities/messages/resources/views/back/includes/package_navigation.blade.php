@@ -4,7 +4,7 @@
     $unreadBadge = $messagesService->getUnreadMessagesCount();
 @endphp
 
-<li class="{{ isActiveRoute('back.reviews.messages.*') }}">
+<li class="{{ isActiveRoute('back.reviews.messages.*', 'mm-active') }}">
     <a href="{{ route('back.reviews.messages.index') }}">Сообщения<span
                 class="label label-primary float-right">{{ $unreadBadge }}</span></a>
 </li>

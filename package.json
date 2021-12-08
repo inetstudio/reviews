@@ -1,6 +1,6 @@
 {
   "name": "inetstudio-reviews",
-  "version": "7.0.0",
+  "version": "8.0.0",
   "dependencies": {
     "rateyo": "^2.3.3",
     "switchery": "https://github.com/thomask/switchery"

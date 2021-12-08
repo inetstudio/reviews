@@ -1,3 +1,5 @@
+import Swal from 'sweetalert2';
+
 let messagesList = $('#messages_list_modal'),
     messageModal = $('#message_modal'),
     template = messagesList.find('.message-tr-template'),
@@ -69,10 +71,10 @@ messagesList.find('table').on('click', '.edit-message', function (event) {
             }
         },
         error: function () {
-            swal({
+            Swal.fire({
                 title: "Ошибка",
                 text: "При получении отзыва произошла ошибка",
-                type: "error"
+                icon: "error"
             });
         }
     });
@@ -146,10 +148,10 @@ window.tinymce.PluginManager.add('reviews.messages', function (editor) {
             contentEditor = editor;
 
             if (content !== '' && !/<img class="content-widget".+data-type="reviews\.messages".+\/>/g.test(content)) {
-                swal({
+                Swal.fire({
                     title: "Ошибка",
                     text: "Необходимо выбрать виджет-отзывы",
-                    type: "error"
+                    icon: "error"
                 });
 
                 return false;
