@@ -11,7 +11,7 @@
   ],
   "require": {
     "inetstudio/admin-panel": "^9.0",
-    "inetstudio/captcha": "^8.0",
+    "inetstudio/captcha": "^9.0",
     "inetstudio/widgets": "^9.0"
   },
   "autoload": {
